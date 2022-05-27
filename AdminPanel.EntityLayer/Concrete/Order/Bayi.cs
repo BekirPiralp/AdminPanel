@@ -2,10 +2,10 @@
 
 namespace AdminPanel.EntityLayer.Concrete.Order
 {
-    public class Firma:EntityBase
+    public class Bayi : EntityBase
     {
-        public string adi { get; set; }
-        public string logoURL { get; set; }
+        public int firma { get; set; }
+        public string isim { get; set; }
         public int iletisim { get; set; }
     }
 }

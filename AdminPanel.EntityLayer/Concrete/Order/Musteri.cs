@@ -2,11 +2,11 @@
 
 namespace AdminPanel.EntityLayer.Concrete.Order
 {
-    public class Personel : EntityBase
+    public class Musteri : EntityBase
     {
+        public int firma { get; set; }
         public string tc { get; set; }
         public string ad { get; set; }
         public string soyad { get; set; }
-        public string fotoURL { get; set; }
     }
 }
