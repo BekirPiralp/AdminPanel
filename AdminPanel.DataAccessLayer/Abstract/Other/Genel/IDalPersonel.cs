@@ -1,9 +1,8 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Concrete.Other;
-
 namespace AdminPanel.DataAccessLayer.Abstract.Other.Genel
 {
-    public interface IDalArabaBolumBilgi : IEntityDalBase<ArabaBolumBilgi>
+    public interface IDalPersonel : IEntityDalBase<Personel>
     {
     }
 }

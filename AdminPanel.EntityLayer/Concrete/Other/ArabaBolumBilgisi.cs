@@ -2,7 +2,7 @@
 
 namespace AdminPanel.EntityLayer.Concrete.Other
 {
-    public class IletisimBolumBilgi:BolumBilgiBase
+    public class ArabaBolumBilgisi : BolumBilgiBase
     {
     }
 }
