@@ -13,39 +13,71 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         public async Task<bool> AddAsync(TEntity entity)
         {
             bool result = false;
-
             using (TContext context = new TContext()) {
                 if (!entity.isNull())
                 {
                     context.Entry(entity).State = EntityState.Added;
-                    int response = context.SaveChanges();
+                    int response = await context.SaveChangesAsync();
                     
                     if (response > 0)
                         result = true;
                 }
             }
-                return result;
+            return result;
         }
-        #region yazılmadı
-        public Task<bool> DeleteAsync(TEntity entity)
+        
+        public async Task<bool> DeleteAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            using (TContext context = new TContext())
+            {
+                if (!entity.isIdEmpty() & entity.silinmisMi())
+                {
+                    context.Entry(entity).State = EntityState.Deleted;
+                    int response = await context.SaveChangesAsync();
+
+                    if (response > 0)
+                        result = true;
+                }
+            }
+            return result;
+        }
+        
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            List<TEntity> result;
+            using (TContext context = new TContext()) {
+                result = filter == null ? await context.Set<TEntity>().ToListAsync() 
+                    : await context.Set<TEntity>().Where(filter).ToListAsync();
+            }
+            return result;
         }
 
-        public Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
+        public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            List<TEntity> result;
+            using (TContext context = new TContext())
+            {
+                result = await context.Set<TEntity>().Where(filter).ToListAsync();
+            }
+            return result;
         }
 
-        public Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
+        public async Task<bool> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
+            bool result = false;
+            using (TContext context = new TContext())
+            {
+                if (!entity.isIdEmpty())
+                {
+                    context.Entry(entity).State = EntityState.Modified;
+                    int response = await context.SaveChangesAsync();
 
-        public Task<bool> UpdateAsync(TEntity entity)
-        {
-            throw new NotImplementedException();
+                    if (response > 0)
+                        result = true;
+                }
+            }
+            return result;
         }
-        #endregion
     }
 }
