@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AdminPanel.EntityLayer\AdminPanel.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Concrete\EntityFramework\Other\" />
+  </ItemGroup>
+
 </Project>

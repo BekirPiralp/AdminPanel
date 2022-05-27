@@ -3,29 +3,30 @@ using AdminPanel.EntityLayer.Abctract;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
+namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
 {
     public class EntityEfDal<TEntity, TContext> : IEntityEfDalBase<TEntity>
-        where TEntity : class, IEntity , new()
+        where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
 
         public async Task<bool> AddAsync(TEntity entity)
         {
             bool result = false;
-            using (TContext context = new TContext()) {
+            using (TContext context = new TContext())
+            {
                 if (!entity.isNull())
                 {
                     context.Entry(entity).State = EntityState.Added;
                     int response = await context.SaveChangesAsync();
-                    
+
                     if (response > 0)
                         result = true;
                 }
             }
             return result;
         }
-        
+
         public async Task<bool> DeleteAsync(TEntity entity)
         {
             bool result = false;
@@ -42,12 +43,13 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             }
             return result;
         }
-        
+
         public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
         {
             List<TEntity> result;
-            using (TContext context = new TContext()) {
-                result = filter == null ? await context.Set<TEntity>().ToListAsync() 
+            using (TContext context = new TContext())
+            {
+                result = filter == null ? await context.Set<TEntity>().ToListAsync()
                     : await context.Set<TEntity>().Where(filter).ToListAsync();
             }
             return result;
