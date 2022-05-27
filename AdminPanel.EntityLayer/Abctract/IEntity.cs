@@ -8,5 +8,7 @@ namespace AdminPanel.EntityLayer.Abctract
 {
     public interface IEntity
     {
+        int id { get; set; }
+        bool sil { get; set; }
     }
 }

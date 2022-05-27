@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace AdminPanel.DataAccessLayer.Abstract.Base
 {
     public interface IEntityDalBase<TEntity> 
-        where TEntity : class, IEntity
+        where TEntity : class, IEntity, new()
     {
         /***
          * sil delete
@@ -18,7 +18,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(TEntity entity);
 
         /// <summary>
         /// Güncelleme işlemi yapar 
@@ -39,17 +39,19 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         #region getirme işlemleri
         /// <summary>
         /// Getirme işlemi yapar 
+        /// Filtreye göre
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
         /// Getirme işlemi yapar 
+        /// Duruma göre ;)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetByFilterAsync(Expression<Func<TEntity,bool>> filter);
+        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null);
         #endregion
 
     }

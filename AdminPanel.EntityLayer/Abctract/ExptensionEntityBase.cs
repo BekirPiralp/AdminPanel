@@ -1,4 +1,5 @@
-﻿namespace AdminPanel.EntityLayer.Concrete.Base
+﻿
+namespace AdminPanel.EntityLayer.Abctract
 {
     public static class ExptensionEntityBase
     {
@@ -8,7 +9,7 @@
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool silinmisMi(this EntityBase entity)
+        public static bool silinmisMi(this IEntity entity)
         {
             return !entity.isNull() && entity.sil;
         }
@@ -18,13 +19,13 @@
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool isNull(this EntityBase? entity) => entity == null;
+        public static bool isNull(this IEntity? entity) => entity == null;
 
         /// <summary>
         /// id atalı ise false değil ise true
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool isIdEmpty(this EntityBase entity) => !(!entity.isNull() && entity.id > 0);
+        public static bool isIdEmpty(this IEntity entity) => !(!entity.isNull() && entity.id > 0);
     }
 }
