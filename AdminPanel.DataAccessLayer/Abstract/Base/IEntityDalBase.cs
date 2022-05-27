@@ -5,7 +5,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
 {
     public interface IEntityDalBase<TEntity> 
         where TEntity : class, IEntity, new()
-    {
+    {//Kübra
         /***
          * sil delete
          * guncelle udpdate
