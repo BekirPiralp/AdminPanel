@@ -1,4 +1,15 @@
-﻿using AdminPanel.EntityLayer.Concrete.Other;
+﻿using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
+using AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri;
+using AdminPanel.EntityLayer.Concrete.Other.FirmaKismi;
+using AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi;
+using AdminPanel.EntityLayer.Concrete.Other.HizmetKismi;
+using AdminPanel.EntityLayer.Concrete.Other.IletisimKismi;
+using AdminPanel.EntityLayer.Concrete.Other.IpucuKismi;
+using AdminPanel.EntityLayer.Concrete.Other.LogoKismi;
+using AdminPanel.EntityLayer.Concrete.Other.MesajKismi;
+using AdminPanel.EntityLayer.Concrete.Other.MusteriKismi;
+using AdminPanel.EntityLayer.Concrete.Other.PaketKismi;
+using AdminPanel.EntityLayer.Concrete.Other.PersonelKismi;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
