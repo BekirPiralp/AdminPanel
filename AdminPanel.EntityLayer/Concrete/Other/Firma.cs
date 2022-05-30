@@ -6,6 +6,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     {
         public string adi { get; set; }
         public string logoURL { get; set; }
-        public int iletisim { get; set; }
+        public Iletisim iletisim { get; set; }
     }
 }

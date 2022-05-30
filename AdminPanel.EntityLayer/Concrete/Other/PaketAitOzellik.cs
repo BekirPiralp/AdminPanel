@@ -4,7 +4,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
 {
     public class PaketAitOzellik : EntityBase
     {
-        public int paket { get; set; }
-        public int ozellik { get; set; }
+        public Paket paket { get; set; }
+        public PaketOzellik ozellik { get; set; }
     }
 }

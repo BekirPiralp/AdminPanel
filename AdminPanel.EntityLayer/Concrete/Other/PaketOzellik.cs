@@ -4,6 +4,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other
 {
     public class PaketOzellik:EntityBase
     {
-        public string adi { get; set; }
+        public string isim { get; set; }
     }
 }

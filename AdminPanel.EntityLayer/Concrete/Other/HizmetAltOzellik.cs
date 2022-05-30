@@ -4,7 +4,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
 {
     public class HizmetAltOzellik : EntityBase
     {
-        public int hizmetAlt { get; set; }
+        public HizmetAlt hizmetAlt { get; set; }
         public string isim { get; set; }
     }
 }

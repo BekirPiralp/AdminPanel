@@ -4,7 +4,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
 {
     public class FirmaSahip :EntityBase
     {
-        public int firma { get; set; }
-        public int personel { get; set; }
+        public Firma firma { get; set; }
+        public Personel personel { get; set; }
     }
 }

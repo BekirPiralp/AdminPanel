@@ -4,8 +4,8 @@ namespace AdminPanel.EntityLayer.Concrete.Other
 {
     public class Bayi : EntityBase
     {
-        public int firma { get; set; }
+        public Firma firma { get; set; }
         public string isim { get; set; }
-        public int iletisim { get; set; }
+        public Iletisim iletisim { get; set; }
     }
 }
