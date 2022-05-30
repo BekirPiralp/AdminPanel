@@ -6,7 +6,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     [Table("HizmetAltOzellikler")]
     public class HizmetAltOzellik : EntityBase
     {
-        public HizmetAlt hizmetAlt { get; set; }
+        public virtual HizmetAlt hizmetAlt { get; set; }
         public string isim { get; set; }
     }
 }

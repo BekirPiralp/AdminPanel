@@ -8,6 +8,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     {
         public string adi { get; set; }
         public string logoURL { get; set; }
-        public Iletisim iletisim { get; set; }
+        public virtual Iletisim iletisim { get; set; }
     }
 }

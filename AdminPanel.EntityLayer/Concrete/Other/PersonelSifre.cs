@@ -6,7 +6,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     [Table("PersonelSifreleri")]
     public class PersonelSifre : EntityBase
     {
-        public Personel personel { get; set; }
+        public virtual Personel personel { get; set; }
         public string sifre { get; set; }
     }
 }

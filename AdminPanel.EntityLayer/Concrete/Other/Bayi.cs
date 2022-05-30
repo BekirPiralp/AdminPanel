@@ -6,8 +6,8 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     [Table("Bayiler")]
     public class Bayi : EntityBase
     {
-        public Firma firma { get; set; }
+        public virtual Firma firma { get; set; }
         public string isim { get; set; }
-        public Iletisim iletisim { get; set; }
+        public virtual Iletisim iletisim { get; set; }
     }
 }

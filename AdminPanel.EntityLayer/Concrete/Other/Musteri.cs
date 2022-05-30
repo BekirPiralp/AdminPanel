@@ -7,7 +7,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     [Table("Musteriler")]
     public class Musteri : EntityBase
     {
-        public Firma firma { get; set; }
+        public virtual Firma firma { get; set; }
         [MaxLength(11,ErrorMessage ="TC kimlik numarası 11 hanedir."),MinLength(11, ErrorMessage = "TC kimlik numarası 11 hanedir.")]
         public string tc { get; set; }
         public string ad { get; set; }

@@ -6,7 +6,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other
     [Table("ArabaOzellikleri")]
     public class ArabaOzellik : EntityBase
     {
-        public Araba araba { get; set; }
+        public virtual Araba araba { get; set; }
         public string isim { get; set; }
     }
 }

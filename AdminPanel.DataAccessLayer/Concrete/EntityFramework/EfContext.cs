@@ -5,48 +5,60 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
     public class EfContext : DbContext
     {
-        DbSet<Araba> Arabalar { get; set; }
-        DbSet<ArabaBolumBilgisi> ArabaBolumBilgileri { get; set; }
-        DbSet<ArabaKasaTip> ArabaKasaTipleri { get; set; }
-        DbSet<ArabaMarka> ArabaMarkalari { get; set; }
-        DbSet<ArabaOzellik> ArabaOzellikleri { get; set; }
-        DbSet<ArabaTip> ArabaTipleri { get; set; }
-        DbSet<ArabaVitesTip> ArabaVitesTipleri { get; set; }
         
-        DbSet<Bayi> Bayiler { get; set; }
-        DbSet<BayiYonetici> BayiYoneticileri { get; set; }
-        DbSet<Firma> Firmalar { get; set; }
-        DbSet<FirmaSahip> FirmaSahipleri { get; set; }
+        public DbSet<Araba> Arabalar { get; set; }
+        public DbSet<ArabaBolumBilgisi> ArabaBolumBilgileri { get; set; }
+        public DbSet<ArabaKasaTip> ArabaKasaTipleri { get; set; }
+        public DbSet<ArabaMarka> ArabaMarkalari { get; set; }
+        public DbSet<ArabaOzellik> ArabaOzellikleri { get; set; }
+        public DbSet<ArabaTip> ArabaTipleri { get; set; }
+        public DbSet<ArabaVitesTip> ArabaVitesTipleri { get; set; }
+        
+        public DbSet<Bayi> Bayiler { get; set; }
+        public DbSet<BayiYonetici> BayiYoneticileri { get; set; }
+        public DbSet<Firma> Firmalar { get; set; }
+        public DbSet<FirmaSahip> FirmaSahipleri { get; set; }
+        
+        public DbSet<GaleriBolumBilgisi> GaleriBolumBilgileri { get; set; }
+        public DbSet<HakkindaBolumBilgisi> HakkindaBolumBilgileri { get; set; }
+        public DbSet<HakkindaIcerik> HakkindaIcerikler { get; set; }
+        public DbSet<HakkindaReklam> HakkindaReklamlar { get; set; }
+        
+        public DbSet<Hizmet> Hizmetler { get; set; }
+        public DbSet<HizmetAlt> HizmetAltlar { get; set; }
+        public DbSet<HizmetAltOzellik> HizmetAltOzellikler { get; set; }
+        public DbSet<HizmetBolumBilgisi> HizmetBolumBilgileri { get; set; }
+        
+        public DbSet<Iletisim> Iletisimler { get; set; }
+        public DbSet<IletisimBolumBilgisi> IletisimBolumBilgileri { get; set; }
+        
+        public DbSet<IpucuVeYazi> IpucuVeYazilar { get; set; }
+        public DbSet<IpucuVeYaziBolumBilgisi> IpucuVeYaziBolumBilgileri { get; set; }
+        
+        public DbSet<Mesaj> Mesajlar { get; set; }
+        public DbSet<Musteri> Musteriler { get; set; }
+         
+        public DbSet<Paket> Paketler { get; set; }
+        public DbSet<PaketAitOzellik> PaketAitOzellikleri { get; set; }
+        public DbSet<PaketBolumBilgisi> PaketBolumBilgileri { get; set; }
+        public DbSet<PaketOzellik> PaketOzellikleri { get; set; }
+        
+        public DbSet<Personel> Personeller { get; set; }
+        public DbSet<PersonelBolumBilgisi> PersonelBolumBilgileri { get; set; }
+        public DbSet<PersonelGorev> PersonelGorevleri { get; set; }
+        public DbSet<PersonelSifre> PersonelSifreleri { get; set; }
+        public DbSet<PersonelSosyalMedya> PersonelSosyalMedyalari { get; set; }
+        public DbSet<SosyalMedyaLogo> SosyalMedyaLogolar { get; set; }
 
-        DbSet<GaleriBolumBilgisi> GaleriBolumBilgileri { get; set; }
-        DbSet<HakkindaBolumBilgisi> HakkindaBolumBilgileri { get; set; }
-        DbSet<HakkindaIcerik> HakkindaIcerikler { get; set; }
-        DbSet<HakkindaReklam> HakkindaReklamlar { get; set; }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string connect =
+        //        "Data Source=DESKTOP-IBLI6B4;Integrated Security=True;";
+                        
+        //    optionsBuilder.UseSqlServer(connectionString:connect);
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
-        DbSet<Hizmet> Hizmetler { get; set; }
-        DbSet<HizmetAlt> HizmetAltlar { get; set; }
-        DbSet<HizmetAltOzellik> HizmetAltOzellikler { get; set; }
-        DbSet<HizmetBolumBilgisi> HizmetBolumBilgileri { get; set; }
 
-        DbSet<Iletisim> Iletisimler { get; set; }
-        DbSet<IletisimBolumBilgisi> IletisimBolumBilgileri { get; set; }
-
-        DbSet<IpucuVeYazi> IpucuVeYazilar { get; set; }
-        DbSet<IpucuVeYaziBolumBilgisi> IpucuVeYaziBolumBilgileri { get; set; }
-
-        DbSet<Mesaj> Mesajlar { get; set; }
-        DbSet<Musteri> Musteriler { get; set; }
-
-        DbSet<Paket> Paketler { get; set; }
-        DbSet<PaketAitOzellik> PaketAitOzellikleri { get; set; }
-        DbSet<PaketBolumBilgisi> PaketBolumBilgileri { get; set; }
-        DbSet<PaketOzellik> PaketOzellikleri { get; set; }
-
-        DbSet<Personel> Personeller { get; set; }
-        DbSet<PersonelBolumBilgisi> PersonelBolumBilgileri { get; set; }
-        DbSet<PersonelGorev> PersonelGorevleri { get; set; }
-        DbSet<PersonelSifre> PersonelSifreleri { get; set; }
-        DbSet<PersonelSosyalMedya> PersonelSosyalMedyalari { get; set; }
-        DbSet<SosyalMedyaLogo> SosyalMedyaLogolar { get; set; }
     }
 }
