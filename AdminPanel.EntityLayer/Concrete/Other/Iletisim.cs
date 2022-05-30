@@ -1,7 +1,9 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other
 {
+    [Table("Iletisimleri")]
     public class Iletisim : EntityBase
     {
         public string adres { get; set; }

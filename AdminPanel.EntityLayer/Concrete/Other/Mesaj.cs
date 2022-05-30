@@ -1,7 +1,9 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other
 {
+    [Table("Mesajlar")]
     public class Mesaj : EntityBase
     {
         public string ad { get; set; }

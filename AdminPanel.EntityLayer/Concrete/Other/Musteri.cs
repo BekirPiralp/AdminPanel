@@ -1,8 +1,10 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other
 {
+    [Table("Musteriler")]
     public class Musteri : EntityBase
     {
         public Firma firma { get; set; }

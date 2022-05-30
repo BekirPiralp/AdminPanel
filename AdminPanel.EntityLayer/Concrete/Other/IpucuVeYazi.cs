@@ -1,7 +1,9 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other
 {
+    [Table("IpucuVeYazilar")]
     public class IpucuVeYazi:EntityBase
     {
         public string baslik { get; set; }
