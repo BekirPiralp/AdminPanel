@@ -14,7 +14,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         }
 
         #region Ekleme işlemleri
-        public async Task<bool> Add(TEntity entity)
+        public async Task<bool> AddAsync(TEntity entity)
         {
             bool result = false;
 
@@ -33,14 +33,14 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-        public async Task<bool> Add(List<TEntity> entities)
+        public async Task<bool> AddAsync(List<TEntity> entities)
         {
             bool result = true;
             if(entities != null && entities.Count() > 0)
             {
                 foreach (TEntity entity in entities)
                 {
-                    result = await Add(entity);
+                    result = await AddAsync(entity);
                     if (!result)
                         break;
                 }
@@ -52,7 +52,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-        public async Task<TEntity?> AddBy(TEntity entity)
+        public async Task<TEntity?> AddByAsync(TEntity entity)
         {
             TEntity? result = null;
             if (entity.isNotNull())
@@ -66,8 +66,8 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         }
         #endregion
 
-        #region Sİlme işlemleri
-        public async Task<bool> Delete(List<TEntity> entities)
+        #region Silme işlemleri
+        public async Task<bool> DeleteAsync(List<TEntity> entities)
         {
             bool result = false;
             if(entities != null && entities.Count() > 0)
@@ -75,7 +75,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 result = true;
                 foreach(TEntity entity in entities)
                 {
-                    result = await Delete(entity);
+                    result = await DeleteAsync(entity);
                     if (!result)
                         break;
                 }
@@ -83,20 +83,20 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             bool result = false;
             if (id > 0)
             {
                 TEntity? entity =(await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault();
-                if (entity.isNotNull())
-                    result = await Delete(entity);
+                if (entity.isNotNull() && !entity.silinmisMi())
+                    result = await _entityDalBase.DeleteAsync(entity);
             }
 
             return result;
         }
 
-        public async Task<bool> Delete(TEntity entity)
+        public async Task<bool> DeleteAsync(TEntity entity)
         {
             bool result = false;
             if (entity.isIdNotEmpty())
@@ -107,25 +107,52 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         }
         #endregion
 
-        #region daha yapılmadı
-        public Task<List<TEntity>> GetAllAsync()
+        #region Getirme işlemleri
+        public async Task<List<TEntity>?> GetAllAsync()
         {
-            throw new NotImplementedException();
+            List<TEntity>? result;
+            result = await _entityDalBase.GetAsync();
+            
+            if (result != null && result.Count < 0)
+                result = null;
+            
+            return result;
         }
 
-        public Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            TEntity? result = null;
+            if (id > 0)
+                result = (await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault();
+            return result;
+        }
+        #endregion
+
+        #region Güncellem İşlemleri
+        public async Task<bool> UpdateAsync(TEntity entity)
+        {
+            bool result = false;
+            if (entity.isNotNull() && entity.isIdNotEmpty())
+                result = await _entityDalBase.UpdateAsync(entity);
+            return result;
         }
 
-        public Task<bool> Update(TEntity entity)
+        public async Task<TEntity?> UpdateByAsync(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
+            TEntity? result = null;
+            if (entity.isNotNull() && entity.isIdNotEmpty())
+            {
+                DateTime dateTime = DateTime.Now;
+                entity.guncellemeZamani = dateTime;
 
-        public Task<TEntity> UpdateBy(TEntity entity)
-        {
-            throw new NotImplementedException();
+                if(await _entityDalBase.UpdateAsync(entity))
+                {
+                    result = (await _entityDalBase.GetAsync(
+                        e => e.guncellemeZamani == dateTime && 
+                        e.id == entity.id)).FirstOrDefault();
+                }
+            }
+            return result;
         }
         #endregion
     }

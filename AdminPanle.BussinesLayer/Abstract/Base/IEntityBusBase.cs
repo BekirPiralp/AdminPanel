@@ -13,14 +13,14 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// Liste olarak getirme 
         /// </summary>
         /// <returns></returns>
-        Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>?> GetAllAsync();
         
         /// <summary>
         /// id ye göre
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity?> GetByIdAsync(int id);
         #endregion
 
         #region Silme işlemleri
@@ -31,7 +31,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        Task<bool> Delete(List<TEntity> entities);
+        Task<bool> DeleteAsync(List<TEntity> entities);
 
         /// <summary>
         /// id olarak siler
@@ -39,7 +39,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
         /// <summary>
         /// Göderilmiş olan nesneye göre siler
@@ -47,7 +47,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Delete(TEntity entity);
+        Task<bool> DeleteAsync(TEntity entity);
         #endregion
 
         #region Güncelleme işlemleri
@@ -58,7 +58,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Update(TEntity entity);
+        Task<bool> UpdateAsync(TEntity entity);
 
         /// <summary>
         /// Güncelleme işlemi yapar
@@ -66,7 +66,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<TEntity> UpdateBy(TEntity entity);
+        Task<TEntity?> UpdateByAsync(TEntity entity);
         #endregion
 
         #region Ekleme işlemleri
@@ -76,7 +76,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Add(TEntity entity);
+        Task<bool> AddAsync(TEntity entity);
 
         /// <summary>
         /// Liste olarak ekler
@@ -84,14 +84,14 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Add(List<TEntity> entities);
+        Task<bool> AddAsync(List<TEntity> entities);
 
         /// <summary>
         /// Ekleme işlemi yapar işlem başarılı ise kayıtlı halini geri dödürür
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<TEntity?> AddBy(TEntity entity);
+        Task<TEntity?> AddByAsync(TEntity entity);
         #endregion
     }
 }
