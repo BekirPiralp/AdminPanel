@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Abstract\Other\" />
-    <Folder Include="Concrete\Base\" />
     <Folder Include="Concrete\Other\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdminPanel.DataAccessLayer\AdminPanel.DataAccessLayer.csproj" />
     <ProjectReference Include="..\AdminPanel.EntityLayer\AdminPanel.EntityLayer.csproj" />
   </ItemGroup>
 

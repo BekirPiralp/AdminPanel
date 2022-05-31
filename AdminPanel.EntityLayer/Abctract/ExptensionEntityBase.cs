@@ -22,10 +22,24 @@ namespace AdminPanel.EntityLayer.Abctract
         public static bool isNull(this IEntity? entity) => entity == null;
 
         /// <summary>
-        /// id atalı ise false değil ise true
+        /// null değil ise true diğer durumda false
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool isIdEmpty(this IEntity entity) => !(!entity.isNull() && entity.id > 0);
+        public static bool isNotNull(this IEntity? entity) => entity != null;
+
+        /// <summary>
+        /// id atalı değil ise true diğer durumlarda false
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static bool isIdEmpty(this IEntity entity) => entity.isNotNull() && entity.id < 0;
+
+        /// <summary>
+        /// id atalı ise true diğer durumlarda false
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static bool isIdNotEmpty(this IEntity entity) => entity.isNotNull() && entity.id > 0;
     }
 }

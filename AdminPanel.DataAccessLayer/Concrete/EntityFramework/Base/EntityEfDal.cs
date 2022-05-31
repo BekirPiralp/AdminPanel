@@ -15,7 +15,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             bool result = false;
             using (TContext context = new TContext())
             {
-                if (!entity.isNull())
+                if (entity.isNotNull())
                 {
                     context.Entry(entity).State = EntityState.Added;
                     int response = await context.SaveChangesAsync();
@@ -32,8 +32,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             bool result = false;
             using (TContext context = new TContext())
             {
-                if (!entity.isIdEmpty() & !entity.silinmisMi())
+                if (entity.isIdNotEmpty() & !entity.silinmisMi())
                 {
+                    // silme işlemi sanal olacak on göre ayarlama yapılacak
                     context.Entry(entity).State = EntityState.Deleted;
                     int response = await context.SaveChangesAsync();
 
@@ -70,7 +71,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             bool result = false;
             using (TContext context = new TContext())
             {
-                if (!entity.isIdEmpty())
+                if (entity.isIdNotEmpty())
                 {
                     context.Entry(entity).State = EntityState.Modified;
                     int response = await context.SaveChangesAsync();

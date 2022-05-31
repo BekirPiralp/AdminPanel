@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AdminPanel.EntityLayer.Abctract
 {
     public interface IEntity
     {
+        [Key]
         int id { get; set; }
         bool sil { get; set; }
+        DateTime kayitZamani { get; set; }
+        DateTime silmeZamani { get; set; }
+        DateTime guncellemeZamani { get; set; }
     }
 }

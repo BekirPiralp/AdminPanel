@@ -3,8 +3,9 @@
 namespace AdminPanle.BusinessLayer.Abstract.Base
 {
     // iş katmanı genel arayüzü
+    // IEntityBusBase == InterfaceEntityBusinesLayerBase
     public interface IEntityBusBase<TEntity>
-        where TEntity : IEntity, new ()
+        where TEntity : class, IEntity, new ()
     {
         #region Getirme işlemleri
         
@@ -83,14 +84,14 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Add(List<TEntity> entity);
+        Task<bool> Add(List<TEntity> entities);
 
         /// <summary>
         /// Ekleme işlemi yapar işlem başarılı ise kayıtlı halini geri dödürür
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<TEntity> AddBy(TEntity entity);
+        Task<TEntity?> AddBy(TEntity entity);
         #endregion
     }
 }

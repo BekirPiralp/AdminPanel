@@ -8,6 +8,9 @@ namespace AdminPanel.EntityLayer.Concrete.Base
         [Key]
         public int id { get; set; }
         public bool sil { get; set; } = false;
+        public DateTime kayitZamani { get; set; }
+        public DateTime silmeZamani { get; set; }
+        public DateTime guncellemeZamani { get; set; }
     }
 
 }
