@@ -32,7 +32,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             bool result = false;
             using (TContext context = new TContext())
             {
-                if (!entity.isIdEmpty() & entity.silinmisMi())
+                if (!entity.isIdEmpty() & !entity.silinmisMi())
                 {
                     context.Entry(entity).State = EntityState.Deleted;
                     int response = await context.SaveChangesAsync();
