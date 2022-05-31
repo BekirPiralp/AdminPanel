@@ -37,13 +37,13 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         Task<bool> AddAsync(TEntity entity);
 
         #region getirme işlemleri
-        /// <summary>
-        /// Getirme işlemi yapar 
-        /// Filtreye göre
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter);
+        ///// <summary>
+        ///// Getirme işlemi yapar 
+        ///// Filtreye göre
+        ///// </summary>
+        ///// <param name="entity"></param>
+        ///// <returns></returns>
+        //Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
         /// Getirme işlemi yapar 
@@ -51,7 +51,10 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null);
+        Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null);
+        /**
+         * Geetirm işleminin özelleştirme işlemi iş katmanında yapılacaktır
+         */
         #endregion
 
     }

@@ -44,7 +44,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             return result;
         }
 
-        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
+        public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null)
         {
             List<TEntity> result;
             using (TContext context = new TContext())
@@ -55,15 +55,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             return result;
         }
 
-        public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
-        {
-            List<TEntity> result;
-            using (TContext context = new TContext())
-            {
-                result = await context.Set<TEntity>().Where(filter).ToListAsync();
-            }
-            return result;
-        }
+        //public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
+        //{
+        //    List<TEntity> result;
+        //    using (TContext context = new TContext())
+        //    {
+        //        result = await context.Set<TEntity>().Where(filter).ToListAsync();
+        //    }
+        //    return result;
+        //}
 
         public async Task<bool> UpdateAsync(TEntity entity)
         {
