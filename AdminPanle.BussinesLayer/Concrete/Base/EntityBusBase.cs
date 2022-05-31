@@ -1,4 +1,5 @@
-﻿using AdminPanel.DataAccessLayer.Abstract.Base;
+﻿
+using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanle.BusinessLayer.Abstract.Base;
 
@@ -10,6 +11,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         IEntityDalBase<TEntity> _entityDalBase;
         public EntityBusBase(IEntityDalBase<TEntity> entityDalBase)
         {
+            //deneme
             _entityDalBase = entityDalBase;
         }
 
