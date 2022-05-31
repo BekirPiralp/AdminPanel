@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
+    <Folder Include="Abstract\Other\" />
+    <Folder Include="Concrete\Base\" />
+    <Folder Include="Concrete\Other\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdminPanel.EntityLayer\AdminPanel.EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>
