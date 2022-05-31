@@ -10,13 +10,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
         where TContext : DbContext, new()
     {
 
-        public async Task<bool> AddAsync(TEntity entity)
+        public async Task<bool> AddAsync(TEntity entity,DateTime? kayitZamani = null)
         {
             bool result = false;
             using (TContext context = new TContext())
             {
                 if (entity.isNotNull())
                 {
+                    entity.kayitZamani = kayitZamani != null ? (DateTime)kayitZamani : DateTime.Now;
+
                     context.Entry(entity).State = EntityState.Added;
                     int response = await context.SaveChangesAsync();
 
@@ -27,13 +29,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             return result;
         }
 
-        public async Task<bool> DeleteAsync(TEntity entity)
+        public async Task<bool> DeleteAsync(TEntity entity, DateTime? silmeZamani = null)
         {
             bool result = false;
             using (TContext context = new TContext())
             {
                 if (entity.isIdNotEmpty() & !entity.silinmisMi())
                 {
+                    entity.silmeZamani = silmeZamani != null ? (DateTime)silmeZamani : DateTime.Now;
+                    
                     // silme işlemi sanal olacak on göre ayarlama yapılacak
                     context.Entry(entity).State = EntityState.Deleted;
                     int response = await context.SaveChangesAsync();
@@ -66,13 +70,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
         //    return result;
         //}
 
-        public async Task<bool> UpdateAsync(TEntity entity)
+        public async Task<bool> UpdateAsync(TEntity entity, DateTime? guncellemeZamani = null)
         {
             bool result = false;
             using (TContext context = new TContext())
             {
                 if (entity.isIdNotEmpty())
                 {
+                    entity.guncellemeZamani = guncellemeZamani != null ? (DateTime)guncellemeZamani : DateTime.Now;
+
                     context.Entry(entity).State = EntityState.Modified;
                     int response = await context.SaveChangesAsync();
 

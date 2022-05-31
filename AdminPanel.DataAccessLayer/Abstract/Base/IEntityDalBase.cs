@@ -18,7 +18,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(TEntity entity);
+        Task<bool> DeleteAsync(TEntity entity,DateTime? silmeZamani = null);
 
         /// <summary>
         /// Güncelleme işlemi yapar 
@@ -26,7 +26,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> UpdateAsync(TEntity entity);
+        Task<bool> UpdateAsync(TEntity entity,DateTime? guncellemeZamani = null);
 
         /// <summary>
         /// Ekleme işlemi yapar 
@@ -34,7 +34,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> AddAsync(TEntity entity);
+        Task<bool> AddAsync(TEntity entity, DateTime? kayitZamani = null);
 
         #region getirme işlemleri
         ///// <summary>
