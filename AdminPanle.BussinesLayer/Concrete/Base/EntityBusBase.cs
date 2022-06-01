@@ -62,7 +62,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 DateTime dateTime = DateTime.Now;
                 
                 if (await _entityDalBase.AddAsync(entity,dateTime))
-                    result = (await _entityDalBase.GetAsync()).OrderByDescending(dateTime).FirstOrDefault();
+                    result = (await _entityDalBase.GetAsync()).OrderByDescending(p=>p.kayitZamani).FirstOrDefault();
             }
             return result;
         }
