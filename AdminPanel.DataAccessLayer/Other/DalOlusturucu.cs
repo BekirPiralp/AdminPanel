@@ -1,7 +1,9 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.BolumBilgileri;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.FirmaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -22,7 +24,7 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalArabaVitesTip ArabaVitesTip { get; }
         #endregion
 
-        #region BolumBilgileri
+        #region Bölüm Bilgileri
         public IDalArabaBolumBilgisi ArabaBolumBilgisi { get; }
         public IDalGaleriBolumBilgisi GaleriBolumBilgisi { get; }
         public IDalHakkindaBolumBilgisi HakkindaBolumBilgisi { get; }
@@ -34,7 +36,12 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalReferansBolumBilgisi ReferansBolumBilgisi { get; }
         #endregion
 
-
+        #region Firma Kısmı
+        public IDalBayi Bayi { get; }
+        public IDalBayiYonetici BayiYonetici { get;}
+        public IDalFirma Firma { get; }
+        public IDalFirmaSahip FirmaSahip { get; }
+        #endregion
         private DalOlusturucu()
         {
             #region Araba kısmı
@@ -46,7 +53,7 @@ namespace AdminPanel.DataAccessLayer.Other
             ArabaVitesTip = new EfDalArabaVitesTip();
             #endregion
 
-            #region BolumBilgileri
+            #region Bölüm Bilgileri
             ArabaBolumBilgisi = new EfDalArabaBolumBilgisi();
             GaleriBolumBilgisi = new EfDalGaleriBolumBilgisi();
             HakkindaBolumBilgisi = new EfDalHakkindaBolumBilgisi();
@@ -57,9 +64,16 @@ namespace AdminPanel.DataAccessLayer.Other
             PersonelBolumBilgisi = new EfDalPersonelBolumBilgisi();
             ReferansBolumBilgisi = new EfDalReferansBolumBilgisi();
             #endregion
-    }
 
-    private static DalOlusturucu Olustur()
+            #region Firma Kısmı
+            Bayi = new EfDalBayi();
+            BayiYonetici = new EfDalBayiYonetici();
+            Firma = new EfDalFirma();
+            FirmaSahip = new EfDalFirmaSahip();
+            #endregion
+        }
+
+        private static DalOlusturucu Olustur()
         {
             if (_nesneOlusturucu.isNull())
             {
