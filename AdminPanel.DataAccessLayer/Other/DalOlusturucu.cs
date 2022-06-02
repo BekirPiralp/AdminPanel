@@ -1,5 +1,7 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -20,6 +22,18 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalArabaVitesTip ArabaVitesTip { get; }
         #endregion
 
+        #region BolumBilgileri
+        public IDalArabaBolumBilgisi ArabaBolumBilgisi { get; }
+        public IDalGaleriBolumBilgisi GaleriBolumBilgisi { get; }
+        public IDalHakkindaBolumBilgisi HakkindaBolumBilgisi { get; }
+        public IDalHizmetBolumBilgisi HizmetBolumBilgisi { get; }
+        public IDalIletisimBolumBilgisi IletisimBolumBilgisi { get; }
+        public IDalIpucuVeYaziBolumBilgisi IpucuVeYaziBolumBilgisi { get; }
+        public IDalPaketBolumBilgisi PaketBolumBilgisi { get; }
+        public IDalPersonelBolumBilgisi PersonelBolumBilgisi { get; }
+        public IDalReferansBolumBilgisi ReferansBolumBilgisi { get; }
+        #endregion
+
 
         private DalOlusturucu()
         {
@@ -30,6 +44,18 @@ namespace AdminPanel.DataAccessLayer.Other
             ArabaOzellik = new EfDalArabaOzellik();
             ArabaTip = new EfDalArabaTip();
             ArabaVitesTip = new EfDalArabaVitesTip();
+            #endregion
+
+            #region BolumBilgileri
+            ArabaBolumBilgisi = new EfDalArabaBolumBilgisi();
+            GaleriBolumBilgisi = new EfDalGaleriBolumBilgisi();
+            HakkindaBolumBilgisi = new EfDalHakkindaBolumBilgisi();
+            HizmetBolumBilgisi = new EfDalHizmetBolumBilgisi();
+            IletisimBolumBilgisi = new EfDalIletisimBolumBilgisi();
+            IpucuVeYaziBolumBilgisi = new EfDalIpucuVeYaziBolumBilgisi ();
+            PaketBolumBilgisi = new EfDalPaketBolumBilgisi();
+            PersonelBolumBilgisi = new EfDalPersonelBolumBilgisi();
+            ReferansBolumBilgisi = new EfDalReferansBolumBilgisi();
             #endregion
     }
 
