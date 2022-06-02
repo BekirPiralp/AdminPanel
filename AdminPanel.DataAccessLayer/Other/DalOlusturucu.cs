@@ -10,6 +10,7 @@ using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MesajKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MusteriKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PaketKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PersonelKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ReferansKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
@@ -22,6 +23,7 @@ using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MesajKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MusteriKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.PaketKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.PersonelKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ReferansKismi;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -105,6 +107,10 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalPersonelSosyalMedya PersonelSosyalMedya { get; }
         #endregion
 
+        #region Referans kısmı
+        public IDalReferans Referans { get; }
+        #endregion
+
         private DalOlusturucu()
         {
             #region Araba kısmı
@@ -177,6 +183,10 @@ namespace AdminPanel.DataAccessLayer.Other
             PersonelGorev = new EfDalPersonelGorev();
             PersonelSifre = new EfDalPersonelSifre();
             PersonelSosyalMedya = new EfDalPersonelSosyalMedya();
+            #endregion
+
+            #region Referans kısmı
+            Referans = new EfDalReferans();
             #endregion
         }
 
