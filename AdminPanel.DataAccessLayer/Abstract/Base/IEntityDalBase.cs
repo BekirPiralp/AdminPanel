@@ -19,7 +19,7 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// <param name="entity"></param>
         /// <returns></returns>
         Task<bool> DeleteAsync(TEntity entity,DateTime? silmeZamani = null);
-
+        
         /// <summary>
         /// Güncelleme işlemi yapar 
         /// sonuc başarılı ise true diğer durumlarda false

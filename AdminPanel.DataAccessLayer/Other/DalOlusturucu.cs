@@ -64,8 +64,8 @@ namespace AdminPanel.DataAccessLayer.Other
         #endregion
 
         #region Hakkında Kısmı
-        IDalHakkindaIcerik HakkindaIcerik { get; }
-        IDalHakkindaReklam HakkindaReklam { get; }
+        public IDalHakkindaIcerik HakkindaIcerik { get; }
+        public IDalHakkindaReklam HakkindaReklam { get; }
         #endregion
 
         #region Hizmet Kısmı
@@ -190,7 +190,7 @@ namespace AdminPanel.DataAccessLayer.Other
             #endregion
         }
 
-        private static DalOlusturucu Olustur()
+        public static DalOlusturucu Olustur()
         {
             if (_nesneOlusturucu.isNull())
             {
