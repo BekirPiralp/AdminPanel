@@ -2,10 +2,24 @@
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.FirmaKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.HakkindaKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.HizmetKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.IletisimKsimi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.IpucuKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.LogoKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MesajKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MusteriKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PaketKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.HakkindaKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.HizmetKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.IletisimKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.IpucuKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.LogoKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MesajKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MusteriKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.PaketKismi;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -40,7 +54,7 @@ namespace AdminPanel.DataAccessLayer.Other
 
         #region Firma Kısmı
         public IDalBayi Bayi { get; }
-        public IDalBayiYonetici BayiYonetici { get;}
+        public IDalBayiYonetici BayiYonetici { get; }
         public IDalFirma Firma { get; }
         public IDalFirmaSahip FirmaSahip { get; }
         #endregion
@@ -48,6 +62,38 @@ namespace AdminPanel.DataAccessLayer.Other
         #region Hakkında Kısmı
         IDalHakkindaIcerik HakkindaIcerik { get; }
         IDalHakkindaReklam HakkindaReklam { get; }
+        #endregion
+
+        #region Hizmet Kısmı
+        public IDalHizmet Hizmet { get; }
+        public IDalHizmetAlt HizmetAlt { get; }
+        public IDalHizmetAltOzellik HizmetAltOzellik { get; }
+        #endregion
+
+        #region İleteşim Kısmı
+        public IDalIletisim Iletisim { get; }
+        #endregion
+
+        #region İpucu Kısmı
+        public IDalIpucuVeYazi IpucuVeYazi { get; }
+        #endregion
+
+        #region Logo Kısmı
+        public IDalSosyalMedyaLogo SosyalMedyaLogo { get; }
+        #endregion
+
+        #region Mesaj Kısmı
+        public IDalMesaj Mesaj { get; }
+        #endregion
+
+        #region Müşteri Kısmı
+        public IDalMusteri Musteri { get; }
+        #endregion
+
+        #region Paket Kısmı
+        public IDalPaket Paket { get; }
+        public IDalPaketAitOzellik PaketAitOzellik { get; }
+        public IDalPaketOzellik PaketOzellik { get; }
         #endregion
 
         private DalOlusturucu()
@@ -67,7 +113,7 @@ namespace AdminPanel.DataAccessLayer.Other
             HakkindaBolumBilgisi = new EfDalHakkindaBolumBilgisi();
             HizmetBolumBilgisi = new EfDalHizmetBolumBilgisi();
             IletisimBolumBilgisi = new EfDalIletisimBolumBilgisi();
-            IpucuVeYaziBolumBilgisi = new EfDalIpucuVeYaziBolumBilgisi ();
+            IpucuVeYaziBolumBilgisi = new EfDalIpucuVeYaziBolumBilgisi();
             PaketBolumBilgisi = new EfDalPaketBolumBilgisi();
             PersonelBolumBilgisi = new EfDalPersonelBolumBilgisi();
             ReferansBolumBilgisi = new EfDalReferansBolumBilgisi();
@@ -80,9 +126,41 @@ namespace AdminPanel.DataAccessLayer.Other
             FirmaSahip = new EfDalFirmaSahip();
             #endregion
 
-            #region Hakkkında Kısmı
+            #region Hakkında Kısmı
             HakkindaIcerik = new EfDalHakkindaIcerik();
             HakkindaReklam = new EfDalHakkindaReklam();
+            #endregion
+
+            #region Hizmet Kısmı
+            Hizmet = new EfDalHizmet();
+            HizmetAlt = new EfDalHizmetAlt();
+            HizmetAltOzellik = new EfDalHizmetAltOzellik();
+            #endregion
+
+            #region İleteşim Kısmı
+            Iletisim = new EfDalIletisim();
+            #endregion
+
+            #region İpucu Kısmı
+            IpucuVeYazi = new EfDalIpucuVeYazi();
+            #endregion
+
+            #region Logo Kısmı
+            SosyalMedyaLogo = new EfDalSosyalMedyaLogo();
+            #endregion
+
+            #region Mesaj Kısmı
+            Mesaj = new EfDalMesaj();
+            #endregion
+
+            #region Müşteri Kısmı
+            Musteri = new EfDalMusteri();
+            #endregion
+
+            #region Paket Kısmı
+            Paket = new EfDalPaket();
+            PaketAitOzellik = new EfDalPaketAitOzellik();
+            PaketOzellik = new EfDalPaketOzellik();
             #endregion
         }
 
