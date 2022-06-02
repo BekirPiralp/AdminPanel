@@ -1,9 +1,11 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.FirmaKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.HakkindaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.HakkindaKismi;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -42,6 +44,12 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalFirma Firma { get; }
         public IDalFirmaSahip FirmaSahip { get; }
         #endregion
+
+        #region Hakkında Kısmı
+        IDalHakkindaIcerik HakkindaIcerik { get; }
+        IDalHakkindaReklam HakkindaReklam { get; }
+        #endregion
+
         private DalOlusturucu()
         {
             #region Araba kısmı
@@ -70,6 +78,11 @@ namespace AdminPanel.DataAccessLayer.Other
             BayiYonetici = new EfDalBayiYonetici();
             Firma = new EfDalFirma();
             FirmaSahip = new EfDalFirmaSahip();
+            #endregion
+
+            #region Hakkkında Kısmı
+            HakkindaIcerik = new EfDalHakkindaIcerik();
+            HakkindaReklam = new EfDalHakkindaReklam();
             #endregion
         }
 
