@@ -9,6 +9,7 @@ using AdminPanel.DataAccessLayer.Abstract.Other.Genel.LogoKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MesajKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.MusteriKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PaketKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PersonelKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
@@ -20,6 +21,7 @@ using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.LogoKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MesajKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.MusteriKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.PaketKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.PersonelKismi;
 
 namespace AdminPanel.DataAccessLayer.Other
 {
@@ -96,6 +98,13 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalPaketOzellik PaketOzellik { get; }
         #endregion
 
+        #region PersonelKismi
+        public IDalPersonel Personel { get; }
+        public IDalPersonelGorev PersonelGorev { get; }
+        public IDalPersonelSifre PersonelSifre { get; }
+        public IDalPersonelSosyalMedya PersonelSosyalMedya { get; }
+        #endregion
+
         private DalOlusturucu()
         {
             #region Araba kısmı
@@ -161,6 +170,13 @@ namespace AdminPanel.DataAccessLayer.Other
             Paket = new EfDalPaket();
             PaketAitOzellik = new EfDalPaketAitOzellik();
             PaketOzellik = new EfDalPaketOzellik();
+            #endregion
+
+            #region Personel Kısmı
+            Personel = new EfDalPersonel();
+            PersonelGorev = new EfDalPersonelGorev();
+            PersonelSifre = new EfDalPersonelSifre();
+            PersonelSosyalMedya = new EfDalPersonelSosyalMedya();
             #endregion
         }
 
