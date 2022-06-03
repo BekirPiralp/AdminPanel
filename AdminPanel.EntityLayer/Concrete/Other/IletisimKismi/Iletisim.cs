@@ -9,5 +9,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other.IletisimKismi
         public string adres { get; set; }
         public string eposta { get; set; }
         public string tel { get; set; }
+
     }
 }

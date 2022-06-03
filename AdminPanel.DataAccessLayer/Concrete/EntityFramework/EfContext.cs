@@ -1,4 +1,5 @@
-﻿using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
+﻿using AdminPanel.EntityLayer.Abctract;
+using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
 using AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri;
 using AdminPanel.EntityLayer.Concrete.Other.FirmaKismi;
 using AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi;
@@ -16,7 +17,14 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
     public class EfContext : DbContext
     {
-        
+        public EfContext()
+        {
+
+        }
+        public EfContext(DbContextOptions<EfContext> options):base(options:options)
+        {
+
+        }
         public DbSet<Araba> Arabalar { get; set; }
         public DbSet<ArabaBolumBilgisi> ArabaBolumBilgileri { get; set; }
         public DbSet<ArabaKasaTip> ArabaKasaTipleri { get; set; }
@@ -65,11 +73,27 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         //{
         //    string connect =
         //        "Data Source=DESKTOP-IBLI6B4;Integrated Security=True;";
-                        
+
         //    optionsBuilder.UseSqlServer(connectionString:connect);
         //    base.OnConfiguring(optionsBuilder);
         //}
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Firma>().HasOne(e=>e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Bayi>().HasOne(e => e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
 
+            modelBuilder.Entity<FirmaSahip>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<BayiYonetici>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<BayiYonetici>().HasOne(e => e.firma).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.
+        }
     }
 }
