@@ -90,10 +90,5 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             modelBuilder.Entity<BayiYonetici>().HasOne(e => e.firma).WithMany().OnDelete(DeleteBehavior.ClientCascade);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.
-        }
     }
 }

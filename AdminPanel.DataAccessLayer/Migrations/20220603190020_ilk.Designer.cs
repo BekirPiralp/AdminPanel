@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminPanel.DataAccessLayer.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20220603182750_ilk")]
+    [Migration("20220603190020_ilk")]
     partial class ilk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
