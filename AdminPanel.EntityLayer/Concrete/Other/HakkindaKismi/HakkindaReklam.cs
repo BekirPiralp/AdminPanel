@@ -8,6 +8,9 @@ namespace AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi
     {
         public string baslik { get; set; }
         public string icerik { get; set; }
-        public string logoURL { get; set; }
+        /// <summary>
+        /// Logosu daha belirlenmemiş olabilir
+        /// </summary>
+        public string? logoURL { get; set; }
     }
 }

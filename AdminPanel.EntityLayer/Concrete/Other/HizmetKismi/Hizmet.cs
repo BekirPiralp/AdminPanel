@@ -8,7 +8,13 @@ namespace AdminPanel.EntityLayer.Concrete.Other.HizmetKismi
     {
         public string isim { get; set; }
         public string tanim { get; set; }
-        public string logoURL { get; set; }
-        public string resimURL { get; set; }
+        /// <summary>
+        /// logosu oluşturulmamış olabilir
+        /// </summary>
+        public string? logoURL { get; set; }
+        /// <summary>
+        /// resimi oluşturulmamamış olabilir
+        /// </summary>
+        public string? resimURL { get; set; }
     }
 }
