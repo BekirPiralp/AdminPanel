@@ -11,6 +11,9 @@ namespace AdminPanel.EntityLayer.Concrete.Other.PersonelKismi
         public string tc { get; set; }
         public string ad { get; set; }
         public string soyad { get; set; }
-        public string fotoURL { get; set; }
+        /// <summary>
+        /// resmi yüklenmemiş olabilir
+        /// </summary>
+        public string? fotoURL { get; set; }
     }
 }

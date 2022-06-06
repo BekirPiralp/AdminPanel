@@ -6,9 +6,18 @@ namespace AdminPanel.EntityLayer.Concrete.Other.IletisimKismi
     [Table("Iletisimleri")]
     public class Iletisim : EntityBase
     {
-        public string adres { get; set; }
-        public string eposta { get; set; }
-        public string tel { get; set; }
+        /// <summary>
+        /// adersi olmaya bilir. çift eposta veya çift tel gibi ...
+        /// </summary>
+        public string? adres { get; set; }
+        /// <summary>
+        /// epostası olmaya bilir. çift adres veya çift tel olabilir
+        /// </summary>
+        public string? eposta { get; set; }
+        /// <summary>
+        /// Tel olmaya bilir. Çift adres veya çift eposta olabilir
+        /// </summary>
+        public string? tel { get; set; }
 
     }
 }

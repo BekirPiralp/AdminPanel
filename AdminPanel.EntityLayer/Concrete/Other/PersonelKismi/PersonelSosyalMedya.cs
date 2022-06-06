@@ -8,7 +8,13 @@ namespace AdminPanel.EntityLayer.Concrete.Other.PersonelKismi
     public class PersonelSosyalMedya : EntityBase
     {
         public virtual Personel personel { get; set; }
-        public string sosyalMedyaURL { get; set; }
-        public virtual SosyalMedyaLogo sosyalMedyaLogo { get; set; }
+        /// <summary>
+        /// sosyal medya hesabı olmaya bilir
+        /// </summary>
+        public string? sosyalMedyaURL { get; set; }
+        /// <summary>
+        /// sosyal medya logosu yüklü olmaya bilir
+        /// </summary>
+        public virtual SosyalMedyaLogo? sosyalMedyaLogo { get; set; }
     }
 }

@@ -8,6 +8,9 @@ namespace AdminPanel.EntityLayer.Concrete.Other.ReferansKismi
     {
         public string adi { get; set; }
         public string icerik { get; set; }
-        public string resimURL { get; set; }
+        /// <summary>
+        /// Referansın remi yüklenmemiş olabilir
+        /// </summary>
+        public string? resimURL { get; set; }
     }
 }

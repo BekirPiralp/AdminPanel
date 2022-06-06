@@ -8,7 +8,10 @@ namespace AdminPanel.EntityLayer.Concrete.Other.IpucuKismi
     {
         public string baslik { get; set; }
         public string icerik { get; set; }
-        public string logoURL { get; set; }
+        /// <summary>
+        /// logosu olmaya bilir veya yüklenmemiş olabilir
+        /// </summary>
+        public string? logoURL { get; set; }
         public DateTime tarih { get; set; }
     }
 }
