@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.PersonelKismi
 {
+    [Serializable]
     [Table("PersonelGorevleri")]
     public class PersonelGorev : EntityBase
     {

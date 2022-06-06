@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.IletisimKismi
 {
+    [Serializable]
     [Table("Iletisimleri")]
     public class Iletisim : EntityBase
     {

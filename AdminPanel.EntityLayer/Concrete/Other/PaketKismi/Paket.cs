@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.PaketKismi
 {
+    [Serializable]
     [Table("Paketler")]
     public class Paket : EntityBase
     {

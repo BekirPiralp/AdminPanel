@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.LogoKismi
 {
+    [Serializable]
     [Table("SosyalMedyaLogolari")]
     public class SosyalMedyaLogo : EntityBase
     {

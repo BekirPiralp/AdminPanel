@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Base
 {
+    [Serializable]
     public class EntityBase : IEntity
     {
         [Key]

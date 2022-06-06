@@ -17,14 +17,22 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
     public class EfContext : DbContext
     {
-        public EfContext()
+        public EfContext():base()
         {
 
         }
-        public EfContext(DbContextOptions<EfContext> options):base(options:options)
+        public EfContext(DbContextOptions<EfContext> options) : base(options: options)
         {
-
+            
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-IBLI6B4;Integrated Security=False;Initial Catalog=deneme07;Trusted_Connection=True;MultipleActiveResultSets=true;User ID=AdminPaneli;Password=kizilelma");
+            base.OnConfiguring(optionsBuilder);
+        }
+
         public DbSet<Araba> Arabalar { get; set; }
         public DbSet<ArabaBolumBilgisi> ArabaBolumBilgileri { get; set; }
         public DbSet<ArabaKasaTip> ArabaKasaTipleri { get; set; }

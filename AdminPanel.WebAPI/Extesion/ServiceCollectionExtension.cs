@@ -7,6 +7,7 @@ namespace AdminPanel.WebAPI.Extesion
     {
         public static IServiceCollection AddConnectionString(this IServiceCollection service,WebApplicationBuilder builder)
         {
+            
             service.AddDbContext<EfContext>(op=>op.UseSqlServer(builder.Configuration.GetConnectionString("Varsayilan")));
             return service;
         }

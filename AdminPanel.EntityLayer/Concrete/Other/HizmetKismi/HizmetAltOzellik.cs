@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.HizmetKismi
 {
+    [Serializable]
     [Table("HizmetAltOzellikler")]
     public class HizmetAltOzellik : EntityBase
     {

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.ArabaKismi
 {
+    [Serializable]
     [Table("ArabaMarkalari")]
     public class ArabaMarka : EntityBase
     {

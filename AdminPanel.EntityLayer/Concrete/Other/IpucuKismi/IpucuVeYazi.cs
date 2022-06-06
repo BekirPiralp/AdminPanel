@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.IpucuKismi
 {
+    [Serializable]
     [Table("IpucuVeYazilar")]
     public class IpucuVeYazi : EntityBase
     {
