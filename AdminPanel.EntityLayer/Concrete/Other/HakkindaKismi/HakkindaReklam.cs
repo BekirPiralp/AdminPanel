@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi
 {
-    [Serializable]
     [Table("HakkindaReklamlar")]
     public class HakkindaReklam : EntityBase
     {

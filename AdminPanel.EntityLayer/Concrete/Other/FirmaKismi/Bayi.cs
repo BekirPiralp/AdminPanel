@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
 {
-    [Serializable]
     [Table("Bayiler")]
     public class Bayi : EntityBase
     {

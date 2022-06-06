@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.MusteriKismi
 {
-    [Serializable]
     [Table("Musteriler")]
     public class Musteri : EntityBase
     {

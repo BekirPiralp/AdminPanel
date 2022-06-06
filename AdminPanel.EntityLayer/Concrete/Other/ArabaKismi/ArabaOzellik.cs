@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.ArabaKismi
 {
-    [Serializable]
     [Table("ArabaOzellikleri")]
     public class ArabaOzellik : EntityBase
     {

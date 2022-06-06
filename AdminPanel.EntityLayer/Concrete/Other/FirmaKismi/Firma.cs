@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
 {
-    [Serializable]
     [Table("Firmalar")]
     public class Firma : EntityBase
     {

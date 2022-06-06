@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.ReferansKismi
 {
-    [Serializable]
     [Table("Referanslar")]
     public class Referans : EntityBase
     {

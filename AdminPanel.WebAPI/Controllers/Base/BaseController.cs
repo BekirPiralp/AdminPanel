@@ -21,19 +21,19 @@ namespace AdminPanel.WebAPI.Controllers.Base
         [HttpGet()]
         [Route("[controller]/getAll")]
        // [Route("/getAll")]
-        public ActionResult<List<TEntity>> getAll()
+        public async Task<ActionResult<List<TEntity>>> getAll()
         {
             //_entityBusBase.AddAsync(entity);
             
-            return Ok(_entityBusBase.GetAllAsync());
+            return Ok(await _entityBusBase.GetAllAsync());
         }
 
         [HttpGet()]
         [Route("[controller]/get/{id}")]
-        public ActionResult<TEntity> get(int id)
+        public async Task<ActionResult<TEntity>> get(int id)
         {
 
-            return Ok(_entityBusBase.GetByIdAsync(id));
+            return Ok(await _entityBusBase.GetByIdAsync(id));
         }
     }
 }

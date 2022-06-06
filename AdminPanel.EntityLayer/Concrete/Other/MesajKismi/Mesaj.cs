@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.MesajKismi
 {
-    [Serializable]
     [Table("Mesajlar")]
     public class Mesaj : EntityBase
     {
