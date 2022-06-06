@@ -11,26 +11,29 @@ using AdminPanel.EntityLayer.Concrete.Other.MesajKismi;
 using AdminPanel.EntityLayer.Concrete.Other.MusteriKismi;
 using AdminPanel.EntityLayer.Concrete.Other.PaketKismi;
 using AdminPanel.EntityLayer.Concrete.Other.PersonelKismi;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
+    [Serializable]
     public class EfContext : DbContext
     {
-        public EfContext():base()
-        {
-
-        }
-        public EfContext(DbContextOptions<EfContext> options) : base(options: options)
+        
+        public EfContext() : base()
         {
             
+        }
+
+        public EfContext(DbContextOptions<EfContext> options) : base(options)
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-IBLI6B4;Integrated Security=False;Initial Catalog=deneme07;Trusted_Connection=True;MultipleActiveResultSets=true;User ID=AdminPaneli;Password=kizilelma");
-            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer("".getConnectionString());
+                base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Araba> Arabalar { get; set; }
@@ -78,14 +81,6 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         public DbSet<PersonelSosyalMedya> PersonelSosyalMedyalari { get; set; }
         public DbSet<SosyalMedyaLogo> SosyalMedyaLogolar { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    string connect =
-        //        "Data Source=DESKTOP-IBLI6B4;Integrated Security=True;";
-
-        //    optionsBuilder.UseSqlServer(connectionString:connect);
-        //    base.OnConfiguring(optionsBuilder);
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
