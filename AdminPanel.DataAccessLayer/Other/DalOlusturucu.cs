@@ -39,6 +39,7 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalAraba Araba { get; }
         public IDalArabaKasaTip ArabaKasaTip { get; }
         public IDalArabaMarka ArabaMarka { get; }
+        public IDalArabaAitOzellik ArabaAitOzellik { get; }
         public IDalArabaOzellik ArabaOzellik { get; }
         public IDalArabaTip ArabaTip { get; }
         public IDalArabaVitesTip ArabaVitesTip { get; }
@@ -117,6 +118,7 @@ namespace AdminPanel.DataAccessLayer.Other
             Araba = new EfDalAraba();
             ArabaKasaTip = new EfDalArabaKasaTip();
             ArabaMarka = new EfDalArabaMarka();
+            ArabaAitOzellik = new EfDalArabaAitOzellik();
             ArabaOzellik = new EfDalArabaOzellik();
             ArabaTip = new EfDalArabaTip();
             ArabaVitesTip = new EfDalArabaVitesTip();

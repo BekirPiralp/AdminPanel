@@ -40,6 +40,7 @@ namespace AdminPanle.BusinessLayer.Other
         public IBusAraba Araba { get; }
         public IBusArabaKasaTip ArabaKasaTip { get; }
         public IBusArabaMarka ArabaMarka { get; }
+        public IBusArabaAitOzellik ArabaAitOzellik { get; }
         public IBusArabaOzellik ArabaOzellik { get; }
         public IBusArabaTip ArabaTip { get; }
         public IBusArabaVitesTip ArabaVitesTip { get; }
@@ -117,6 +118,7 @@ namespace AdminPanle.BusinessLayer.Other
             Araba = new BusAraba(DalOlusturucu.Olustur().Araba);
             ArabaKasaTip = new BusArabaKasaTip(DalOlusturucu.Olustur().ArabaKasaTip);
             ArabaMarka = new BusArabaMarka(DalOlusturucu.Olustur().ArabaMarka);
+            ArabaAitOzellik = new BusArabaAitOzellik(DalOlusturucu.Olustur().ArabaAitOzellik);
             ArabaOzellik = new BusArabaOzellik(DalOlusturucu.Olustur().ArabaOzellik);
             ArabaTip = new BusArabaTip(DalOlusturucu.Olustur().ArabaTip);
             ArabaVitesTip = new BusArabaVitesTip(DalOlusturucu.Olustur().ArabaVitesTip);

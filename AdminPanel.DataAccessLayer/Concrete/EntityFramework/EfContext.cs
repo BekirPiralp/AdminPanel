@@ -29,6 +29,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         public DbSet<ArabaBolumBilgisi> ArabaBolumBilgileri { get; set; }
         public DbSet<ArabaKasaTip> ArabaKasaTipleri { get; set; }
         public DbSet<ArabaMarka> ArabaMarkalari { get; set; }
+        public DbSet<ArabaAitOzellik> ArabayaAitOzellikler { get; set; }
         public DbSet<ArabaOzellik> ArabaOzellikleri { get; set; }
         public DbSet<ArabaTip> ArabaTipleri { get; set; }
         public DbSet<ArabaVitesTip> ArabaVitesTipleri { get; set; }
