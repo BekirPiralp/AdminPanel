@@ -6,7 +6,7 @@ namespace AdminPanel.EntityLayer.Abctract
     public interface IEntity
     {
         [Key]
-        int id { get; set; }
+        int Id { get; set; }
         //[Column(TypeName = "boolean")]
         bool sil { get; set; }
         [Required]

@@ -90,7 +90,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             bool result = false;
             if (id > 0)
             {
-                TEntity? entity =(await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault();
+                TEntity? entity =(await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
                 if (entity.isNotNull() && !entity.silinmisMi())
                     result = await _entityDalBase.DeleteAsync(entity);
             }
@@ -125,7 +125,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         {
             TEntity? result = null;
             if (id > 0)
-                result = (await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault();
+                result = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
             return result;
         }
         #endregion
@@ -151,7 +151,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 {
                     result = (await _entityDalBase.GetAsync(
                         e => e.guncellemeZamani == dateTime && 
-                        e.id == entity.id)).FirstOrDefault();
+                        e.Id == entity.Id)).FirstOrDefault();
                 }
             }
             return result;

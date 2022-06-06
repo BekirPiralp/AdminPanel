@@ -33,13 +33,13 @@ namespace AdminPanel.EntityLayer.Abctract
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool isIdEmpty(this IEntity entity) => entity.isNotNull() && entity.id < 0;
+        public static bool isIdEmpty(this IEntity entity) => entity.isNotNull() && entity.Id < 0;
 
         /// <summary>
         /// id atalı ise true diğer durumlarda false
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool isIdNotEmpty(this IEntity entity) => entity.isNotNull() && entity.id > 0;
+        public static bool isIdNotEmpty(this IEntity entity) => entity.isNotNull() && entity.Id > 0;
     }
 }
