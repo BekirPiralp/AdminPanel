@@ -10,7 +10,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
     {
         public virtual Firma firma { get; set; }
         public string isim { get; set; }
-        [Required]
-        public virtual Iletisim iletisim { get; set; }
+        public virtual Iletisim? iletisim { get; set; }
     }
 }

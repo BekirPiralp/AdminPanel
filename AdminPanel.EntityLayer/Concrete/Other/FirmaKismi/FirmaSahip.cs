@@ -8,6 +8,9 @@ namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
     public class FirmaSahip : EntityBase
     {
         public virtual Firma firma { get; set; }
-        public virtual Personel personel { get; set; }
+        /// <summary>
+        /// Firma sahibi değişe bilier veya firma sisteme yeni kayıt yapılıyor olabilir
+        /// </summary>
+        public virtual Personel? personel { get; set; }
     }
 }

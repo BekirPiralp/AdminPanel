@@ -9,6 +9,9 @@ namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
     {
         public virtual Firma firma { get; set; }
         public virtual Bayi bayi { get; set; }
-        public virtual Personel personel { get; set; }
+        /// <summary>
+        /// henüz yöneticisi atanmamış olabilir
+        /// </summary>
+        public virtual Personel? personel { get; set; }
     }
 }

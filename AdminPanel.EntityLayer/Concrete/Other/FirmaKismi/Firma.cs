@@ -10,6 +10,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi
     {
         public string adi { get; set; }
         public string logoURL { get; set; }
-        public virtual Iletisim iletisim { get; set; }
+        public virtual Iletisim? iletisim { get; set; }
     }
 }
