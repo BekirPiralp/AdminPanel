@@ -20,7 +20,7 @@ namespace AdminPanel.WebAPI.Controllers.Test
         [Route("[controller]/putt")]
         public ActionResult put()
         {
-            return Ok("[controller] başarılı get all");
+            return RedirectToAction();
         }
     }
 }

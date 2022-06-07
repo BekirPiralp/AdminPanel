@@ -1,4 +1,4 @@
-using AdminPanel.WebAPI.Extesion;
+using AdminPanel.WebAPI.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 

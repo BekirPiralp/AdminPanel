@@ -1,7 +1,7 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdminPanel.WebAPI.Extesion
+namespace AdminPanel.WebAPI.Extension
 {
     public static class ServiceCollectionExtension
     {

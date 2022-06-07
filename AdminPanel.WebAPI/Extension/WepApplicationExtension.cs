@@ -1,6 +1,6 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 
-namespace AdminPanel.WebAPI.Extesion
+namespace AdminPanel.WebAPI.Extension
 {
     public static class WepApplicationExtension
     {
