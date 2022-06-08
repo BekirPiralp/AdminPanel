@@ -66,8 +66,8 @@ namespace AdminPanle.BusinessLayer.Other
         #endregion
 
         #region Hakkında Kısmı
-        IBusHakkindaIcerik HakkindaIcerik { get; }
-        IBusHakkindaReklam HakkindaReklam { get; }
+        public IBusHakkindaIcerik HakkindaIcerik { get; }
+        public IBusHakkindaReklam HakkindaReklam { get; }
         #endregion
 
         #region Hizmet Kısmı
