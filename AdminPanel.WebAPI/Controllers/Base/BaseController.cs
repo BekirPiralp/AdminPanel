@@ -9,8 +9,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
     [ApiController]
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
-        where TEntity : class, IEntity, new()
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
+        where TEntity : class, IEntity, new()
+        
     {
         private ITEntityBusBase _entityBusBase;
         public BaseController(ITEntityBusBase entityBusBase) : base()
