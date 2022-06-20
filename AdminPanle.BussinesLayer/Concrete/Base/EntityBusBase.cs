@@ -8,7 +8,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
     public class EntityBusBase<TEntity> : IEntityBusBase<TEntity>
         where TEntity : class, IEntity, new()
     {
-        IEntityDalBase<TEntity> _entityDalBase;
+        protected IEntityDalBase<TEntity> _entityDalBase;
         public EntityBusBase(IEntityDalBase<TEntity> entityDalBase)
         {
             //deneme

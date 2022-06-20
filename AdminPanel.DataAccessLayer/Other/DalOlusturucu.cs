@@ -1,4 +1,5 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.FirmaKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.HakkindaKismi;
@@ -12,6 +13,7 @@ using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PaketKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.PersonelKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ReferansKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.BolumBilgileri;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.FirmaKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.HakkindaKismi;
@@ -43,6 +45,11 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalArabaOzellik ArabaOzellik { get; }
         public IDalArabaTip ArabaTip { get; }
         public IDalArabaVitesTip ArabaVitesTip { get; }
+        #endregion
+
+        #region Authentication kısmı
+        public IDalTokensTable TokensTable { get; }
+        public IDalTokensMailPassword TokensMailPassword { get; }
         #endregion
 
         #region Bölüm Bilgileri
@@ -122,6 +129,11 @@ namespace AdminPanel.DataAccessLayer.Other
             ArabaOzellik = new EfDalArabaOzellik();
             ArabaTip = new EfDalArabaTip();
             ArabaVitesTip = new EfDalArabaVitesTip();
+            #endregion
+
+            #region Authentication kısmı
+            TokensTable = new EfDalTokensTable();
+            TokensMailPassword = new EfDalTokensMailPassword();
             #endregion
 
             #region Bölüm Bilgileri

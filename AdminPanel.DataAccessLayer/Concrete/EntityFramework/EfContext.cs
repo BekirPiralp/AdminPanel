@@ -1,5 +1,6 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
+using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
 using AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri;
 using AdminPanel.EntityLayer.Concrete.Other.FirmaKismi;
 using AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi;
@@ -81,6 +82,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         public DbSet<PersonelSosyalMedya> PersonelSosyalMedyalari { get; set; }
         public DbSet<SosyalMedyaLogo> SosyalMedyaLogolar { get; set; }
 
+
+        public DbSet<TokensMailPassword> TokensMailPasswords { get; set; }
+        public DbSet<TokensTable> TokensTables { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
