@@ -1,5 +1,9 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
+using AdminPanel.Guvenlik.Other;
+using AdminPanel.Guvenlik.Token.Concrete;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AdminPanel.WebAPI.Extension
 {
@@ -11,6 +15,35 @@ namespace AdminPanel.WebAPI.Extension
             
             service.AddDbContext<EfContext>(op=>op.UseSqlServer("".getConnectionString()));
             return service;
+        }
+
+
+        public static void AddJwt(this IServiceCollection services)
+        {
+            var imzalayici = GuvenlikOlusturucu.Olustur().Imzalayici;
+            var tokenOption = GuvenlikOlusturucu.Olustur().TokenOpsiyonlari;
+
+            var authenticationBuilder =services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+
+            authenticationBuilder.AddJwtBearer( JwtBearerOptions =>
+            {
+                JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters() { 
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenOption.Yayinci,
+                    ValidAudience = tokenOption.Dinleyici,
+                    IssuerSigningKey = imzalayici.GetSecurityKey(tokenOption.GuvenlikAnahtari),
+                    ClockSkew = new TimeSpan(0,tokenOption.GecikmeSuresi,0)
+                };
+            }
+                );
+
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
         }
 
     }

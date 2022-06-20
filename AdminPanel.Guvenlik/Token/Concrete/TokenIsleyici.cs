@@ -17,10 +17,10 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         private JwtSecurityTokenHandler _tokenIsleyici;
         private string _guvenlikAlgoritmasi;
 
-        public TokenIsleyici(ITokenOpsiyonlari tokenOpsiyonlari)
+        public TokenIsleyici(ITokenOpsiyonlari tokenOpsiyonlari,IImzalayici imzalayici)
         {
             _tokenOpsiyonlari = tokenOpsiyonlari;
-            _imzalayici = new Imzalayici();
+            _imzalayici = imzalayici;
             _guvenlikAlgoritmasi = SecurityAlgorithms.HmacSha256Signature;
             _tokenIsleyici = new JwtSecurityTokenHandler();
         }
@@ -85,10 +85,14 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         }
         #endregion
 
-        public void RemoveRefreshToken(Tokens)
+        /// <summary>
+        ///  TokenTable referansı geldiği için bu gelen referans içerisindeki
+        ///  geçerlilik durumunu değiştirir
+        /// </summary>
+        /// <param name="token"></param>
+        public void RemoveRefreshToken(TokensTable token)
         {
-            //TODO : remove refreshtoken
-            throw new NotImplementedException();
+            token.gecerlilikDurumu = true;
         }
     }
 }

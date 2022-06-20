@@ -6,6 +6,6 @@ namespace AdminPanel.Guvenlik.Token.Abstract
     public interface ITokenIsleyici
     {
         AccessToken CreateAccessToken(TokensMailPassword mailPassword);
-        void RemoveRefreshToken(TokensMailPassword mailPassword);
+        void RemoveRefreshToken(TokensTable token);
     }
 }
