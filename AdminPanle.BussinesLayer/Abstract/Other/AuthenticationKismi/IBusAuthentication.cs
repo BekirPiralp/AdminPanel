@@ -4,7 +4,7 @@ using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi
 {
-    public interface IAuthentication
+    public interface IBusAuthentication
     {
         Task<ObjectResponse<TokensMailPassword>> CreateEmailPassword(string email, string password);
 

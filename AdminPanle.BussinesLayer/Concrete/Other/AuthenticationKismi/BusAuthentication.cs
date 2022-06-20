@@ -2,7 +2,7 @@
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
 {
-    public class Authentication : IAuthentication
+    public class BusAuthentication : IBusAuthentication
     {
         
     }
