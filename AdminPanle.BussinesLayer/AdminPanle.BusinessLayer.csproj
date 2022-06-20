@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdminPanel.DataAccessLayer\AdminPanel.DataAccessLayer.csproj" />
     <ProjectReference Include="..\AdminPanel.EntityLayer\AdminPanel.EntityLayer.csproj" />
+    <ProjectReference Include="..\AdminPanel.Guvenlik\AdminPanel.Guvenlik.csproj" />
   </ItemGroup>
 
 </Project>

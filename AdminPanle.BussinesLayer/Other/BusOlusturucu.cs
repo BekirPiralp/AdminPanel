@@ -1,5 +1,6 @@
 ﻿using AdminPanel.DataAccessLayer.Other;
 using AdminPanle.BusinessLayer.Abstract.Other.ArabaKismi;
+using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.BolumBilgileri;
 using AdminPanle.BusinessLayer.Abstract.Other.FirmaKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.HakkindaKismi;
@@ -13,6 +14,7 @@ using AdminPanle.BusinessLayer.Abstract.Other.PaketKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.PersonelKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.ReferansKismi;
 using AdminPanle.BusinessLayer.Concrete.Other.ArabaKismi;
+using AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Concrete.Other.BolumBilgileri;
 using AdminPanle.BusinessLayer.Concrete.Other.FirmaKismi;
 using AdminPanle.BusinessLayer.Concrete.Other.HakkindaKismi;
@@ -44,6 +46,11 @@ namespace AdminPanle.BusinessLayer.Other
         public IBusArabaOzellik ArabaOzellik { get; }
         public IBusArabaTip ArabaTip { get; }
         public IBusArabaVitesTip ArabaVitesTip { get; }
+        #endregion
+
+        #region Authentication Kismi
+        public IBusTokensTable TokensTable { get; }
+        public IBusTokensMailPassword TokensMailPassword { get; }
         #endregion
 
         #region Bölüm Bilgileri
@@ -122,6 +129,11 @@ namespace AdminPanle.BusinessLayer.Other
             ArabaOzellik = new BusArabaOzellik(DalOlusturucu.Olustur().ArabaOzellik);
             ArabaTip = new BusArabaTip(DalOlusturucu.Olustur().ArabaTip);
             ArabaVitesTip = new BusArabaVitesTip(DalOlusturucu.Olustur().ArabaVitesTip);
+            #endregion
+
+            #region Authentication kısmı
+            TokensMailPassword = new BusTokensMailPassword(DalOlusturucu.Olustur().TokensMailPassword);
+            TokensTable = new BusTokensTable(DalOlusturucu.Olustur().TokensTable);
             #endregion
 
             #region Bölüm Bilgileri

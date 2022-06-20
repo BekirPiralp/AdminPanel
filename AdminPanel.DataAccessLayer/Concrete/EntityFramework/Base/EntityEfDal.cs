@@ -39,9 +39,11 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
                 if (entity.isIdNotEmpty() & !entity.silinmisMi())
                 {
                     entity.silmeZamani = silmeZamani != null ? (DateTime)silmeZamani : DateTime.Now;
-                    
+
                     // silme işlemi sanal olacak on göre ayarlama yapılacak
-                    context.Entry(entity).State = EntityState.Deleted;
+                    //context.Entry(entity).State = EntityState.Deleted;
+                    entity.sil = true;
+                    context.Entry(entity).State = EntityState.Modified;
                     int response = await context.SaveChangesAsync();
 
                     if (response > 0)
