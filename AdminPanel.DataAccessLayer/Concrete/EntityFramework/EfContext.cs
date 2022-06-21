@@ -33,7 +33,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseLazyLoadingProxies()
+            optionsBuilder//.UseLazyLoadingProxies()
                 .UseSqlServer("".getConnectionString());
 
             base.OnConfiguring(optionsBuilder);
@@ -100,6 +100,8 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             modelBuilder.Entity<BayiYonetici>().HasOne(e => e.firma).WithMany().OnDelete(DeleteBehavior.ClientCascade);
 
             //modelBuilder.Entity<TokensTable>().HasOne(e=>e.mailPassword).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+
+            //modelBuilder.Entity<TokensTable>().Navigation(e => e.mailPassword).AutoInclude();
         }
 
     }
