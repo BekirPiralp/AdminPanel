@@ -58,6 +58,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             List<TEntity> result;
             using (TContext context = new TContext())
             {
+                
                 result = filter == null ? await context.Set<TEntity>().ToListAsync()
                     : await context.Set<TEntity>().Where(filter).ToListAsync();
             }

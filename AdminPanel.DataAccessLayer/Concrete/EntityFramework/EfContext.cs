@@ -20,10 +20,10 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
     [Serializable]
     public class EfContext : DbContext
     {
-        
+
         public EfContext() : base()
         {
-            
+
         }
 
         public EfContext(DbContextOptions<EfContext> options) : base(options)
@@ -33,8 +33,10 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("".getConnectionString());
-                base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies()
+                .UseSqlServer("".getConnectionString());
+
+            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Araba> Arabalar { get; set; }
@@ -45,36 +47,36 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         public DbSet<ArabaOzellik> ArabaOzellikleri { get; set; }
         public DbSet<ArabaTip> ArabaTipleri { get; set; }
         public DbSet<ArabaVitesTip> ArabaVitesTipleri { get; set; }
-        
+
         public DbSet<Bayi> Bayiler { get; set; }
         public DbSet<BayiYonetici> BayiYoneticileri { get; set; }
         public DbSet<Firma> Firmalar { get; set; }
         public DbSet<FirmaSahip> FirmaSahipleri { get; set; }
-        
+
         public DbSet<GaleriBolumBilgisi> GaleriBolumBilgileri { get; set; }
         public DbSet<HakkindaBolumBilgisi> HakkindaBolumBilgileri { get; set; }
         public DbSet<HakkindaIcerik> HakkindaIcerikler { get; set; }
         public DbSet<HakkindaReklam> HakkindaReklamlar { get; set; }
-        
+
         public DbSet<Hizmet> Hizmetler { get; set; }
         public DbSet<HizmetAlt> HizmetAltlar { get; set; }
         public DbSet<HizmetAltOzellik> HizmetAltOzellikler { get; set; }
         public DbSet<HizmetBolumBilgisi> HizmetBolumBilgileri { get; set; }
-        
+
         public DbSet<Iletisim> Iletisimler { get; set; }
         public DbSet<IletisimBolumBilgisi> IletisimBolumBilgileri { get; set; }
-        
+
         public DbSet<IpucuVeYazi> IpucuVeYazilar { get; set; }
         public DbSet<IpucuVeYaziBolumBilgisi> IpucuVeYaziBolumBilgileri { get; set; }
-        
+
         public DbSet<Mesaj> Mesajlar { get; set; }
         public DbSet<Musteri> Musteriler { get; set; }
-         
+
         public DbSet<Paket> Paketler { get; set; }
         public DbSet<PaketAitOzellik> PaketAitOzellikleri { get; set; }
         public DbSet<PaketBolumBilgisi> PaketBolumBilgileri { get; set; }
         public DbSet<PaketOzellik> PaketOzellikleri { get; set; }
-        
+
         public DbSet<Personel> Personeller { get; set; }
         public DbSet<PersonelBolumBilgisi> PersonelBolumBilgileri { get; set; }
         public DbSet<PersonelGorev> PersonelGorevleri { get; set; }
@@ -88,9 +90,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Firma>().HasOne(e=>e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+            modelBuilder.Entity<Firma>().HasOne(e => e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Bayi>().HasOne(e => e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<FirmaSahip>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);

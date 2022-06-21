@@ -12,7 +12,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi
         [Required]
         //[ForeignKey("Id")]
         //public int mailPasswordId { get; set; }
-        public TokensMailPassword mailPassword { get; set; }
+        public virtual TokensMailPassword mailPassword { get; set; }
         /// <summary>
         /// gecerli ise true değil ise false süreden 
         /// bağımsız yapılan geçerlilik için geçerli
