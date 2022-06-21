@@ -11,7 +11,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi
         public DateTime? refreshTokenDate {get;set;}
         [Required]
         //[ForeignKey("Id")]
-        public int mailPasswordId { get; set; }
+        //public int mailPasswordId { get; set; }
         public TokensMailPassword mailPassword { get; set; }
         /// <summary>
         /// gecerli ise true değil ise false süreden 
