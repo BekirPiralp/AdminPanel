@@ -1,4 +1,6 @@
-﻿namespace AdminPanle.BusinessLayer.Other.Response;
+﻿using AdminPanle.BusinessLayer.Other.Extensions;
+
+namespace AdminPanle.BusinessLayer.Other.Response;
 public class ObjectResponse<DataType>
     where DataType : class
 {
@@ -8,13 +10,25 @@ public class ObjectResponse<DataType>
 
     public DataType? Data => _data;
     public string Message => _message;
+    /// <summary>
+    /// Sıkıntısız şekilde data verildiyse Success true olur diğer durumlarda false
+    /// </summary>
     public bool Success => _succes;
 
     private ObjectResponse(DataType? data, string message, bool succes)
     {
-        _data = data;
-        _message = message;
-        _succes = succes;
+        if ((message == null || message.Trim().Equals("")) && data == null)
+        {
+            _data = null;
+            _message = "nesne gelmedi.";
+            _succes = false;
+        }
+        else
+        {
+            _data = data;
+            _message = message;
+            _succes = succes;
+        }
     }
 
     /// <summary>

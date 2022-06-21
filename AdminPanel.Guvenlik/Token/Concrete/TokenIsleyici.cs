@@ -14,7 +14,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         private readonly IImzalayici _imzalayici;
         private SigningCredentials _kimlikImzalayici;
         private JwtSecurityToken _jwtGuvenliToken;
-        private JwtSecurityTokenHandler _tokenIsleyici;
+        private JwtSecurityTokenHandler _jwtGuvenliTokenIsleyici;
         private string _guvenlikAlgoritmasi;
 
         public TokenIsleyici(ITokenOpsiyonlari tokenOpsiyonlari,IImzalayici imzalayici)
@@ -22,7 +22,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
             _tokenOpsiyonlari = tokenOpsiyonlari;
             _imzalayici = imzalayici;
             _guvenlikAlgoritmasi = SecurityAlgorithms.HmacSha256Signature;
-            _tokenIsleyici = new JwtSecurityTokenHandler();
+            _jwtGuvenliTokenIsleyici = new JwtSecurityTokenHandler();
         }
 
         public AccessToken CreateAccessToken(TokensMailPassword mailPassword)
@@ -49,7 +49,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
 
             
 
-            var token = _tokenIsleyici.WriteToken(_jwtGuvenliToken);
+            var token = _jwtGuvenliTokenIsleyici.WriteToken(_jwtGuvenliToken);
 
             result.Token = token;
             result.SonKullanımTarihi = accsessTokenSonKullanmaTarihi;
@@ -87,12 +87,12 @@ namespace AdminPanel.Guvenlik.Token.Concrete
 
         /// <summary>
         ///  TokenTable referansı geldiği için bu gelen referans içerisindeki
-        ///  geçerlilik durumunu değiştirir
+        ///  geçerlilik durumunu değiştirir Geçersiz ise false olur
         /// </summary>
         /// <param name="token"></param>
         public void RemoveRefreshToken(TokensTable token)
         {
-            token.gecerlilikDurumu = true;
+            token.gecerlilikDurumu = false;
         }
     }
 }

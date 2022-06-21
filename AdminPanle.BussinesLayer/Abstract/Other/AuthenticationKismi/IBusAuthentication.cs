@@ -14,7 +14,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi
 
         Task<ObjectResponse<AccessToken>> CreateAccessTokenByRefreshToken(string email, string refreshToken);
 
-        Task<ObjectResponse<AccessToken>> RemoveRefreshToken(string email, string refreshToken);
+        Task<ObjectResponse<TokensTable>> RemoveRefreshToken(string email, string refreshToken);
 
 
     }
