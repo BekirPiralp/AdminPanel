@@ -49,8 +49,9 @@ namespace AdminPanle.BusinessLayer.Other
         #endregion
 
         #region Authentication Kismi
-        public IBusTokensTable TokensTable { get; }
-        public IBusTokensMailPassword TokensMailPassword { get; }
+        internal IBusTokensTable TokensTable { get; }
+        internal IBusTokensMailPassword TokensMailPassword { get; }
+        public IBusAuthentication Authentication { get; }
         #endregion
 
         #region Bölüm Bilgileri
@@ -134,6 +135,7 @@ namespace AdminPanle.BusinessLayer.Other
             #region Authentication kısmı
             TokensMailPassword = new BusTokensMailPassword(DalOlusturucu.Olustur().TokensMailPassword);
             TokensTable = new BusTokensTable(DalOlusturucu.Olustur().TokensTable);
+            Authentication = new BusAuthentication();
             #endregion
 
             #region Bölüm Bilgileri

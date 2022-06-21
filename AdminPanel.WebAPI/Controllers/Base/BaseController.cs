@@ -2,11 +2,13 @@
 using AdminPanel.WebAPI.Definitions;
 using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Base
 {
     [ApiController]
+    [Authorize()]
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
