@@ -36,7 +36,7 @@ namespace AdminPanle.BusinessLayer.Other
     public class BusOlusturucu
     {
         private static BusOlusturucu _olusturucu;
-        private static object _object = new Object();
+        private static readonly object _object = new object();
 
         #region Araba kısmı
         public IBusAraba Araba { get; }
@@ -51,7 +51,21 @@ namespace AdminPanle.BusinessLayer.Other
         #region Authentication Kismi
         internal IBusTokensTable TokensTable { get; }
         internal IBusTokensMailPassword TokensMailPassword { get; }
-        public IBusAuthentication Authentication { get; }
+        private IBusAuthentication authentication;
+        public IBusAuthentication Authentication { get
+            {
+                if(authentication == null)
+                {
+                    if (_olusturucu.isNull())
+                    {
+                        BusOlusturucu.Olustur();
+                    }
+
+                    authentication=new BusAuthentication(); 
+                }
+                return authentication;
+            } 
+        }
         #endregion
 
         #region Bölüm Bilgileri
@@ -135,7 +149,7 @@ namespace AdminPanle.BusinessLayer.Other
             #region Authentication kısmı
             TokensMailPassword = new BusTokensMailPassword(DalOlusturucu.Olustur().TokensMailPassword);
             TokensTable = new BusTokensTable(DalOlusturucu.Olustur().TokensTable);
-            Authentication = new BusAuthentication();
+            //Authentication = new BusAuthentication();//sonsuz döngüye giriyor
             #endregion
 
             #region Bölüm Bilgileri

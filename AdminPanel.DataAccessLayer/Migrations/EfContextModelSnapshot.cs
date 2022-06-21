@@ -24,72 +24,107 @@ namespace AdminPanel.DataAccessLayer.Migrations
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.Araba", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("gunlukFiyat")
+                    b.Property<double?>("gunlukFiyat")
                         .HasColumnType("float");
 
-                    b.Property<int>("kasaTipid")
+                    b.Property<int>("kasaTipId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("markaid")
+                    b.Property<int>("markaId")
                         .HasColumnType("int");
 
                     b.Property<string>("model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("resimURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("tipid")
+                    b.Property<int>("tipId")
                         .HasColumnType("int");
 
                     b.Property<int>("uretimYili")
                         .HasColumnType("int");
 
-                    b.Property<int>("vitesTipid")
+                    b.Property<int>("vitesTipId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("kasaTipid");
+                    b.HasIndex("kasaTipId");
 
-                    b.HasIndex("markaid");
+                    b.HasIndex("markaId");
 
-                    b.HasIndex("tipid");
+                    b.HasIndex("tipId");
 
-                    b.HasIndex("vitesTipid");
+                    b.HasIndex("vitesTipId");
 
                     b.ToTable("Arabalar");
                 });
 
-            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaKasaTip", b =>
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaAitOzellik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<int>("arabaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("guncellemeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("kayitZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ozellikId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("sil")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("silmeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("arabaId");
+
+                    b.HasIndex("ozellikId");
+
+                    b.ToTable("ArabayaAitOzellikler");
+                });
+
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaKasaTip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -102,23 +137,23 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaKasaTipleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaMarka", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -131,31 +166,29 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaMarkalari");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaOzellik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("arabaid")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
@@ -163,25 +196,23 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("arabaid");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaOzellikleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaTip", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -194,23 +225,23 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaTipleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaVitesTip", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -223,21 +254,93 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaVitesTipleri");
                 });
 
-            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.ArabaBolumBilgisi", b =>
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi.TokensMailPassword", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("guncellemeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("kayitZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("sil")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("silmeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TokensMailPasswords");
+                });
+
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi.TokensTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("gecerlilikDurumu")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("guncellemeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("kayitZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("mailPasswordId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("refreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("refreshTokenDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("sil")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("silmeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("mailPasswordId");
+
+                    b.ToTable("TokensTables");
+                });
+
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.ArabaBolumBilgisi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -247,7 +350,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -256,21 +359,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ArabaBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.GaleriBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -280,7 +383,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -289,21 +392,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("GaleriBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.HakkindaBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -313,7 +416,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -322,21 +425,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("HakkindaBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.HizmetBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -346,7 +449,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -355,21 +458,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("HizmetBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.IletisimBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -379,7 +482,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -388,21 +491,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("IletisimBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.IpucuVeYaziBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -412,7 +515,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -421,21 +524,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("IpucuVeYaziBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.PaketBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -445,7 +548,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -454,21 +557,21 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("PaketBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri.PersonelBolumBilgisi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("altBaslik")
                         .IsRequired()
@@ -478,7 +581,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -487,29 +590,29 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("PersonelBolumBilgileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Bayi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("firmaid")
+                    b.Property<int>("firmaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("iletisimid")
+                    b.Property<int?>("iletisimId")
                         .HasColumnType("int");
 
                     b.Property<string>("isim")
@@ -522,74 +625,74 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("firmaid");
+                    b.HasIndex("firmaId");
 
-                    b.HasIndex("iletisimid");
+                    b.HasIndex("iletisimId");
 
                     b.ToTable("Bayiler");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.BayiYonetici", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("bayiid")
+                    b.Property<int>("bayiId")
                         .HasColumnType("int");
 
-                    b.Property<int>("firmaid")
+                    b.Property<int>("firmaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("personelid")
+                    b.Property<int?>("personelId")
                         .HasColumnType("int");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("bayiid");
+                    b.HasIndex("bayiId");
 
-                    b.HasIndex("firmaid");
+                    b.HasIndex("firmaId");
 
-                    b.HasIndex("personelid");
+                    b.HasIndex("personelId");
 
                     b.ToTable("BayiYoneticileri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Firma", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("adi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("iletisimid")
+                    b.Property<int?>("iletisimId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("kayitZamani")
@@ -602,60 +705,60 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("iletisimid");
+                    b.HasIndex("iletisimId");
 
                     b.ToTable("Firmalar");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.FirmaSahip", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("firmaid")
+                    b.Property<int>("firmaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("personelid")
+                    b.Property<int?>("personelId")
                         .HasColumnType("int");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("firmaid");
+                    b.HasIndex("firmaId");
 
-                    b.HasIndex("personelid");
+                    b.HasIndex("personelId");
 
                     b.ToTable("FirmaSahipleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi.HakkindaIcerik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("icerik")
@@ -672,27 +775,27 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("HakkindaIcerikleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.HakkindaKismi.HakkindaReklam", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("baslik")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("icerik")
@@ -703,29 +806,28 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("logoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("HakkindaReklamlar");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.HizmetKismi.Hizmet", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -736,40 +838,38 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("logoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("resimURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("tanim")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Hizmetler");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.HizmetKismi.HizmetAlt", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("hizmetid")
+                    b.Property<int>("hizmetId")
                         .HasColumnType("int");
 
                     b.Property<string>("isim")
@@ -782,28 +882,28 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("hizmetid");
+                    b.HasIndex("hizmetId");
 
                     b.ToTable("HizmetAltlar");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.HizmetKismi.HizmetAltOzellik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("hizmetAltid")
+                    b.Property<int>("hizmetAltId")
                         .HasColumnType("int");
 
                     b.Property<string>("isim")
@@ -816,33 +916,31 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("hizmetAltid");
+                    b.HasIndex("hizmetAltId");
 
                     b.ToTable("HizmetAltOzellikler");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.IletisimKismi.Iletisim", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("adres")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("eposta")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -851,31 +949,30 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("tel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Iletisimleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.IpucuKismi.IpucuVeYazi", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("baslik")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("icerik")
@@ -886,59 +983,61 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("logoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("tarih")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("IpucuVeYazilar");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.LogoKismi.SosyalMedyaLogo", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("logoURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("SosyalMedyaLogolari");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.MesajKismi.Mesaj", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ad")
                         .IsRequired()
@@ -948,7 +1047,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("icerik")
@@ -965,34 +1064,34 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("soyad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Mesajlar");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.MusteriKismi.Musteri", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("firmaid")
+                    b.Property<int>("firmaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -1001,7 +1100,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("soyad")
@@ -1013,25 +1112,25 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("firmaid");
+                    b.HasIndex("firmaId");
 
                     b.ToTable("Musteriler");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PaketKismi.Paket", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("fiyat")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -1044,58 +1143,58 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Paketler");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PaketKismi.PaketAitOzellik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ozellikid")
+                    b.Property<int>("ozellikId")
                         .HasColumnType("int");
 
-                    b.Property<int>("paketid")
+                    b.Property<int>("paketId")
                         .HasColumnType("int");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ozellikid");
+                    b.HasIndex("ozellikId");
 
-                    b.HasIndex("paketid");
+                    b.HasIndex("paketId");
 
                     b.ToTable("PaketAitOzellikleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PaketKismi.PaketOzellik", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -1108,31 +1207,30 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("PaketOzellikleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fotoURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
@@ -1141,7 +1239,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("soyad")
@@ -1153,20 +1251,20 @@ namespace AdminPanel.DataAccessLayer.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Personeller");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.PersonelGorev", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("isim")
@@ -1176,41 +1274,41 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("personelid")
+                    b.Property<int>("personelId")
                         .HasColumnType("int");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("tanim")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("personelid");
+                    b.HasIndex("personelId");
 
                     b.ToTable("PersonelGorevleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.PersonelSifre", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("personelid")
+                    b.Property<int>("personelId")
                         .HasColumnType("int");
 
                     b.Property<string>("sifre")
@@ -1220,51 +1318,50 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("personelid");
+                    b.HasIndex("personelId");
 
                     b.ToTable("PersonelSifreleri");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.PersonelSosyalMedya", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("guncellemeZamani")
+                    b.Property<DateTime?>("guncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("kayitZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("personelid")
+                    b.Property<int>("personelId")
                         .HasColumnType("int");
 
                     b.Property<bool>("sil")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("silmeZamani")
+                    b.Property<DateTime?>("silmeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("sosyalMedyaLogoid")
+                    b.Property<int?>("sosyalMedyaLogoId")
                         .HasColumnType("int");
 
                     b.Property<string>("sosyalMedyaURL")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("personelid");
+                    b.HasIndex("personelId");
 
-                    b.HasIndex("sosyalMedyaLogoid");
+                    b.HasIndex("sosyalMedyaLogoId");
 
                     b.ToTable("PersonelSosyalMedyalari");
                 });
@@ -1273,25 +1370,25 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaKasaTip", "kasaTip")
                         .WithMany()
-                        .HasForeignKey("kasaTipid")
+                        .HasForeignKey("kasaTipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaMarka", "marka")
                         .WithMany()
-                        .HasForeignKey("markaid")
+                        .HasForeignKey("markaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaTip", "tip")
                         .WithMany()
-                        .HasForeignKey("tipid")
+                        .HasForeignKey("tipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaVitesTip", "vitesTip")
                         .WithMany()
-                        .HasForeignKey("vitesTipid")
+                        .HasForeignKey("vitesTipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1304,30 +1401,48 @@ namespace AdminPanel.DataAccessLayer.Migrations
                     b.Navigation("vitesTip");
                 });
 
-            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaOzellik", b =>
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaAitOzellik", b =>
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.Araba", "araba")
                         .WithMany()
-                        .HasForeignKey("arabaid")
+                        .HasForeignKey("arabaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AdminPanel.EntityLayer.Concrete.Other.ArabaKismi.ArabaOzellik", "ozellik")
+                        .WithMany()
+                        .HasForeignKey("ozellikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("araba");
+
+                    b.Navigation("ozellik");
+                });
+
+            modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi.TokensTable", b =>
+                {
+                    b.HasOne("AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi.TokensMailPassword", "mailPassword")
+                        .WithMany()
+                        .HasForeignKey("mailPasswordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("mailPassword");
                 });
 
             modelBuilder.Entity("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Bayi", b =>
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Firma", "firma")
                         .WithMany()
-                        .HasForeignKey("firmaid")
+                        .HasForeignKey("firmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.IletisimKismi.Iletisim", "iletisim")
                         .WithMany()
-                        .HasForeignKey("iletisimid")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .HasForeignKey("iletisimId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("firma");
 
@@ -1338,21 +1453,20 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Bayi", "bayi")
                         .WithMany()
-                        .HasForeignKey("bayiid")
+                        .HasForeignKey("bayiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Firma", "firma")
                         .WithMany()
-                        .HasForeignKey("firmaid")
+                        .HasForeignKey("firmaId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", "personel")
                         .WithMany()
-                        .HasForeignKey("personelid")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .HasForeignKey("personelId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("bayi");
 
@@ -1365,9 +1479,8 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.IletisimKismi.Iletisim", "iletisim")
                         .WithMany()
-                        .HasForeignKey("iletisimid")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .HasForeignKey("iletisimId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("iletisim");
                 });
@@ -1376,15 +1489,14 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Firma", "firma")
                         .WithMany()
-                        .HasForeignKey("firmaid")
+                        .HasForeignKey("firmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", "personel")
                         .WithMany()
-                        .HasForeignKey("personelid")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                        .HasForeignKey("personelId")
+                        .OnDelete(DeleteBehavior.ClientCascade);
 
                     b.Navigation("firma");
 
@@ -1395,7 +1507,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.HizmetKismi.Hizmet", "hizmet")
                         .WithMany()
-                        .HasForeignKey("hizmetid")
+                        .HasForeignKey("hizmetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1406,7 +1518,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.HizmetKismi.HizmetAlt", "hizmetAlt")
                         .WithMany()
-                        .HasForeignKey("hizmetAltid")
+                        .HasForeignKey("hizmetAltId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1417,7 +1529,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.FirmaKismi.Firma", "firma")
                         .WithMany()
-                        .HasForeignKey("firmaid")
+                        .HasForeignKey("firmaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1428,13 +1540,13 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PaketKismi.PaketOzellik", "ozellik")
                         .WithMany()
-                        .HasForeignKey("ozellikid")
+                        .HasForeignKey("ozellikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PaketKismi.Paket", "paket")
                         .WithMany()
-                        .HasForeignKey("paketid")
+                        .HasForeignKey("paketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1447,7 +1559,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", "personel")
                         .WithMany()
-                        .HasForeignKey("personelid")
+                        .HasForeignKey("personelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1458,7 +1570,7 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", "personel")
                         .WithMany()
-                        .HasForeignKey("personelid")
+                        .HasForeignKey("personelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1469,15 +1581,13 @@ namespace AdminPanel.DataAccessLayer.Migrations
                 {
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.PersonelKismi.Personel", "personel")
                         .WithMany()
-                        .HasForeignKey("personelid")
+                        .HasForeignKey("personelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AdminPanel.EntityLayer.Concrete.Other.LogoKismi.SosyalMedyaLogo", "sosyalMedyaLogo")
                         .WithMany()
-                        .HasForeignKey("sosyalMedyaLogoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("sosyalMedyaLogoId");
 
                     b.Navigation("personel");
 

@@ -12,5 +12,6 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         public int GecerlilikBaslamasi { get; set; }
 
         public string GuvenlikAnahtari { get; set; }
+        public int GecikmeSuresi { get; set; } = 0;
     }
 }

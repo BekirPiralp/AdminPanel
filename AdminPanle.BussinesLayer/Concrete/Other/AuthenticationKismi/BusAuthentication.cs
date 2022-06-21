@@ -5,6 +5,7 @@ using AdminPanel.Guvenlik.Token.Abstract;
 using AdminPanel.Guvenlik.Token.Objects;
 using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Other;
+using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
@@ -83,7 +84,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 {
                     if (!refresTableResponse.Data.silinmisMi())
                     {
-                        if (refresTableResponse.Data.kayitZamani >= DateTime.Now)
+                        if (refresTableResponse.Data.refreshTokenDate >= DateTime.Now)
                         {
                             // olaki şifresi güncellendi ise bu sayede eski kayıtlar giriş yapmaz. Id ile getirseydim yapabilirdi...
                             var emailPaswordResource = await _mailPassword.GetByEmailAndPassword(
@@ -130,8 +131,8 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             try
             {
                 var mailPasswordResource = await _mailPassword.GetByEmail(email);
-
-                if (!mailPasswordResource.Success)
+                // message tanımları tek bir merkeze alınacak
+                if (!mailPasswordResource.Success && mailPasswordResource.Message.Equals("Sistemde kayıtlı değildir."))
                 {
                     var addResult = await _mailPassword.AddByAsync(new TokensMailPassword { mail = email, password = password });
                     if (addResult.isIdNotEmpty())
@@ -143,7 +144,10 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 }
                 else
                 {
-                    result = new ObjectResponse<TokensMailPassword>("Bu emailde sistemde bir kayıt mevcuttur.");
+                    if (mailPasswordResource.Message.isNotEmpty())
+                        result = mailPasswordResource;
+                    else
+                        result = new ObjectResponse<TokensMailPassword>("Bu emailde sistemde bir kayıt mevcuttur.");
                 }
             }
             catch (Exception ex)

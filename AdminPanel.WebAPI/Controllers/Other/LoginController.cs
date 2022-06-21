@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Other
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
         private IBusAuthentication _authentication;
-        public LoginController():base()
+        public LoginController() : base()
         {
             _authentication = BusOlusturucu.Olustur().Authentication;
         }
@@ -34,7 +34,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
         }
 
         [HttpPut()]
-        [Authorize()]
+        //[Authorize()]
         public async Task<IActionResult> UpdatePassword(string email, string password)
         {
             var resource = await _authentication.UpdatePassword(email, password);
@@ -58,7 +58,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
         [HttpDelete()]
         public async Task<IActionResult> RemoveRefreshToken(string email, string refreshToken)
         {
-            var resource =await _authentication.RemoveRefreshToken(email, refreshToken);
+            var resource = await _authentication.RemoveRefreshToken(email, refreshToken);
             return dondur(resource);
         }
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AdminPanel.WebAPI.Controllers.Base
 {
     [ApiController]
-    [Authorize()]
+   
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
         where ITEntityBusBase : class, IEntityBusBase<TEntity>

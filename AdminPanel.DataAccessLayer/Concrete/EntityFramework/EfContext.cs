@@ -96,6 +96,8 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             modelBuilder.Entity<FirmaSahip>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<BayiYonetici>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<BayiYonetici>().HasOne(e => e.firma).WithMany().OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<TokensTable>().HasOne(e=>e.mailPassword).WithMany().OnDelete(DeleteBehavior.ClientCascade);
         }
 
     }

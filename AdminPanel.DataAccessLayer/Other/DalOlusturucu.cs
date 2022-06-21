@@ -35,7 +35,7 @@ namespace AdminPanel.DataAccessLayer.Other
     public class DalOlusturucu
     {
         private static DalOlusturucu? _nesneOlusturucu;
-        private static readonly Object kilit = new Object();
+        private static readonly object kilit = new object();
 
         #region Araba kısmı
         public IDalAraba Araba { get; }
