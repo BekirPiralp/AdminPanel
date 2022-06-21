@@ -101,7 +101,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 
             //modelBuilder.Entity<TokensTable>().HasOne(e=>e.mailPassword).WithMany().OnDelete(DeleteBehavior.ClientCascade);
 
-            //modelBuilder.Entity<TokensTable>().Navigation(e => e.mailPassword).AutoInclude();
+            modelBuilder.Entity<TokensTable>().Navigation(e => e.mailPassword).AutoInclude();
+
+            modelBuilder.Entity<Araba>().Navigation(e => e.kasaTip).AutoInclude();
+            modelBuilder.Entity<Araba>().Navigation(e => e.marka).AutoInclude();
+            modelBuilder.Entity<Araba>().Navigation(e => e.tip).AutoInclude();
+            modelBuilder.Entity<Araba>().Navigation(e => e.vitesTip).AutoInclude();
+
+            modelBuilder.Entity<ArabaAitOzellik>().Navigation(e => e.araba).AutoInclude();
+            modelBuilder.Entity<ArabaAitOzellik>().Navigation(e =>e.ozellik).AutoInclude();
         }
 
     }
