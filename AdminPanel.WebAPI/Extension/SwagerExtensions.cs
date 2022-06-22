@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 namespace AdminPanel.WebAPI.Extension
 {
@@ -9,15 +8,15 @@ namespace AdminPanel.WebAPI.Extension
         {
             services.AddSwaggerGen(opt =>
             {
-                opt.SwaggerDoc("v1", new OpenApiInfo()
+                opt.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Admin paneli API",
                     Version = "v01",
-                    //Description = "Admin panelinin api kısmıdır ve bir araba kiralam şirketine hizmet edecektir."
+                    Description = "Admin panelinin api kısmıdır ve bir araba kiralama şirketine hizmet edecektir."
                 });
 
-                opt.AddSecurityDefinition("Güvenlik Kısmı",
-                    new OpenApiSecurityScheme(){
+                opt.AddSecurityDefinition("Bearer",
+                    new OpenApiSecurityScheme{
                         In = ParameterLocation.Header,
                         Description = "Lütfen tokenı giriniz",
                         Name = "Authorize",
@@ -26,22 +25,21 @@ namespace AdminPanel.WebAPI.Extension
                         Scheme = "Bearer"//JwtBearerDefaults.AuthenticationScheme
                     });
 
-                var oASS = new OpenApiSecurityScheme()
+                var oASS = new OpenApiSecurityScheme
                 {
                     Reference = new OpenApiReference
                     {
-                        Id = "Bearer",//JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"//JwtBearerDefaults.AuthenticationScheme,
                     }
                 };
 
-                var value = new List<string>();
-
-                
+                var value = new List<String>();
                 opt.AddSecurityRequirement(new OpenApiSecurityRequirement(){{
-                        oASS,value
-                    }}
-                );
+                        oASS,
+                        value
+                    }
+                });
             });
         }
     }
