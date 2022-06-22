@@ -8,22 +8,22 @@ namespace AdminPanel.WebAPI.Extension
         internal static void AddSwagerAuthorization(this IServiceCollection services)
         {
             services.AddSwaggerGen(
-                stpAction =>
+                opt =>
                 {
-                    stpAction.SwaggerDoc("v1", new OpenApiInfo { 
+                    opt.SwaggerDoc("v1", new OpenApiInfo { 
                         Title = "Admin paneli API",
                         Version = "v001",
                         Description = "Admin panelinin api kısmıdır ve bir araba kiralam şirketine hizmet edecektir."
                     });
 
-                    stpAction.AddSecurityDefinition("Güvenlik Kısmı",
+                    opt.AddSecurityDefinition("Güvenlik Kısmı",
                         new OpenApiSecurityScheme
                         {
                             In = ParameterLocation.Header,
                             Description = "Lütfen tokenı giriniz",
                             Name = "Authorize",
                             Type = SecuritySchemeType.Http,
-                            BearerFormat = "jwt",
+                            BearerFormat = "JWT",
                             Scheme = JwtBearerDefaults.AuthenticationScheme
                         }
                         );
@@ -43,7 +43,7 @@ namespace AdminPanel.WebAPI.Extension
                     //new Dictionary<OpenApiSecurityScheme, IList<string>>(){ {oASS,value } };
                     //val.Add(oASS, value);
 
-                    stpAction.AddSecurityRequirement(new OpenApiSecurityRequirement{{
+                    opt.AddSecurityRequirement(new OpenApiSecurityRequirement{{
                             oASS,value 
                         }}
                     ) ;
