@@ -31,38 +31,43 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             ObjectResponse<AccessToken> result ;
             try
             {
-                var mailPasswordResponse = await _mailPassword.GetByEmailAndPassword(email, password);
-                if (mailPasswordResponse.Success)
+                if (email.isEmail())
                 {
-                    if (!mailPasswordResponse.Data.silinmisMi())
+                    var mailPasswordResponse = await _mailPassword.GetByEmailAndPassword(email, password);
+                    if (mailPasswordResponse.Success)
                     {
-                        var token = _tokenIsleyici.CreateAccessToken(mailPasswordResponse.Data);
-                        if (token != null)
+                        if (!mailPasswordResponse.Data.silinmisMi())
                         {
-                            var refresAddResult = await _refreshTokentable.AddAsync(new TokensTable
+                            var token = _tokenIsleyici.CreateAccessToken(mailPasswordResponse.Data);
+                            if (token != null)
                             {
-                                mailPassword = mailPasswordResponse.Data,
-                                refreshToken = token.RefreshToken,
-                                refreshTokenDate = DateTime.Now.AddMinutes(_tokenOpsiyonlari.RefreshTokenSonKullanim)
-                            });
+                                var refresAddResult = await _refreshTokentable.AddAsync(new TokensTable
+                                {
+                                    mailPassword = mailPasswordResponse.Data,
+                                    refreshToken = token.RefreshToken,
+                                    refreshTokenDate = DateTime.Now.AddMinutes(_tokenOpsiyonlari.RefreshTokenSonKullanim)
+                                });
 
-                            if (refresAddResult)
-                            {
-                                result = new ObjectResponse<AccessToken>(token);
+                                if (refresAddResult)
+                                {
+                                    result = new ObjectResponse<AccessToken>(token);
+                                }
+                                else
+                                    result = new ObjectResponse<AccessToken>("Refresh Token kaydedilirken hata oluştu");
                             }
                             else
-                                result = new ObjectResponse<AccessToken>("Refresh Token kaydedilirken hata oluştu");
+                            {
+                                result = new ObjectResponse<AccessToken>("Token üretilemedi");
+                            }
                         }
                         else
-                        {
-                            result = new ObjectResponse<AccessToken>("Token üretilemedi");
-                        }
+                            result = new ObjectResponse<AccessToken>("Bu mail password silimiştir. Yetkisiz işlem yapmaya çalışıyorsunuz.");
                     }
                     else
-                        result = new ObjectResponse<AccessToken>("Bu mail password silimiştir. Yetkisiz işlem yapmaya çalışıyorsunuz.");
+                        result = new ObjectResponse<AccessToken>(mailPasswordResponse.Message);
                 }
                 else
-                    result = new ObjectResponse<AccessToken>(mailPasswordResponse.Message);
+                    result = new ObjectResponse<AccessToken>("Geçersiz email");
 
             }
             catch (Exception ex)
@@ -77,44 +82,53 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             ObjectResponse<AccessToken> result;
             try
             {
-                var refresTableResponse = await _refreshTokentable.GetByRefreshToken(refreshToken);
-
-            
-                if (refresTableResponse.Success)
+                if (email.isEmail())
                 {
-                    if (!refresTableResponse.Data.silinmisMi())
-                    {
-                        if (refresTableResponse.Data.refreshTokenDate >= DateTime.Now)
-                        {
-                            // olaki şifresi güncellendi ise bu sayede eski kayıtlar giriş yapmaz. Id ile getirseydim yapabilirdi...
-                            var emailPaswordResource = await _mailPassword.GetByEmailAndPassword(
-                                refresTableResponse.Data.mailPassword.mail, refresTableResponse.Data.mailPassword.password);
+                    var refresTableResponse = await _refreshTokentable.GetByRefreshToken(refreshToken);
 
-                            if (emailPaswordResource.Success)
+
+                    if (refresTableResponse.Success)
+                    {
+                        if (!refresTableResponse.Data.silinmisMi() && refresTableResponse.Data.gecerlilikDurumu)
+                        {
+                            if (refresTableResponse.Data.refreshTokenDate >= DateTime.Now)
                             {
-                                /* Süresi dolmadan işlem yapıldığı için geçerliliği devre dışı bırakılıyor*/
-                                _tokenIsleyici.RemoveRefreshToken(refresTableResponse.Data);
-                                await _refreshTokentable.UpdateAsync(refresTableResponse.Data);
-                                result = await this.CreateAccessToken
-                                    (emailPaswordResource.Data.mail, emailPaswordResource.Data.password);
+                                if (refresTableResponse.Data.mailPassword.mail.Equals(email))
+                                {
+                                    var emailPaswordResource = await _mailPassword.GetByEmailAndPassword(
+                                        email, refresTableResponse.Data.mailPassword.password);
+
+                                    if (emailPaswordResource.Success)
+                                    {
+                                        /* Süresi dolmadan işlem yapıldığı için geçerliliği devre dışı bırakılıyor*/
+                                        _tokenIsleyici.RemoveRefreshToken(refresTableResponse.Data);
+                                        await _refreshTokentable.UpdateAsync(refresTableResponse.Data);
+                                        result = await this.CreateAccessToken
+                                            (emailPaswordResource.Data.mail, emailPaswordResource.Data.password);
+                                    }
+                                    else
+                                    {
+                                        result = new ObjectResponse<AccessToken>(emailPaswordResource.Message);
+                                    }
+
+                                }
+                                else
+                                    result = new ObjectResponse<AccessToken>("Yanlış email");
                             }
                             else
                             {
-                                result = new ObjectResponse<AccessToken>(emailPaswordResource.Message);
+                                await _refreshTokentable.DeleteAsync(refresTableResponse.Data); // süresi dolduğu için siliyoruz. Emaile bakmak sızın
+                                result = new ObjectResponse<AccessToken>("Refresh tokenın süresi dolmuştur.");
                             }
-
                         }
                         else
-                        {
-                            await _refreshTokentable.DeleteAsync(refresTableResponse.Data); // süresi dolduğu için siliyoruz
-                            result = new ObjectResponse<AccessToken>("Refresh tokenın süresi dolmuştur.");
-                        }
+                            result = new ObjectResponse<AccessToken>("Bu refresh token silimiştir veya geçersizdir.");
                     }
                     else
-                        result = new ObjectResponse<AccessToken>("Bu refresh token silimiştir.");
+                        result = new ObjectResponse<AccessToken>(refresTableResponse.Message);
                 }
                 else
-                    result = new ObjectResponse<AccessToken>(refresTableResponse.Message);
+                    result = new ObjectResponse<AccessToken>("Lütfen bir email giriniz.");
             }
             catch (Exception ex)
             {
@@ -167,32 +181,37 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
 
                 if (refrehTokenResource.Success)
                 {
-                    if (refrehTokenResource.Data.silinmisMi())
+                    if (email.isEmail() && refrehTokenResource.Data.mailPassword.mail.Equals(email))
                     {
-                        // silindiği için idrekt yolluyoruz
-                        result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
-                    }
-                    else
-                    {
-                        if (refrehTokenResource.Data.gecerlilikDurumu)
+                        if (refrehTokenResource.Data.silinmisMi())
                         {
-                            _tokenIsleyici.RemoveRefreshToken(refrehTokenResource.Data);
-                            var islemResult=await _refreshTokentable.UpdateAsync(refrehTokenResource.Data);
-                            if (islemResult)
-                            {
-                                result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
-                            }
-                            else
-                                result = new ObjectResponse<TokensTable>("Refresh tokenı geçersi kılmada" +
-                                    "bilinmeyen bir hata oluştu");
-                            
+                            // silindiği için direkt yolluyoruz
+                            result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
                         }
                         else
                         {
-                            // geçerliliği devre dışı kaldığı için direkt yolluyoruz
-                            result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
+                            if (refrehTokenResource.Data.gecerlilikDurumu)
+                            {
+                                _tokenIsleyici.RemoveRefreshToken(refrehTokenResource.Data);
+                                var islemResult = await _refreshTokentable.UpdateAsync(refrehTokenResource.Data);
+                                if (islemResult)
+                                {
+                                    result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
+                                }
+                                else
+                                    result = new ObjectResponse<TokensTable>("Refresh tokenı geçersiz kılmada" +
+                                        "bilinmeyen bir hata oluştu");
+
+                            }
+                            else
+                            {
+                                // geçerliliği devre dışı kaldığı için direkt yolluyoruz
+                                result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
+                            }
                         }
                     }
+                    else
+                        result = new ObjectResponse<TokensTable>("Email geçersiz veya kayıtlarla uyuşmuyor");
                 }
                 else
                     result = new ObjectResponse<TokensTable>("Kaldırmak istediğiniz refres token getirilemedi. \nDetay: " +
@@ -211,18 +230,23 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             ObjectResponse<TokensMailPassword> result;
             try
             {
-                var emailResource = await _mailPassword.GetByEmail(email);
-
-                if (emailResource.Success)
+                if (email.isEmail()&& password.isNotEmpty())
                 {
-                    emailResource.Data.password = password;
+                    var emailResource = await _mailPassword.GetByEmail(email);
 
-                    await _mailPassword.UpdateAsync(emailResource.Data);
+                    if (emailResource.Success)
+                    {
+                        emailResource.Data.password = password;
 
-                    result = emailResource;
+                        await _mailPassword.UpdateAsync(emailResource.Data);
+
+                        result = emailResource;
+                    }
+                    else
+                        result = new ObjectResponse<TokensMailPassword>($"İlgili \"{email}\" emaile ait veri bulunamadı.");
                 }
                 else
-                    result = new ObjectResponse<TokensMailPassword>($"İlgili \"{email}\" emaile ait veri bulunamadı.");
+                    result = new ObjectResponse<TokensMailPassword>("Geçersiz email veya password");
             }
             catch (Exception ex)
             {
