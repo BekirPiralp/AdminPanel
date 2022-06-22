@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 namespace AdminPanel.WebAPI.Extension
 {
@@ -9,21 +10,21 @@ namespace AdminPanel.WebAPI.Extension
             services.AddSwaggerGen(
                 stpAction =>
                 {
-                    stpAction.SwaggerDoc("SwagerDokumani", new OpenApiInfo { 
+                    stpAction.SwaggerDoc("v1", new OpenApiInfo { 
                         Title = "Admin paneli API",
                         Version = "v001",
-                        Description = "Admin panelinin api kısmı dır ve bir araba kiralam şirketine hizmet edecektir."
+                        Description = "Admin panelinin api kısmıdır ve bir araba kiralam şirketine hizmet edecektir."
                     });
 
-                    stpAction.AddSecurityDefinition("GuvenlikTanimlamasi",
+                    stpAction.AddSecurityDefinition("Güvenlik Kısmı",
                         new OpenApiSecurityScheme
                         {
                             In = ParameterLocation.Header,
                             Description = "Lütfen tokenı giriniz",
-                            Name = "GirisKismi",
-                            Type = SecuritySchemeType.ApiKey,
-                            BearerFormat = "JWT",
-                            Scheme = "Bearer"
+                            Name = "Authorize",
+                            Type = SecuritySchemeType.Http,
+                            BearerFormat = "jwt",
+                            Scheme = JwtBearerDefaults.AuthenticationScheme
                         }
                         );
 
@@ -31,7 +32,7 @@ namespace AdminPanel.WebAPI.Extension
                     {
                         Reference = new OpenApiReference
                         {
-                            Id = "Bearer",
+                            Id = JwtBearerDefaults.AuthenticationScheme,
                             Type = ReferenceType.SecurityScheme
                         }
                     };

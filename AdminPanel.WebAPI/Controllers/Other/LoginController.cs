@@ -34,7 +34,8 @@ namespace AdminPanel.WebAPI.Controllers.Other
         }
 
         [HttpPut()]
-        [Authorize()]
+       // [Authorize]
+       
         public async Task<IActionResult> UpdatePassword(string email, string password)
         {
             var resource = await _authentication.UpdatePassword(email, password);

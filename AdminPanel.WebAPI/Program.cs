@@ -24,10 +24,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
+
 
 app.MapControllers();
 

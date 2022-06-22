@@ -1,6 +1,5 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.Guvenlik.Other;
-using AdminPanel.Guvenlik.Token.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +22,7 @@ namespace AdminPanel.WebAPI.Extension
             var imzalayici = GuvenlikOlusturucu.Olustur().Imzalayici;
             var tokenOption = GuvenlikOlusturucu.Olustur().TokenOpsiyonlari;
 
-            var authenticationBuilder =services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+            var authenticationBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
             authenticationBuilder.AddJwtBearer( JwtBearerOptions =>
             {
@@ -37,12 +36,12 @@ namespace AdminPanel.WebAPI.Extension
                     IssuerSigningKey = imzalayici.GetSecurityKey(tokenOption.GuvenlikAnahtari),
                     ClockSkew = new TimeSpan(0,tokenOption.GecikmeSuresi,0)
                 };
-            }
-                );
+            });
 
+            /** Cros ayarı**/
             services.AddCors(opt =>
             {
-                opt.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+                opt.AddDefaultPolicy(builder => { builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             });
         }
 
