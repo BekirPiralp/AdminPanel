@@ -1,5 +1,4 @@
-﻿using AdminPanel.EntityLayer.Abctract;
-using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
+﻿using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
 using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
 using AdminPanel.EntityLayer.Concrete.Other.BolumBilgileri;
 using AdminPanel.EntityLayer.Concrete.Other.FirmaKismi;
@@ -90,26 +89,11 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.RemoveRelationship();
+
+            modelBuilder.AutoInclude();
 
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Firma>().HasOne(e => e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<Bayi>().HasOne(e => e.iletisim).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-
-            modelBuilder.Entity<FirmaSahip>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<BayiYonetici>().HasOne(e => e.personel).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-            modelBuilder.Entity<BayiYonetici>().HasOne(e => e.firma).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-
-            //modelBuilder.Entity<TokensTable>().HasOne(e=>e.mailPassword).WithMany().OnDelete(DeleteBehavior.ClientCascade);
-
-            modelBuilder.Entity<TokensTable>().Navigation(e => e.mailPassword).AutoInclude();
-
-            modelBuilder.Entity<Araba>().Navigation(e => e.kasaTip).AutoInclude();
-            modelBuilder.Entity<Araba>().Navigation(e => e.marka).AutoInclude();
-            modelBuilder.Entity<Araba>().Navigation(e => e.tip).AutoInclude();
-            modelBuilder.Entity<Araba>().Navigation(e => e.vitesTip).AutoInclude();
-
-            modelBuilder.Entity<ArabaAitOzellik>().Navigation(e => e.araba).AutoInclude();
-            modelBuilder.Entity<ArabaAitOzellik>().Navigation(e =>e.ozellik).AutoInclude();
         }
 
     }
