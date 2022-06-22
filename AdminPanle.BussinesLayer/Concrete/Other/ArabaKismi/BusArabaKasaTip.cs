@@ -1,5 +1,4 @@
-﻿using AdminPanel.DataAccessLayer.Abstract.Base;
-using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
+﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi;
 using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.ArabaKismi;
 using AdminPanle.BusinessLayer.Concrete.Base;

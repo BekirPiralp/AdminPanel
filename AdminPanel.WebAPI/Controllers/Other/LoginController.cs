@@ -1,7 +1,6 @@
 ﻿using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Other;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Other

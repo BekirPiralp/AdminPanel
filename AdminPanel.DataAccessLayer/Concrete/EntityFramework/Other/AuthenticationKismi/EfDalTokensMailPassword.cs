@@ -4,7 +4,7 @@ using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi
 {
-    public class EfDalTokensMailPassword: EntityEfDal<TokensMailPassword,EfContext>,IDalTokensMailPassword
+    public class EfDalTokensMailPassword : EntityEfDal<TokensMailPassword, EfContext>, IDalTokensMailPassword
     {
     }
 }

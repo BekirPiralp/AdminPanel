@@ -7,7 +7,7 @@ namespace AdminPanel.Guvenlik.Other
     {
         private static GuvenlikOlusturucu? _olusturucu;
         private static readonly Object _kilitNesnesi = new Object();
-         
+
         public ITokenIsleyici TokenIsleyici { get; }
         public ITokenOpsiyonlari TokenOpsiyonlari { get; }
         public IImzalayici Imzalayici { get; }
@@ -17,7 +17,7 @@ namespace AdminPanel.Guvenlik.Other
             Imzalayici = new Imzalayici();
             TokenOpsiyonlari = new TokenOpsiyonlari();
             TokenOpsiyonlariAta();
-            TokenIsleyici = new TokenIsleyici(TokenOpsiyonlari,Imzalayici);
+            TokenIsleyici = new TokenIsleyici(TokenOpsiyonlari, Imzalayici);
 
         }
 
@@ -34,11 +34,11 @@ namespace AdminPanel.Guvenlik.Other
 
         public static GuvenlikOlusturucu Olustur()
         {
-            if( _olusturucu == null)
+            if (_olusturucu == null)
             {
-                lock( _kilitNesnesi)
+                lock (_kilitNesnesi)
                 {
-                    if(_olusturucu == null)
+                    if (_olusturucu == null)
                     {
                         _olusturucu = new GuvenlikOlusturucu();
                     }

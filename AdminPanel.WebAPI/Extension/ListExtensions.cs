@@ -6,7 +6,7 @@ namespace AdminPanel.WebAPI.Extension
     {
         // liste boş vey null ise true
         public static bool isEmpty(this IList values) //where T : object
-            
+
         {
             return values == null || values.Count <= 0;
         }

@@ -1,6 +1,5 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Base
 {

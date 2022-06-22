@@ -8,6 +8,6 @@ namespace AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi
     {
         Task<ObjectResponse<TokensMailPassword>> GetByEmail(string email);
 
-        Task<ObjectResponse<TokensMailPassword>> GetByEmailAndPassword(string email,string password);
+        Task<ObjectResponse<TokensMailPassword>> GetByEmailAndPassword(string email, string password);
     }
 }

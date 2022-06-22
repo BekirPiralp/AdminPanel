@@ -3,7 +3,7 @@ using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
 
 namespace AdminPanel.DataAccessLayer.Abstract.Other.Genel.ArabaKismi
 {
-    public interface IDalArabaAitOzellik: IEntityDalBase<ArabaAitOzellik>
+    public interface IDalArabaAitOzellik : IEntityDalBase<ArabaAitOzellik>
     {
     }
 }

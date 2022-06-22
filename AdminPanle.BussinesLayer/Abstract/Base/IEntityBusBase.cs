@@ -5,16 +5,16 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
     // iş katmanı genel arayüzü
     // IEntityBusBase == InterfaceEntityBusinesLayerBase
     public interface IEntityBusBase<TEntity>
-        where TEntity : class, IEntity, new ()
+        where TEntity : class, IEntity, new()
     {
         #region Getirme işlemleri
-        
+
         /// <summary>
         /// Liste olarak getirme 
         /// </summary>
         /// <returns></returns>
         Task<List<TEntity>?> GetAllAsync();
-        
+
         /// <summary>
         /// id ye göre
         /// </summary>

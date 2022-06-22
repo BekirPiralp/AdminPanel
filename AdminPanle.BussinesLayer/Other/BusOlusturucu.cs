@@ -52,19 +52,21 @@ namespace AdminPanle.BusinessLayer.Other
         internal IBusTokensTable TokensTable { get; }
         internal IBusTokensMailPassword TokensMailPassword { get; }
         private IBusAuthentication authentication;
-        public IBusAuthentication Authentication { get
+        public IBusAuthentication Authentication
+        {
+            get
             {
-                if(authentication == null)
+                if (authentication == null)
                 {
                     if (_olusturucu.isNull())
                     {
                         BusOlusturucu.Olustur();
                     }
 
-                    authentication=new BusAuthentication(); 
+                    authentication = new BusAuthentication();
                 }
                 return authentication;
-            } 
+            }
         }
         #endregion
 
@@ -237,7 +239,8 @@ namespace AdminPanle.BusinessLayer.Other
 
     }
 
-    internal static class geniset{
+    internal static class geniset
+    {
         internal static bool isNull(this BusOlusturucu olusturucu)
         {
             return olusturucu == null;

@@ -1,7 +1,5 @@
-﻿using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
-using AdminPanel.EntityLayer.Concrete.Other.IletisimKismi;
+﻿using AdminPanel.EntityLayer.Concrete.Other.IletisimKismi;
 using AdminPanel.WebAPI.Controllers.Base;
-using AdminPanle.BusinessLayer.Abstract.Other.ArabaKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.IletisimKismi;
 using AdminPanle.BusinessLayer.Other;
 using Microsoft.AspNetCore.Mvc;

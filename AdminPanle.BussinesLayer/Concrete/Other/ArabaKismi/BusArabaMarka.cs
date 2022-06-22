@@ -5,7 +5,7 @@ using AdminPanle.BusinessLayer.Concrete.Base;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.ArabaKismi
 {
-    public class BusArabaMarka : EntityBusBase<ArabaMarka>,IBusArabaMarka
+    public class BusArabaMarka : EntityBusBase<ArabaMarka>, IBusArabaMarka
     {
         public BusArabaMarka(IDalArabaMarka entityDalBase) : base(entityDalBase)
         {

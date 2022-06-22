@@ -4,7 +4,7 @@ using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi
 {
-    public interface IBusTokensTable:IEntityBusBase<TokensTable>
+    public interface IBusTokensTable : IEntityBusBase<TokensTable>
     {
         Task<ObjectResponse<List<TokensTable>>> GetByMailPassword(TokensMailPassword mailPassword);
 

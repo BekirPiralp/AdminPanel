@@ -1,5 +1,4 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.EntityFramework;
-using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.EntityLayer.Abctract;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -8,15 +7,15 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
 {
     public class EntityEfDal<TEntity, TContext> : IEntityEfDalBase<TEntity>
         where TEntity : class, IEntity, new()
-        where TContext : DbContext,new()
+        where TContext : DbContext, new()
     {
 
-        public async Task<bool> AddAsync(TEntity entity,DateTime? kayitZamani = null)
+        public async Task<bool> AddAsync(TEntity entity, DateTime? kayitZamani = null)
         {
             bool result = false;
             using (TContext context = new TContext())
             {
-                
+
                 if (entity.isNotNull())
                 {
                     entity.kayitZamani = kayitZamani != null ? (DateTime)kayitZamani : DateTime.Now;
@@ -58,7 +57,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             List<TEntity> result;
             using (TContext context = new TContext())
             {
-                
+
                 result = filter == null ? await context.Set<TEntity>().ToListAsync()
                     : await context.Set<TEntity>().Where(filter).ToListAsync();
             }

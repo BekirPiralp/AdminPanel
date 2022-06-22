@@ -2,18 +2,17 @@
 using AdminPanel.WebAPI.Definitions;
 using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Base
 {
     [ApiController]
-   
+
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
         where TEntity : class, IEntity, new()
-        
+
     {
         private ITEntityBusBase _entityBusBase;
         public BaseController(ITEntityBusBase entityBusBase) : base()
@@ -45,8 +44,8 @@ namespace AdminPanel.WebAPI.Controllers.Base
             return result;
         }
 
-       
-        
+
+
         [HttpGet()]
         [Route("[controller]/GetAll/")]
         public async Task<ActionResult<List<TEntity>>> GetAll()
@@ -57,7 +56,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
             try
             {
                 var entities = await _entityBusBase.GetAllAsync();
-                result = Ok(entities) ;
+                result = Ok(entities);
             }
             catch (Exception e)
             {
@@ -84,12 +83,12 @@ namespace AdminPanel.WebAPI.Controllers.Base
                 result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
             }
             return result;
-            
+
         }
 
         [HttpDelete()]
         [Route("[controller]/[Action]/")]
-        public async Task<ActionResult> DeleteByObject([FromBody]TEntity entity)
+        public async Task<ActionResult> DeleteByObject([FromBody] TEntity entity)
         {
             ActionResult result;
             if (entity.isIdNotEmpty())
@@ -114,7 +113,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
         [HttpDelete()]
         [Route("[controller]/[Action]/")]
-        public async Task<ActionResult> DeleteByList([FromBody]List<TEntity> entities)
+        public async Task<ActionResult> DeleteByList([FromBody] List<TEntity> entities)
         {
             ActionResult result;
             if (entities.isNotEmpty())

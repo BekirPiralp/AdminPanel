@@ -10,7 +10,7 @@ namespace AdminPanle.BusinessLayer.Other.Extensions
         /// <param name="list"></param>
         /// <returns></returns>
         public static bool isNotEmpty(this IList list) => list.isNotNull() && list.Count > 0;
-        
+
         /// <summary>
         /// null değil ise true diğer durumda false
         /// </summary>

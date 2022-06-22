@@ -13,7 +13,7 @@
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static bool isNotEmpty(this string val) => !string.IsNullOrEmpty(val) && val.Trim().Length>0;
+        public static bool isNotEmpty(this string val) => !string.IsNullOrEmpty(val) && val.Trim().Length > 0;
 
         /// <summary>
         /// boş deil ve email şartı olan xyz@mail.abc deki gibi @ var ve en az iki parça oluyor ise
@@ -30,7 +30,7 @@
             {
                 var ilk = val.Split("@");
 
-                if (ilk != null &&ilk.Length >= 2)
+                if (ilk != null && ilk.Length >= 2)
                 {
                     var son = ilk.LastOrDefault();
                     var kntrl = son.Split(".");

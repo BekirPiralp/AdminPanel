@@ -10,7 +10,8 @@ namespace AdminPanel.WebAPI.Extension
             services.AddSwaggerGen(
                 opt =>
                 {
-                    opt.SwaggerDoc("v1", new OpenApiInfo { 
+                    opt.SwaggerDoc("v1", new OpenApiInfo
+                    {
                         Title = "Admin paneli API",
                         Version = "v001",
                         Description = "Admin panelinin api kısmıdır ve bir araba kiralam şirketine hizmet edecektir."
@@ -44,9 +45,9 @@ namespace AdminPanel.WebAPI.Extension
                     //val.Add(oASS, value);
 
                     opt.AddSecurityRequirement(new OpenApiSecurityRequirement{{
-                            oASS,value 
+                            oASS,value
                         }}
-                    ) ;
+                    );
                 });
         }
     }

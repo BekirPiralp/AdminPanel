@@ -3,7 +3,7 @@ using AdminPanle.BusinessLayer.Abstract.Base;
 
 namespace AdminPanle.BusinessLayer.Abstract.Other.BolumBilgileri
 {
-    public interface IBusPersonelBolumBilgisi :IEntityBusBase<PersonelBolumBilgisi>
+    public interface IBusPersonelBolumBilgisi : IEntityBusBase<PersonelBolumBilgisi>
     {
     }
 }

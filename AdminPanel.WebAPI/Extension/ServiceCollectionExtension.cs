@@ -8,11 +8,11 @@ namespace AdminPanel.WebAPI.Extension
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddConnectionString(this IServiceCollection service,WebApplicationBuilder builder)
+        public static IServiceCollection AddConnectionString(this IServiceCollection service, WebApplicationBuilder builder)
         {
             "".setConnectionString(builder.Configuration.GetConnectionString("Varsayilan"));
-            
-            service.AddDbContext<EfContext>(op=>op.UseSqlServer("".getConnectionString()));
+
+            service.AddDbContext<EfContext>(op => op.UseSqlServer("".getConnectionString()));
             return service;
         }
 
@@ -24,9 +24,10 @@ namespace AdminPanel.WebAPI.Extension
 
             var authenticationBuilder = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
-            authenticationBuilder.AddJwtBearer( JwtBearerOptions =>
+            authenticationBuilder.AddJwtBearer(JwtBearerOptions =>
             {
-                JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters() { 
+                JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
+                {
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidateLifetime = true,
@@ -34,7 +35,7 @@ namespace AdminPanel.WebAPI.Extension
                     ValidIssuer = tokenOption.Yayinci,
                     ValidAudience = tokenOption.Dinleyici,
                     IssuerSigningKey = imzalayici.GetSecurityKey(tokenOption.GuvenlikAnahtari),
-                    ClockSkew = new TimeSpan(0,tokenOption.GecikmeSuresi,0)
+                    ClockSkew = new TimeSpan(0, tokenOption.GecikmeSuresi, 0)
                 };
             });
 

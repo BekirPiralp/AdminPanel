@@ -1,6 +1,4 @@
-﻿using AdminPanle.BusinessLayer.Other.Extensions;
-
-namespace AdminPanle.BusinessLayer.Other.Response;
+﻿namespace AdminPanle.BusinessLayer.Other.Response;
 public class ObjectResponse<DataType>
     where DataType : class
 {
@@ -35,7 +33,7 @@ public class ObjectResponse<DataType>
     /// Data verilmiş ise Succes true yapılır ve mesaj boş olur
     /// </summary>
     /// <param name="data"></param>
-    public ObjectResponse(DataType data):this(data,string.Empty,true)
+    public ObjectResponse(DataType data) : this(data, string.Empty, true)
     {
     }
 
@@ -43,7 +41,7 @@ public class ObjectResponse<DataType>
     /// Mesaj verilmiş ise succes false yapılır ve data null olur
     /// </summary>
     /// <param name="message"></param>
-    public ObjectResponse(string message):this(null,message,false)
+    public ObjectResponse(string message) : this(null, message, false)
     {
     }
 

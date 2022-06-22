@@ -31,20 +31,20 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 }
                 catch (Exception ex)
                 {
-                    result = new ObjectResponse<TokensMailPassword>("Nesneler getiriliken hata oluştu :"+ex.Message);
+                    result = new ObjectResponse<TokensMailPassword>("Nesneler getiriliken hata oluştu :" + ex.Message);
                 }
-                
+
             }
             else
                 result = new ObjectResponse<TokensMailPassword>("Bu bir email değildir");
-            
+
             return result;
         }
 
         public async Task<ObjectResponse<TokensMailPassword>> GetByEmailAndPassword(string email, string password)
         {
             ObjectResponse<TokensMailPassword> result;
-            if(email.isEmail()&& password.isNotEmpty())
+            if (email.isEmail() && password.isNotEmpty())
             {
                 try
                 {
@@ -58,14 +58,14 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 }
                 catch (Exception ex)
                 {
-                    result = new ObjectResponse<TokensMailPassword>("Nesneler getiriliken hata oluştu :"+ex.Message);
+                    result = new ObjectResponse<TokensMailPassword>("Nesneler getiriliken hata oluştu :" + ex.Message);
                 }
             }
             else
             {
                 result = new ObjectResponse<TokensMailPassword>("Geçersiz parametre");
             }
-            
+
             return result;
         }
     }

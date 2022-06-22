@@ -2,7 +2,7 @@
 {
     enum ResultCode
     {
-        SunucuHatasi= 500,
+        SunucuHatasi = 500,
         Basarili = 200,
         Kaydedildi = 201,
 

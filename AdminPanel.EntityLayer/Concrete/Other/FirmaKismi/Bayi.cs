@@ -1,6 +1,5 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
 using AdminPanel.EntityLayer.Concrete.Other.IletisimKismi;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.FirmaKismi

@@ -4,7 +4,7 @@ using AdminPanel.EntityLayer.Concrete.Other.ArabaKismi;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.ArabaKismi
 {
-    public class EfDalArabaAitOzellik : EntityEfDal<ArabaAitOzellik,EfContext>,IDalArabaAitOzellik
+    public class EfDalArabaAitOzellik : EntityEfDal<ArabaAitOzellik, EfContext>, IDalArabaAitOzellik
     {
     }
 }

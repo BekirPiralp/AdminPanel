@@ -5,7 +5,7 @@ using AdminPanle.BusinessLayer.Other;
 
 namespace AdminPanel.WebAPI.Controllers.Settled.MesajKismi
 {
-    public class MesajController : BaseController<IBusMesaj,Mesaj>
+    public class MesajController : BaseController<IBusMesaj, Mesaj>
     {
         public MesajController() : base(BusOlusturucu.Olustur().Mesaj)
         {

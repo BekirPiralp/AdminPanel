@@ -21,14 +21,14 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
         {
             _mailPassword = BusOlusturucu.Olustur().TokensMailPassword;
             _refreshTokentable = BusOlusturucu.Olustur().TokensTable;
-            
+
             _tokenIsleyici = GuvenlikOlusturucu.Olustur().TokenIsleyici;
             _tokenOpsiyonlari = GuvenlikOlusturucu.Olustur().TokenOpsiyonlari;
         }
 
         public async Task<ObjectResponse<AccessToken>> CreateAccessToken(string email, string password)
         {
-            ObjectResponse<AccessToken> result ;
+            ObjectResponse<AccessToken> result;
             try
             {
                 if (email.isEmail())
@@ -72,7 +72,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             }
             catch (Exception ex)
             {
-                result = new ObjectResponse<AccessToken>("Access token üretilirken hata oluştu. : "+ex.Message);
+                result = new ObjectResponse<AccessToken>("Access token üretilirken hata oluştu. : " + ex.Message);
             }
             return result;
         }
@@ -172,7 +172,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             return result;
         }
 
-        public  async Task<ObjectResponse<TokensTable>> RemoveRefreshToken(string email, string refreshToken)
+        public async Task<ObjectResponse<TokensTable>> RemoveRefreshToken(string email, string refreshToken)
         {
             ObjectResponse<TokensTable> result;
             try
@@ -219,7 +219,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             }
             catch (Exception ex)
             {
-                result = new ObjectResponse<TokensTable>("Refresh token kaldırılırken hata oluştu. : "+ex.Message);
+                result = new ObjectResponse<TokensTable>("Refresh token kaldırılırken hata oluştu. : " + ex.Message);
             }
 
             return result;
@@ -230,7 +230,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             ObjectResponse<TokensMailPassword> result;
             try
             {
-                if (email.isEmail()&& password.isNotEmpty())
+                if (email.isEmail() && password.isNotEmpty())
                 {
                     var emailResource = await _mailPassword.GetByEmail(email);
 

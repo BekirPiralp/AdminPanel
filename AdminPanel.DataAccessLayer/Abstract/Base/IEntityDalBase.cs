@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace AdminPanel.DataAccessLayer.Abstract.Base
 {
-    public interface IEntityDalBase<TEntity> 
+    public interface IEntityDalBase<TEntity>
         where TEntity : class, IEntity, new()
     {//Kübra
         /***
@@ -18,15 +18,15 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(TEntity entity,DateTime? silmeZamani = null);
-        
+        Task<bool> DeleteAsync(TEntity entity, DateTime? silmeZamani = null);
+
         /// <summary>
         /// Güncelleme işlemi yapar 
         /// sonuc başarılı ise true diğer durumlarda false
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> UpdateAsync(TEntity entity,DateTime? guncellemeZamani = null);
+        Task<bool> UpdateAsync(TEntity entity, DateTime? guncellemeZamani = null);
 
         /// <summary>
         /// Ekleme işlemi yapar 

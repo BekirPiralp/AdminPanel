@@ -28,7 +28,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 }
                 catch
                 {
-                    result=false;
+                    result = false;
                 }
             }
 
@@ -38,7 +38,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<bool> AddAsync(List<TEntity> entities)
         {
             bool result = true;
-            if(entities != null && entities.Count() > 0)
+            if (entities != null && entities.Count() > 0)
             {
                 foreach (TEntity entity in entities)
                 {
@@ -49,7 +49,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             }
             else
                 result = false;
-            
+
 
             return result;
         }
@@ -60,9 +60,9 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             if (entity.isNotNull())
             {
                 DateTime dateTime = DateTime.Now;
-                
-                if (await _entityDalBase.AddAsync(entity,dateTime))
-                    result = (await _entityDalBase.GetAsync()).OrderByDescending(p=>p.kayitZamani).FirstOrDefault();
+
+                if (await _entityDalBase.AddAsync(entity, dateTime))
+                    result = (await _entityDalBase.GetAsync()).OrderByDescending(p => p.kayitZamani).FirstOrDefault();
             }
             return result;
         }
@@ -72,10 +72,10 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<bool> DeleteAsync(List<TEntity> entities)
         {
             bool result = false;
-            if(entities != null && entities.Count() > 0)
+            if (entities != null && entities.Count() > 0)
             {
                 result = true;
-                foreach(TEntity entity in entities)
+                foreach (TEntity entity in entities)
                 {
                     result = await DeleteAsync(entity);
                     if (!result)
@@ -90,7 +90,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             bool result = false;
             if (id > 0)
             {
-                TEntity? entity =(await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
+                TEntity? entity = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
                 if (entity.isNotNull() && !entity.silinmisMi())
                     result = await _entityDalBase.DeleteAsync(entity);
             }
@@ -114,10 +114,10 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         {
             List<TEntity>? result;
             result = await _entityDalBase.GetAsync();
-            
+
             if (result != null && result.Count < 0)
                 result = null;
-            
+
             return result;
         }
 
@@ -147,10 +147,10 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 DateTime dateTime = DateTime.Now;
                 entity.guncellemeZamani = dateTime;
 
-                if(await _entityDalBase.UpdateAsync(entity))
+                if (await _entityDalBase.UpdateAsync(entity))
                 {
                     result = (await _entityDalBase.GetAsync(
-                        e => e.guncellemeZamani == dateTime && 
+                        e => e.guncellemeZamani == dateTime &&
                         e.Id == entity.Id)).FirstOrDefault();
                 }
             }

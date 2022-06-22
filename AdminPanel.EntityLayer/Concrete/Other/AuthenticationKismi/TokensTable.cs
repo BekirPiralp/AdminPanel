@@ -7,8 +7,8 @@ namespace AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi
     [Table(name: "TokensTables")]
     public class TokensTable : EntityBase
     {
-        public string? refreshToken {get;set;}
-        public DateTime? refreshTokenDate {get;set;}
+        public string? refreshToken { get; set; }
+        public DateTime? refreshTokenDate { get; set; }
         [Required]
         //[ForeignKey("Id")]
         //public int mailPasswordId { get; set; }
@@ -17,6 +17,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi
         /// gecerli ise true değil ise false süreden 
         /// bağımsız yapılan geçerlilik için geçerli
         /// </summary>
-        public bool gecerlilikDurumu { get; set;}=true;
-    } 
+        public bool gecerlilikDurumu { get; set; } = true;
+    }
 }

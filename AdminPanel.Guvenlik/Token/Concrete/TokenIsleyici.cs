@@ -17,7 +17,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         private JwtSecurityTokenHandler _jwtGuvenliTokenIsleyici;
         private string _guvenlikAlgoritmasi;
 
-        public TokenIsleyici(ITokenOpsiyonlari tokenOpsiyonlari,IImzalayici imzalayici)
+        public TokenIsleyici(ITokenOpsiyonlari tokenOpsiyonlari, IImzalayici imzalayici)
         {
             _tokenOpsiyonlari = tokenOpsiyonlari;
             _imzalayici = imzalayici;
@@ -27,16 +27,16 @@ namespace AdminPanel.Guvenlik.Token.Concrete
 
         public AccessToken CreateAccessToken(TokensMailPassword mailPassword)
         {
-            AccessToken result= new AccessToken();
+            AccessToken result = new AccessToken();
 
-            var accsessTokenSonKullanmaTarihi = 
+            var accsessTokenSonKullanmaTarihi =
                 DateTime.Now.AddMinutes(_tokenOpsiyonlari.AccessTokenSonKulanim);
-            var guvenlikAnahtari = 
+            var guvenlikAnahtari =
                 _imzalayici.GetSecurityKey(_tokenOpsiyonlari.GuvenlikAnahtari);
-            var tarihtenitibarenGecerli = 
+            var tarihtenitibarenGecerli =
                 DateTime.Now.AddMinutes(_tokenOpsiyonlari.GecerlilikBaslamasi);
 
-            _kimlikImzalayici = new SigningCredentials(guvenlikAnahtari,_guvenlikAlgoritmasi);
+            _kimlikImzalayici = new SigningCredentials(guvenlikAnahtari, _guvenlikAlgoritmasi);
 
             _jwtGuvenliToken = new JwtSecurityToken(
                 audience: _tokenOpsiyonlari.Dinleyici,
@@ -47,7 +47,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
                 claims: TalepGetir(mailPassword)
                 );
 
-            
+
 
             var token = _jwtGuvenliTokenIsleyici.WriteToken(_jwtGuvenliToken);
 

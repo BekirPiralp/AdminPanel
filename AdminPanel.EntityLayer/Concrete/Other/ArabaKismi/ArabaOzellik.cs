@@ -7,7 +7,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.ArabaKismi
     [Table("ArabaOzellikleri")]
     public class ArabaOzellik : EntityBase
     {
-        [MaxLength(length:100)]
+        [MaxLength(length: 100)]
         public string isim { get; set; }
     }
 }

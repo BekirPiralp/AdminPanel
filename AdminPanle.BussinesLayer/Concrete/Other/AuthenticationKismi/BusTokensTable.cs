@@ -32,9 +32,9 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 }
                 catch (Exception ex)
                 {
-                    result = new ObjectResponse<List<TokensTable>>("Veriler getirilirken hata oluştu : "+ ex.Message);
+                    result = new ObjectResponse<List<TokensTable>>("Veriler getirilirken hata oluştu : " + ex.Message);
                 }
-                
+
             }
             else
                 result = new ObjectResponse<List<TokensTable>>("Geçersiz argüman");
@@ -46,7 +46,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
             ObjectResponse<List<TokensTable>> result;
             try
             {
-                var list = await _entityDalBase.GetAsync(e => e.refreshTokenDate>=DateTime.Now);
+                var list = await _entityDalBase.GetAsync(e => e.refreshTokenDate >= DateTime.Now);
 
                 if (list.isNotEmpty())
                 {
@@ -70,7 +70,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
                 try
                 {
                     var list = await _entityDalBase.
-                        GetAsync(e => e.mailPassword.mail == mailPassword.mail && 
+                        GetAsync(e => e.mailPassword.mail == mailPassword.mail &&
                         e.mailPassword.password == mailPassword.password);
 
                     if (list.isNotEmpty())
