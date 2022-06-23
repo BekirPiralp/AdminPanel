@@ -1,8 +1,8 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
-using AdminPanel.Guvenlik.Other;
+using AdminPanel.WebAPI.Guvenlik.Other;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using MIMT = Microsoft.IdentityModel.Tokens;
 
 namespace AdminPanel.WebAPI.Extension
 {
@@ -16,6 +16,14 @@ namespace AdminPanel.WebAPI.Extension
             return service;
         }
 
+        public static void AddCrosAyari(this IServiceCollection services)
+        {
+            /** Cros ayarı**/
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(builder => { builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); }); // TODO Allovcredential ? 
+            });
+        }
 
         public static void AddJwt(this IServiceCollection services)
         {
@@ -26,24 +34,22 @@ namespace AdminPanel.WebAPI.Extension
 
             authenticationBuilder.AddJwtBearer(JwtBearerOptions =>
             {
-                JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
+                JwtBearerOptions.TokenValidationParameters = new MIMT.TokenValidationParameters()
                 {
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = false,
                     ValidIssuer = tokenOption.Yayinci,
                     ValidAudience = tokenOption.Dinleyici,
                     IssuerSigningKey = imzalayici.GetSecurityKey(tokenOption.GuvenlikAnahtari),
                     ClockSkew = new TimeSpan(0, tokenOption.GecikmeSuresi, 0)
                 };
+
             });
 
-            /** Cros ayarı**/
-            services.AddCors(opt =>
-            {
-                opt.AddDefaultPolicy(builder => { builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
-            });
+           
+
         }
 
     }

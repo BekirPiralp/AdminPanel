@@ -1,10 +1,10 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
-using AdminPanel.Guvenlik.Token.Objects;
+using AdminPanel.WebAPI.Guvenlik.Token.Objects;
 using AdminPanle.BusinessLayer.Other.Response;
 
-namespace AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi
+namespace AdminPanel.WebAPI.Guvenlik.AuthenticationKismi
 {
-    public interface IBusAuthentication
+    public interface IAuthentication
     {
         Task<ObjectResponse<TokensMailPassword>> CreateEmailPassword(string email, string password);
 

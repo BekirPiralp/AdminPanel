@@ -1,5 +1,5 @@
-﻿using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
-using AdminPanle.BusinessLayer.Other;
+﻿using AdminPanel.WebAPI.Guvenlik.AuthenticationKismi;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +9,10 @@ namespace AdminPanel.WebAPI.Controllers.Other
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private IBusAuthentication _authentication;
+        private IAuthentication _authentication;
         public LoginController() : base()
         {
-            _authentication = BusOlusturucu.Olustur().Authentication;
+            _authentication = new Authentication();
         }
 
         [HttpPost()]
@@ -38,6 +38,13 @@ namespace AdminPanel.WebAPI.Controllers.Other
         {
             var resource = await _authentication.UpdatePassword(email, password);
             return dondur(resource);
+        }
+
+        [HttpPut()]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Test()
+        {
+            return Ok("Geldi");
         }
 
         [HttpPost()]

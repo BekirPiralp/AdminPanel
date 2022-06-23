@@ -1,23 +1,23 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
-using AdminPanel.Guvenlik.Other;
-using AdminPanel.Guvenlik.Token.Abstract;
-using AdminPanel.Guvenlik.Token.Objects;
+using AdminPanel.WebAPI.Guvenlik.Other;
+using AdminPanel.WebAPI.Guvenlik.Token.Objects;
+using AdminPanel.WebAPI.Guvenlik.Token.Abstract;
 using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Other;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
 
-namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
+namespace AdminPanel.WebAPI.Guvenlik.AuthenticationKismi
 {
-    public class BusAuthentication : IBusAuthentication
+    public class Authentication : IAuthentication
     {
         ITokenIsleyici _tokenIsleyici;
         IBusTokensMailPassword _mailPassword;
         IBusTokensTable _refreshTokentable;
         ITokenOpsiyonlari _tokenOpsiyonlari;
 
-        public BusAuthentication()
+        public Authentication()
         {
             _mailPassword = BusOlusturucu.Olustur().TokensMailPassword;
             _refreshTokentable = BusOlusturucu.Olustur().TokensTable;

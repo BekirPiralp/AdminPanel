@@ -49,25 +49,8 @@ namespace AdminPanle.BusinessLayer.Other
         #endregion
 
         #region Authentication Kismi
-        internal IBusTokensTable TokensTable { get; }
-        internal IBusTokensMailPassword TokensMailPassword { get; }
-        private IBusAuthentication authentication;
-        public IBusAuthentication Authentication
-        {
-            get
-            {
-                if (authentication == null)
-                {
-                    if (_olusturucu.isNull())
-                    {
-                        BusOlusturucu.Olustur();
-                    }
-
-                    authentication = new BusAuthentication();
-                }
-                return authentication;
-            }
-        }
+        public IBusTokensTable TokensTable { get; }
+        public IBusTokensMailPassword TokensMailPassword { get; }
         #endregion
 
         #region Bölüm Bilgileri
