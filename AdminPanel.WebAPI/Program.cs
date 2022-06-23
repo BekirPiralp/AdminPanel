@@ -1,5 +1,5 @@
 using AdminPanel.WebAPI.Extension;
-using AdminPanel.WebAPI.Guvenlik.Other;
+using AdminPanel.Guvenlik.Other;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,5 +1,5 @@
 ﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
-using AdminPanel.WebAPI.Guvenlik.Other;
+using AdminPanel.Guvenlik.Other;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using MIMT = Microsoft.IdentityModel.Tokens;

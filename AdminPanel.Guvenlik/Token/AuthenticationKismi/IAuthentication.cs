@@ -1,8 +1,8 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
-using AdminPanel.WebAPI.Guvenlik.Token.Objects;
+using AdminPanel.Guvenlik.Token.Objects;
 using AdminPanle.BusinessLayer.Other.Response;
 
-namespace AdminPanel.WebAPI.Guvenlik.AuthenticationKismi
+namespace AdminPanel.Guvenlik.AuthenticationKismi
 {
     public interface IAuthentication
     {

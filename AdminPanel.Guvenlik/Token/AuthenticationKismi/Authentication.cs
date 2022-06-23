@@ -1,14 +1,14 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
-using AdminPanel.WebAPI.Guvenlik.Other;
-using AdminPanel.WebAPI.Guvenlik.Token.Objects;
-using AdminPanel.WebAPI.Guvenlik.Token.Abstract;
+using AdminPanel.Guvenlik.Other;
+using AdminPanel.Guvenlik.Token.Objects;
+using AdminPanel.Guvenlik.Token.Abstract;
 using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Other;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
 
-namespace AdminPanel.WebAPI.Guvenlik.AuthenticationKismi
+namespace AdminPanel.Guvenlik.AuthenticationKismi
 {
     public class Authentication : IAuthentication
     {

@@ -1,4 +1,4 @@
-﻿using AdminPanel.WebAPI.Guvenlik.AuthenticationKismi;
+﻿using AdminPanel.Guvenlik.AuthenticationKismi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
