@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Other
 {
-    [Route("[controller]/[action]")]//
+    [Route("[controller]/[action]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
