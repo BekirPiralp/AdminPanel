@@ -225,7 +225,7 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
             return result;
         }
 
-        public async Task<ObjectResponse<TokensMailPassword>> UpdatePassword(string email, string password)
+        public async Task<ObjectResponse<TokensMailPassword>> UpdatePassword(string email, string password,int emailID)
         {
             ObjectResponse<TokensMailPassword> result;
             try
@@ -236,11 +236,16 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
 
                     if (emailResource.Success)
                     {
-                        emailResource.Data.password = password;
+                        if (emailResource.Data.Id == emailID)
+                        {
+                            emailResource.Data.password = password;
 
-                        await _mailPassword.UpdateAsync(emailResource.Data);
+                            await _mailPassword.UpdateAsync(emailResource.Data);
 
-                        result = emailResource;
+                            result = emailResource;
+                        }
+                        else
+                            result = new ObjectResponse<TokensMailPassword>("Kendinizden başka birinin şifresini değiştirme hakkınız yoktur.");
                     }
                     else
                         result = new ObjectResponse<TokensMailPassword>($"İlgili \"{email}\" emaile ait veri bulunamadı.");

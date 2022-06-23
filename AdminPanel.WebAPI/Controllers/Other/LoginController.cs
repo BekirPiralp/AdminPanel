@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AdminPanel.WebAPI.Controllers.Other
 {
@@ -36,7 +37,9 @@ namespace AdminPanel.WebAPI.Controllers.Other
         [Authorize]
         public async Task<IActionResult> UpdatePassword(string email, string password)
         {
-            var resource = await _authentication.UpdatePassword(email, password);
+            var kullaniciTalepleri = User.Claims;
+            string? strEmailId = kullaniciTalepleri.FirstOrDefault(t => t.Type == ClaimTypes.NameIdentifier)?.Value;
+            var resource = await _authentication.UpdatePassword(email, password,int.Parse(strEmailId!));
             return dondur(resource);
         }
 

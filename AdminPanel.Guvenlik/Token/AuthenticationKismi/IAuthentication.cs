@@ -8,7 +8,7 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
     {
         Task<ObjectResponse<TokensMailPassword>> CreateEmailPassword(string email, string password);
 
-        Task<ObjectResponse<TokensMailPassword>> UpdatePassword(string email, string password);
+        Task<ObjectResponse<TokensMailPassword>> UpdatePassword(string email, string password, int emailID);
 
         Task<ObjectResponse<AccessToken>> CreateAccessToken(string email, string password);
 
