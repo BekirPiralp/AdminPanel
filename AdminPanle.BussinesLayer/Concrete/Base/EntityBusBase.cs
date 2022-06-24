@@ -169,17 +169,22 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         #endregion
 
         #region Güncellem İşlemleri
-        public async Task<bool> UpdateAsync(TEntity entity)
+        public async Task<ObjectResponse<object>> UpdateAsync(TEntity entity)
         {
-            bool result = false;
+            ObjectResponse<object> result
             if (entity.isNotNull() && entity.isIdNotEmpty())
-                result = await _entityDalBase.UpdateAsync(entity);
+                if (await _entityDalBase.UpdateAsync(entity))
+                    result = new ObjectResponse<object>(true);
+                else
+                    result = new ObjectResponse<object>("Nesne güncellenemedi");
+            else
+                result = new ObjectResponse<object>("Geçersiz parametre");
             return result;
         }
 
-        public async Task<TEntity?> UpdateByAsync(TEntity entity)
+        public async Task<ObjectResponse<TEntity>> UpdateByAsync(TEntity entity)
         {
-            TEntity? result = null;
+            ObjectResponse<TEntity> result;
             if (entity.isNotNull() && entity.isIdNotEmpty())
             {
                 DateTime dateTime = DateTime.Now;
@@ -187,11 +192,16 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
 
                 if (await _entityDalBase.UpdateAsync(entity))
                 {
-                    result = (await _entityDalBase.GetAsync(
+                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(
                         e => e.guncellemeZamani == dateTime &&
-                        e.Id == entity.Id)).FirstOrDefault();
+                        e.Id == entity.Id)).FirstOrDefault());
                 }
+                else
+                    result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
             }
+            else
+                result = new ObjectResponse<TEntity>("Geçersiz parametre");
+
             return result;
         }
         #endregion

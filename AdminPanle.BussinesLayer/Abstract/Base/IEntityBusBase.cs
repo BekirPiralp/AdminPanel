@@ -55,11 +55,11 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
 
         /// <summary>
         /// Güncelleme işlemi yapar
-        /// işlem başarılı ise true diğer durumlarda false
+        /// işlem başarılı ise  success true diğer durumlarda false
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> UpdateAsync(TEntity entity);
+        Task<ObjectResponse<object>> UpdateAsync(TEntity entity);
 
         /// <summary>
         /// Güncelleme işlemi yapar
@@ -67,7 +67,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<TEntity?> UpdateByAsync(TEntity entity);
+        Task<ObjectResponse<TEntity>> UpdateByAsync(TEntity entity);
         #endregion
 
         #region Ekleme işlemleri
