@@ -2,12 +2,13 @@
 using AdminPanel.WebAPI.Definitions;
 using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Base
 {
     [ApiController]
-
+    [Authorize]
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
@@ -25,22 +26,10 @@ namespace AdminPanel.WebAPI.Controllers.Base
         [Route("[controller]/Get/{Id}")]
         public async Task<ActionResult<TEntity>> GetById(int Id)
         {
-            ActionResult<TEntity> result = null;
-            if (Id.isNotInvalid())
-            {
-                try
-                {
-                    result = Ok(await _entityBusBase.GetByIdAsync(Id));
-                }
-                catch (Exception e)
-                {
-                    result = NotFound(new Exception(message: "Id ile nesne getirmede hata oluştu. "));
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz Id");
-            }
+            ActionResult result;
+
+            result = dondur(await _entityBusBase.GetByIdAsync(Id));
+
             return result;
         }
 
@@ -51,17 +40,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult<List<TEntity>>> GetAll()
         {
 
-            ActionResult<List<TEntity>> result;
+            ActionResult result;
 
-            try
-            {
-                var entities = await _entityBusBase.GetAllAsync();
-                result = Ok(entities);
-            }
-            catch (Exception e)
-            {
-                result = NotFound(new Exception(message: "nesneler getirlirken hata oluştu. "));
-            }
+            result = dondur(await _entityBusBase.GetAllAsync());
 
             return result;
         }
@@ -73,15 +54,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult> Delete(int id)
         {
             ActionResult result;
-            try
-            {
-                result = Ok(await _entityBusBase.DeleteAsync(id));
 
-            }
-            catch (Exception)
-            {
-                result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
-            }
+            result = dondur(await _entityBusBase.DeleteAsync(id));
+
             return result;
 
         }
@@ -91,21 +66,8 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult> DeleteByObject([FromBody] TEntity entity)
         {
             ActionResult result;
-            if (entity.isIdNotEmpty())
-            {
-                try
-                {
-                    result = this.Ok(await _entityBusBase.DeleteAsync(entity));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.DeleteAsync(entity));
 
             return result;
 
@@ -116,21 +78,8 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult> DeleteByList([FromBody] List<TEntity> entities)
         {
             ActionResult result;
-            if (entities.isNotEmpty())
-            {
-                try
-                {
-                    result = this.Ok(await _entityBusBase.DeleteAsync(entities));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.DeleteAsync(entities));
 
             return result;
 
@@ -143,21 +92,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult<bool>> Put(TEntity entity)
         {
             ActionResult result;
-            if (entity.isIdNotEmpty())
-            {
-                try
-                {
-                    result = Ok(await _entityBusBase.UpdateAsync(entity));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.UpdateAsync(entity));
+
             return result;
         }
 
@@ -166,21 +103,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult<TEntity>> PutBy(TEntity entity)
         {
             ActionResult result;
-            if (entity.isIdNotEmpty())
-            {
-                try
-                {
-                    result = Ok(await _entityBusBase.UpdateByAsync(entity));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Sunucuda hata gerçekleşti");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.UpdateByAsync(entity));
+
             return result;
         }
         #endregion
@@ -191,21 +116,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult<bool>> Post(TEntity entity)
         {
             ActionResult result;
-            if (entity.isNotNull())
-            {
-                try
-                {
-                    result = Ok(await _entityBusBase.AddAsync(entity));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Beklenmeyen bir hata oluştu");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.AddAsync(entity));
+
             return result;
         }
 
@@ -214,21 +127,9 @@ namespace AdminPanel.WebAPI.Controllers.Base
         public async Task<ActionResult<TEntity>> PostByObject(TEntity entity)
         {
             ActionResult result;
-            if (entity.isNotNull())
-            {
-                try
-                {
-                    result = Ok(await _entityBusBase.AddByAsync(entity));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Beklenmeyen bir hata oluştu");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+
+            result = dondur(await _entityBusBase.AddByAsync(entity));
+
             return result;
         }
 
@@ -238,25 +139,24 @@ namespace AdminPanel.WebAPI.Controllers.Base
         {
             ActionResult result;
 
-            if (entities.isNotEmpty())
-            {
-                try
-                {
-                    result = Ok(_entityBusBase.AddAsync(entities));
-                }
-                catch (Exception)
-                {
-                    result = this.StatusCode((int)ResultCode.SunucuHatasi, "Beklenmeyen bir hata oluştu");
-                }
-            }
-            else
-            {
-                result = this.BadRequest("Geçersiz veri");
-            }
+            result = dondur(await _entityBusBase.AddAsync(entities));
 
             return result;
         }
         #endregion
+
+        private protected ActionResult dondur(dynamic resource)
+        {
+            ActionResult result;
+            if (resource.Success)
+            {
+                result = Ok(resource.Data);
+            }
+            else
+                result = BadRequest(resource.Message);
+
+            return result;
+        }
     }
 
 }

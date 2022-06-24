@@ -48,7 +48,7 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
                                     refreshTokenDate = DateTime.Now.AddMinutes(_tokenOpsiyonlari.RefreshTokenSonKullanim)
                                 });
 
-                                if (refresAddResult)
+                                if (refresAddResult.Success)
                                 {
                                     result = new ObjectResponse<AccessToken>(token);
                                 }
@@ -149,9 +149,9 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
                 if (!mailPasswordResource.Success && mailPasswordResource.Message.Equals("Sistemde kayıtlı değildir."))
                 {
                     var addResult = await _mailPassword.AddByAsync(new TokensMailPassword { mail = email, password = password });
-                    if (addResult.isIdNotEmpty())
+                    if (addResult.Data.isIdNotEmpty())
                     {
-                        result = new ObjectResponse<TokensMailPassword>(addResult);
+                        result = new ObjectResponse<TokensMailPassword>(addResult.Data);
                     }
                     else
                         result = new ObjectResponse<TokensMailPassword>("Obje oluşturulamadı");
@@ -194,7 +194,7 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
                             {
                                 _tokenIsleyici.RemoveRefreshToken(refrehTokenResource.Data);
                                 var islemResult = await _refreshTokentable.UpdateAsync(refrehTokenResource.Data);
-                                if (islemResult)
+                                if (islemResult.Success)
                                 {
                                     result = new ObjectResponse<TokensTable>(refrehTokenResource.Data);
                                 }

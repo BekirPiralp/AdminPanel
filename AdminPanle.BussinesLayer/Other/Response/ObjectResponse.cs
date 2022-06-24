@@ -1,4 +1,5 @@
-﻿namespace AdminPanle.BusinessLayer.Other.Response;
+﻿
+namespace AdminPanle.BusinessLayer.Other.Response;
 public class ObjectResponse<DataType>
     where DataType : class
 {
@@ -15,10 +16,13 @@ public class ObjectResponse<DataType>
 
     private ObjectResponse(DataType? data, string message, bool succes)
     {
-        if ((message == null || message.Trim().Equals("")) && data == null)
+
+        
+        if (((message == null || message.Trim().Equals("")) && data == null) ||
+            (data is IEnumerable<object> a && a.Count()<=0))
         {
             _data = null;
-            _message = "nesne gelmedi.";
+            _message = "Nesne veya nesneler gelmedi";
             _succes = false;
         }
         else
