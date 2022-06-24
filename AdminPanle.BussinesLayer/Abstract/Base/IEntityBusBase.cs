@@ -14,14 +14,14 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// Liste olarak getirme 
         /// </summary>
         /// <returns></returns>
-        Task<List<TEntity>?> GetAllAsync();
+        Task<ObjectResponse<List<TEntity>>> GetAllAsync();
 
         /// <summary>
         /// id ye göre
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TEntity?> GetByIdAsync(int id);
+        Task<ObjectResponse<TEntity>> GetByIdAsync(int id);
         #endregion
 
         #region Silme işlemleri

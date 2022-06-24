@@ -144,22 +144,26 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         #endregion
 
         #region Getirme işlemleri
-        public async Task<List<TEntity>?> GetAllAsync()
+        public async Task<ObjectResponse<List<TEntity>>> GetAllAsync()
         {
-            List<TEntity>? result;
-            result = await _entityDalBase.GetAsync();
+            ObjectResponse<List<TEntity>> result;
+            var entities = await _entityDalBase.GetAsync();
 
-            if (result != null && result.Count < 0)
-                result = null;
+            if (entities != null && entities.Count < 0)
+                result = new ObjectResponse<List<TEntity>>("Veriler getirilemedi");
+            else
+                result = new ObjectResponse<List<TEntity>>(entities);
 
             return result;
         }
 
-        public async Task<TEntity?> GetByIdAsync(int id)
+        public async Task<ObjectResponse<TEntity>> GetByIdAsync(int id)
         {
-            TEntity? result = null;
+            ObjectResponse<TEntity> result ;
             if (id > 0)
-                result = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
+                result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault());
+            else
+                result = new ObjectResponse<TEntity>("Geçersiz parametre");
             return result;
         }
         #endregion
