@@ -45,22 +45,29 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<ObjectResponse<object>> AddAsync(List<TEntity> entities)
         {
             ObjectResponse<object> result;
-            
-            if (entities != null && entities.Count() > 0)
-            {
-                result = new ObjectResponse<object>(true);
-                foreach (TEntity entity in entities)
-                {
 
-                    if (!(await _entityDalBase.AddAsync(entity)))
+            try
+            {
+                if (entities != null && entities.Count() > 0)
+                {
+                    result = new ObjectResponse<object>(true);
+                    foreach (TEntity entity in entities)
                     {
-                        result = new ObjectResponse<object>("Liste ekleme işleminde ekelenemeyen nesneler oluştu");
-                        break;
+
+                        if (!(await _entityDalBase.AddAsync(entity)))
+                        {
+                            result = new ObjectResponse<object>("Liste ekleme işleminde ekelenemeyen nesneler oluştu");
+                            break;
+                        }
                     }
                 }
+                else
+                    result = new ObjectResponse<object>("Geçersiz parametre");
             }
-            else
-                result = new ObjectResponse<object>("Geçersiz parametre");
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesneler eklenirken hata ile karşılaşıldı. :\n\t"+ex.Message);
+            }
 
             return result;
         }
@@ -68,18 +75,25 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<ObjectResponse<TEntity>> AddByAsync(TEntity entity)
         {
             ObjectResponse<TEntity> result;
-            if (entity.isNotNull())
+            try
             {
-                DateTime dateTime = DateTime.Now;
+                if (entity.isNotNull())
+                {
+                    DateTime dateTime = DateTime.Now;
 
-                if (await _entityDalBase.AddAsync(entity, dateTime))
-                    result = new ObjectResponse<TEntity>(
-                        (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
+                    if (await _entityDalBase.AddAsync(entity, dateTime))
+                        result = new ObjectResponse<TEntity>(
+                            (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
+                    else
+                        result = new ObjectResponse<TEntity>("Nesne eklenemedi");
+                }
                 else
-                    result = new ObjectResponse<TEntity>("Nesne eklenemedi");
+                    result = new ObjectResponse<TEntity>("Geçersiz parametre");
             }
-            else
-                result = new ObjectResponse<TEntity>("Geçersiz parametre");
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<TEntity>("Nesne eklenirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
 
             return result;
         }
@@ -89,56 +103,77 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<ObjectResponse<object>> DeleteAsync(List<TEntity> entities)
         {
             ObjectResponse<object> result;
-            if (entities != null && entities.Count() > 0)
+            try
             {
-                result = new ObjectResponse<object>(true);
-                foreach (TEntity entity in entities)
+                if (entities != null && entities.Count() > 0)
                 {
-
-                    if (!await _entityDalBase.DeleteAsync(entity))
+                    result = new ObjectResponse<object>(true);
+                    foreach (TEntity entity in entities)
                     {
-                        result = new ObjectResponse<object>("Silme işleminde silinemeyen nesneler oldu");
-                        break;
+
+                        if (!await _entityDalBase.DeleteAsync(entity))
+                        {
+                            result = new ObjectResponse<object>("Silme işleminde silinemeyen nesneler oldu");
+                            break;
+                        }
                     }
                 }
+                else
+                    result = new ObjectResponse<object>("Geçersiz parametre");
             }
-            else
-                result = new ObjectResponse<object>("Geçersiz parametre");
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesneler silinirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
             return result;
         }
 
         public async Task<ObjectResponse<object>> DeleteAsync(int id)
         {
             ObjectResponse<object> result = new ObjectResponse<object>(true);
-            if (id > 0)
+            try
             {
-                TEntity? entity = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
-                if (entity.isNotNull() && !entity.silinmisMi())
+                if (id > 0)
                 {
-                    if (!await _entityDalBase.DeleteAsync(entity))
-                        result = new ObjectResponse<object>($"{id} li nesne silinemedi");
+                    TEntity? entity = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
+                    if (entity.isNotNull() && !entity.silinmisMi())
+                    {
+                        if (!await _entityDalBase.DeleteAsync(entity))
+                            result = new ObjectResponse<object>($"{id} li nesne silinemedi");
+                    }
+                    else
+                        result = new ObjectResponse<object>("Nesne bulunamadı veya silinmiş");
                 }
                 else
-                    result = new ObjectResponse<object>("Nesne bulunamadı veya silinmiş");
-            }
-            else
-                result = new ObjectResponse<object>("Geçersiz parametre");
+                    result = new ObjectResponse<object>("Geçersiz parametre");
 
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesne silinirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
             return result;
         }
 
         public async Task<ObjectResponse<object>> DeleteAsync(TEntity entity)
         {
             ObjectResponse<object> result;
-            if (entity.isIdNotEmpty())
+            try
             {
-                if (await _entityDalBase.DeleteAsync(entity))
-                    result = new ObjectResponse<object>(true);
+                if (entity.isIdNotEmpty())
+                {
+                    if (await _entityDalBase.DeleteAsync(entity))
+                        result = new ObjectResponse<object>(true);
+                    else
+                        result = new ObjectResponse<object>("Silme işlemi ilgili nesne için başarısız");
+                }
                 else
-                    result = new ObjectResponse<object>("Silme işlemi ilgili nesne için başarısız");
+                    result = new ObjectResponse<object>("Geçersiz parametre");
             }
-            else
-                result = new ObjectResponse<object>("Geçersiz parametre");
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesne silinirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
             return result;
         }
         #endregion
@@ -149,10 +184,17 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             ObjectResponse<List<TEntity>> result;
             var entities = await _entityDalBase.GetAsync();
 
-            if (entities != null && entities.Count < 0)
-                result = new ObjectResponse<List<TEntity>>("Veriler getirilemedi");
-            else
-                result = new ObjectResponse<List<TEntity>>(entities);
+            try
+            {
+                if (entities != null && entities.Count < 0)
+                    result = new ObjectResponse<List<TEntity>>("Veriler getirilemedi");
+                else
+                    result = new ObjectResponse<List<TEntity>>(entities);
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<List<TEntity>>("Nesneler getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
 
             return result;
         }
@@ -160,10 +202,17 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<ObjectResponse<TEntity>> GetByIdAsync(int id)
         {
             ObjectResponse<TEntity> result ;
-            if (id > 0)
-                result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault());
-            else
-                result = new ObjectResponse<TEntity>("Geçersiz parametre");
+            try
+            {
+                if (id > 0)
+                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault());
+                else
+                    result = new ObjectResponse<TEntity>("Geçersiz parametre");
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<TEntity>("Nesne getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
             return result;
         }
         #endregion
@@ -171,36 +220,53 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         #region Güncellem İşlemleri
         public async Task<ObjectResponse<object>> UpdateAsync(TEntity entity)
         {
-            ObjectResponse<object> result
-            if (entity.isNotNull() && entity.isIdNotEmpty())
-                if (await _entityDalBase.UpdateAsync(entity))
-                    result = new ObjectResponse<object>(true);
+            ObjectResponse<object> result;
+
+            try
+            {
+                if (entity.isNotNull() && entity.isIdNotEmpty())
+                    if (await _entityDalBase.UpdateAsync(entity))
+                        result = new ObjectResponse<object>(true);
+                    else
+                        result = new ObjectResponse<object>("Nesne güncellenemedi");
                 else
-                    result = new ObjectResponse<object>("Nesne güncellenemedi");
-            else
-                result = new ObjectResponse<object>("Geçersiz parametre");
+                    result = new ObjectResponse<object>("Geçersiz parametre");
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesne güncellenirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
+
             return result;
         }
 
         public async Task<ObjectResponse<TEntity>> UpdateByAsync(TEntity entity)
         {
             ObjectResponse<TEntity> result;
-            if (entity.isNotNull() && entity.isIdNotEmpty())
-            {
-                DateTime dateTime = DateTime.Now;
-                entity.guncellemeZamani = dateTime;
 
-                if (await _entityDalBase.UpdateAsync(entity))
+            try
+            {
+                if (entity.isNotNull() && entity.isIdNotEmpty())
                 {
-                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(
-                        e => e.guncellemeZamani == dateTime &&
-                        e.Id == entity.Id)).FirstOrDefault());
+                    DateTime dateTime = DateTime.Now;
+                    entity.guncellemeZamani = dateTime;
+
+                    if (await _entityDalBase.UpdateAsync(entity))
+                    {
+                        result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(
+                            e => e.guncellemeZamani == dateTime &&
+                            e.Id == entity.Id)).FirstOrDefault());
+                    }
+                    else
+                        result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
                 }
                 else
-                    result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
+                    result = new ObjectResponse<TEntity>("Geçersiz parametre");
             }
-            else
-                result = new ObjectResponse<TEntity>("Geçersiz parametre");
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<TEntity>("Nesne güncellenirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
 
             return result;
         }
