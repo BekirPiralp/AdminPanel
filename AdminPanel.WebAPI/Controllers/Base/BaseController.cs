@@ -1,6 +1,4 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
-using AdminPanel.WebAPI.Definitions;
-using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

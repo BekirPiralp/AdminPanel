@@ -43,13 +43,6 @@ namespace AdminPanel.WebAPI.Controllers.Other
             return dondur(resource);
         }
 
-        [HttpPut()]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Test()
-        {
-            return Ok("Geldi");
-        }
-
         [HttpPost()]
         public async Task<IActionResult> CreateAccessToken(string email, string password)
         {
