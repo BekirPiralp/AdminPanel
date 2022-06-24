@@ -24,7 +24,7 @@ public class ObjectResponse<DataType>
         else
         {
             _data = data;
-            _message = message;
+            _message = message!;
             _succes = succes;
         }
     }
@@ -33,7 +33,7 @@ public class ObjectResponse<DataType>
     /// Data verilmiş ise Succes true yapılır ve mesaj boş olur
     /// </summary>
     /// <param name="data"></param>
-    public ObjectResponse(DataType data) : this(data, string.Empty, true)
+    public ObjectResponse(DataType? data) : this(data, string.Empty, true)
     {
     }
 

@@ -1,4 +1,5 @@
 ﻿using AdminPanel.EntityLayer.Abctract;
+using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Abstract.Base
 {
@@ -76,7 +77,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> AddAsync(TEntity entity);
+        Task<ObjectResponse<object>> AddAsync(TEntity entity);
 
         /// <summary>
         /// Liste olarak ekler
@@ -84,14 +85,14 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> AddAsync(List<TEntity> entities);
+        Task<ObjectResponse<object>> AddAsync(List<TEntity> entities);
 
         /// <summary>
         /// Ekleme işlemi yapar işlem başarılı ise kayıtlı halini geri dödürür
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<TEntity?> AddByAsync(TEntity entity);
+        Task<ObjectResponse<TEntity>> AddByAsync(TEntity entity);
         #endregion
     }
 }

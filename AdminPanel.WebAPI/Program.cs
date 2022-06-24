@@ -7,21 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddConnectionString(builder);
 builder.Services.AddCrosAyari();
-//builder.Services.AddJwt();
-
-builder.Services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,opt =>
-{
-    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-    {
-        ValidateAudience = true,
-        ValidateIssuer = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = GuvenlikOlusturucu.Olustur().TokenOpsiyonlari.Yayinci,
-        ValidAudience = GuvenlikOlusturucu.Olustur().TokenOpsiyonlari.Dinleyici,
-        IssuerSigningKey = GuvenlikOlusturucu.Olustur().Imzalayici.GetSecurityKey(GuvenlikOlusturucu.Olustur().TokenOpsiyonlari.GuvenlikAnahtari),
-    };
-});
+builder.Services.AddJwt();
 
 
 
@@ -46,8 +32,6 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 
 app.UseHttpsRedirection();
-
-//app.UseRouting();
 
 app.UseAuthentication();
 

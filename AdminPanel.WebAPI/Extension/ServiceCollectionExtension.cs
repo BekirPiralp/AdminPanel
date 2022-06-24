@@ -39,7 +39,7 @@ namespace AdminPanel.WebAPI.Extension
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidateLifetime = true,
-                    ValidateIssuerSigningKey = false,
+                    ValidateIssuerSigningKey = true,
                     ValidIssuer = tokenOption.Yayinci,
                     ValidAudience = tokenOption.Dinleyici,
                     IssuerSigningKey = imzalayici.GetSecurityKey(tokenOption.GuvenlikAnahtari),

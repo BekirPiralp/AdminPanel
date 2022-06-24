@@ -2,6 +2,7 @@
 using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanle.BusinessLayer.Abstract.Base;
+using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Base
 {
@@ -16,54 +17,70 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         }
 
         #region Ekleme işlemleri
-        public async Task<bool> AddAsync(TEntity entity)
+        public async Task<ObjectResponse<object>> AddAsync(TEntity entity)
         {
-            bool result = false;
+            ObjectResponse<object> result;
+            //bool result = false;
 
             if (entity.isIdEmpty())
             {
                 try
                 {
-                    result = await _entityDalBase.AddAsync(entity);
+                    if (await _entityDalBase.AddAsync(entity))
+                        result = new ObjectResponse<object>(true);
+                    else
+                        result = new ObjectResponse<object>("Ekeleme işlemi başarısız");
                 }
-                catch
+                catch (Exception ex)
                 {
-                    result = false;
-                }
-            }
-
-            return result;
-        }
-
-        public async Task<bool> AddAsync(List<TEntity> entities)
-        {
-            bool result = true;
-            if (entities != null && entities.Count() > 0)
-            {
-                foreach (TEntity entity in entities)
-                {
-                    result = await AddAsync(entity);
-                    if (!result)
-                        break;
+                    result = new ObjectResponse<object>("Eklemişleminde hata ile karşılaşıldı. :\n\t" + ex.Message);
                 }
             }
             else
-                result = false;
-
+                result = new ObjectResponse<object>("Geçersiz parametre");
 
             return result;
         }
 
-        public async Task<TEntity?> AddByAsync(TEntity entity)
+        public async Task<ObjectResponse<object>> AddAsync(List<TEntity> entities)
         {
-            TEntity? result = null;
+            ObjectResponse<object> result;
+            
+            if (entities != null && entities.Count() > 0)
+            {
+                result = new ObjectResponse<object>(true);
+                foreach (TEntity entity in entities)
+                {
+
+                    if (!(await _entityDalBase.AddAsync(entity)))
+                    {
+                        result = new ObjectResponse<object>("Liste ekleme işleminde ekelenemeyen nesneler oluştu");
+                        break;
+                    }
+                }
+            }
+            else
+                result = new ObjectResponse<object>("Geçersiz parametre");
+
+            return result;
+        }
+
+        public async Task<ObjectResponse<TEntity>> AddByAsync(TEntity entity)
+        {
+            ObjectResponse<TEntity> result;
             if (entity.isNotNull())
             {
                 DateTime dateTime = DateTime.Now;
 
                 if (await _entityDalBase.AddAsync(entity, dateTime))
-                    result = (await _entityDalBase.GetAsync()).OrderByDescending(p => p.kayitZamani).FirstOrDefault();
+                    result = new ObjectResponse<TEntity>(
+                        (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
+                else
+                    result = new ObjectResponse<TEntity>("Nesne eklenemedi");
             }
+            else
+                result = new ObjectResponse<TEntity>("Geçersiz parametre");
+
             return result;
         }
         #endregion
