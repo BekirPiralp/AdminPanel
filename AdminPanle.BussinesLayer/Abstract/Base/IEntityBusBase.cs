@@ -32,7 +32,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(List<TEntity> entities);
+        Task<ObjectResponse<object>> DeleteAsync(List<TEntity> entities);
 
         /// <summary>
         /// id olarak siler
@@ -40,7 +40,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(int id);
+        Task<ObjectResponse<object>> DeleteAsync(int id);
 
         /// <summary>
         /// Göderilmiş olan nesneye göre siler
@@ -48,7 +48,7 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(TEntity entity);
+        Task<ObjectResponse<object>> DeleteAsync(TEntity entity);
         #endregion
 
         #region Güncelleme işlemleri

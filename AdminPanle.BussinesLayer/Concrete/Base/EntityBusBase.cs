@@ -86,42 +86,59 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         #endregion
 
         #region Silme işlemleri
-        public async Task<bool> DeleteAsync(List<TEntity> entities)
+        public async Task<ObjectResponse<object>> DeleteAsync(List<TEntity> entities)
         {
-            bool result = false;
+            ObjectResponse<object> result;
             if (entities != null && entities.Count() > 0)
             {
-                result = true;
+                result = new ObjectResponse<object>(true);
                 foreach (TEntity entity in entities)
                 {
-                    result = await DeleteAsync(entity);
-                    if (!result)
+
+                    if (!await _entityDalBase.DeleteAsync(entity))
+                    {
+                        result = new ObjectResponse<object>("Silme işleminde silinemeyen nesneler oldu");
                         break;
+                    }
                 }
             }
+            else
+                result = new ObjectResponse<object>("Geçersiz parametre");
             return result;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<ObjectResponse<object>> DeleteAsync(int id)
         {
-            bool result = false;
+            ObjectResponse<object> result = new ObjectResponse<object>(true);
             if (id > 0)
             {
                 TEntity? entity = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
                 if (entity.isNotNull() && !entity.silinmisMi())
-                    result = await _entityDalBase.DeleteAsync(entity);
+                {
+                    if (!await _entityDalBase.DeleteAsync(entity))
+                        result = new ObjectResponse<object>($"{id} li nesne silinemedi");
+                }
+                else
+                    result = new ObjectResponse<object>("Nesne bulunamadı veya silinmiş");
             }
+            else
+                result = new ObjectResponse<object>("Geçersiz parametre");
 
             return result;
         }
 
-        public async Task<bool> DeleteAsync(TEntity entity)
+        public async Task<ObjectResponse<object>> DeleteAsync(TEntity entity)
         {
-            bool result = false;
+            ObjectResponse<object> result;
             if (entity.isIdNotEmpty())
             {
-                result = await _entityDalBase.DeleteAsync(entity);
+                if (await _entityDalBase.DeleteAsync(entity))
+                    result = new ObjectResponse<object>(true);
+                else
+                    result = new ObjectResponse<object>("Silme işlemi ilgili nesne için başarısız");
             }
+            else
+                result = new ObjectResponse<object>("Geçersiz parametre");
             return result;
         }
         #endregion
