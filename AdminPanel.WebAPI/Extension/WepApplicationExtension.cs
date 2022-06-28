@@ -12,7 +12,8 @@ namespace AdminPanel.WebAPI.Extension
                 var services = scope.ServiceProvider;
 
                 var baglam = services.GetRequiredService<EfContext>();
-                baglam.Database.EnsureCreated();
+                if(!baglam.Database.CanConnect())
+                    baglam.Database.EnsureCreated();
                 //var response = baglam.Database.EnsureCreatedAsync().Result;
 
                 //Console.WriteLine(response);

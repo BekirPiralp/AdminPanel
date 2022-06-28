@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace AdminPanel.WebAPI.Controllers.Other
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]/")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -17,7 +17,9 @@ namespace AdminPanel.WebAPI.Controllers.Other
             _authentication = new Authentication();
         }
 
-        [HttpPost()]
+       
+
+        [HttpPost(template:"Create")]
         public async Task<IActionResult> CreateEmailPassword(EmailPassword emailPassword)//(string email, string password)
         {
 
@@ -31,7 +33,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
                 return BadRequest("Geçersiz parametre");
         }
 
-        [HttpPut()]
+        [HttpPut(template:"Update")]
         [Authorize]
         public async Task<IActionResult> UpdatePassword(EmailPassword emailPassword)
         {
@@ -58,7 +60,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
                 return BadRequest("Geçersiz parametre");
         }
 
-        [HttpPost()]
+        [HttpPost(template:"Refresh")]
         public async Task<IActionResult> CreateAccessTokenByRefreshToken(EmailRefreshToken emailRefreshToken)
         {
             if (emailRefreshToken != null)
@@ -71,6 +73,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
         }
 
         [HttpDelete()]
+        [Authorize]
         public async Task<IActionResult> RemoveRefreshToken(EmailRefreshToken emailRefreshToken)
         {
             if (emailRefreshToken != null)

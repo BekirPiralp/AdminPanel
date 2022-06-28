@@ -13,5 +13,9 @@
         {
             return _connectionString;
         }
+
+        private static int _maxRetryCount=10;
+
+        public static int MaxRetryCount(this string str) { return _maxRetryCount; }
     }
 }

@@ -33,7 +33,10 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
         {
 
             optionsBuilder//.UseLazyLoadingProxies()
-                .UseSqlServer("".getConnectionString());
+                .UseSqlServer("".getConnectionString(), op =>
+                {
+                    op.EnableRetryOnFailure(maxRetryCount: "".MaxRetryCount());
+                });
 
             base.OnConfiguring(optionsBuilder);
         }

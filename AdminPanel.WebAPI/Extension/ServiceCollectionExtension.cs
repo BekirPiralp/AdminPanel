@@ -4,15 +4,22 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using MIMT = Microsoft.IdentityModel.Tokens;
 
+
 namespace AdminPanel.WebAPI.Extension
 {
+
+
     public static class ServiceCollectionExtension
     {
+
         public static IServiceCollection AddConnectionString(this IServiceCollection service, WebApplicationBuilder builder)
         {
             "".setConnectionString(builder.Configuration.GetConnectionString("Varsayilan"));
 
-            service.AddDbContext<EfContext>(op => op.UseSqlServer("".getConnectionString()));
+            service.AddDbContext<EfContext>(op => {
+                op.UseSqlServer("".getConnectionString(),options=> options.EnableRetryOnFailure(maxRetryCount:"".MaxRetryCount()));
+                
+            });
             return service;
         }
 
