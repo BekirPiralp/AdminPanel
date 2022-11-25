@@ -1,16 +1,12 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
 using AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base.Oracle;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.YBS_Asis
 {
-    public class GetTempDAL : EntityEfDalOracle<TEMP_SOSYALYARDIM3, EFContextOracle>, IGetTempDAL
+    public class GetTempDAL<TContext> : EntityEfDalOracle<TEMP_SOSYALYARDIM3, TContext>, IGetTempDAL
+        where TContext : DbContext, new() // Data access layer oluşturucu içerisinden verilecektir.
     {
 
         

@@ -91,5 +91,53 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             }
             return result;
         }
+
+        public async Task<int> GetTotalCountAsync(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            int response = 0;
+            using (TContext context = new TContext())
+            {
+                response = filter == null ? await context.Set<TEntity>().CountAsync()
+                    : await context.Set<TEntity>().Where(filter).CountAsync();
+            }
+            return response;
+        }
+
+
+        public async Task<List<TEntity>> GetPaginationAsync(int pageItemsCount, int pageIndex, Expression<Func<TEntity, bool>>? filter = null)
+        {
+            List<TEntity> response = null;
+
+            int totalItems = await GetTotalCountAsync(filter);
+
+            int mod = totalItems % pageItemsCount;
+            int pageCount = mod == 0 ? totalItems / pageItemsCount : ((totalItems - mod) / pageItemsCount) + 1;
+
+            int itemIndex = pageIndex != 0 ? pageItemsCount * pageIndex - 1 : 0;
+
+            if (pageIndex > pageCount)
+            {
+                throw new Exception("Geçersiz parametre / istek");
+            }
+
+            using (TContext context = new TContext())
+            {
+                response = filter == null ? await filtreYok() : await filtreVar();
+
+                // local function
+                async Task<List<TEntity>> filtreYok()
+                {
+                    return await context.Set<TEntity>().OrderBy(p => p.ID).Skip(itemIndex).Take(pageItemsCount).ToListAsync();
+                }
+
+                async Task<List<TEntity>> filtreVar()
+                {
+                    return await context.Set<TEntity>().OrderBy(p => p.ID).Where(filter).Skip(itemIndex).Take(pageItemsCount).ToListAsync();
+                }
+
+            }
+            return response;
+        }
+
     }
 }

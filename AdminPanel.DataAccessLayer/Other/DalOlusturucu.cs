@@ -1,5 +1,6 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.YBS_Asis;
 
@@ -34,7 +35,7 @@ namespace AdminPanel.DataAccessLayer.Other
             #endregion
 
             #region YBS_TEMP
-            getTempDAL = new GetTempDAL();
+            getTempDAL = new GetTempDAL<EFContextOracle>();
             #endregion
 
         }
