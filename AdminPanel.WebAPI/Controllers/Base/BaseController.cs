@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace AdminPanel.WebAPI.Controllers.Base
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     //[Route("[controller]")]
     public class BaseController<ITEntityBusBase, TEntity> : ControllerBase
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
         where TEntity : class, IEntity, new()
 
     {
-        private ITEntityBusBase _entityBusBase;
+        private protected ITEntityBusBase _entityBusBase;
         public BaseController(ITEntityBusBase entityBusBase) : base()
         {
             _entityBusBase = entityBusBase;
@@ -47,7 +47,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
         #endregion
 
         #region delete
-        [HttpDelete()]
+        [HttpPost()]
         [Route("[controller]/[Action]/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

@@ -81,10 +81,10 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 {
                     DateTime dateTime = DateTime.Now;
 
-                    if (await _entityDalBase.AddAsync(entity, dateTime))
-                        result = new ObjectResponse<TEntity>(
-                            (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
-                    else
+                    //if (await _entityDalBase.AddAsync(entity, dateTime))
+                    //    result = new ObjectResponse<TEntity>(
+                    //        (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
+                    //else
                         result = new ObjectResponse<TEntity>("Nesne eklenemedi");
                 }
                 else
@@ -135,7 +135,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             {
                 if (id > 0)
                 {
-                    TEntity? entity = (await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault();
+                    TEntity? entity = (await _entityDalBase.GetAsync(e => e.ID == id)).FirstOrDefault();
                     if (entity.isNotNull() && !entity.silinmisMi())
                     {
                         if (!await _entityDalBase.DeleteAsync(entity))
@@ -205,7 +205,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             try
             {
                 if (id > 0)
-                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.Id == id)).FirstOrDefault());
+                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.ID == id)).FirstOrDefault());
                 else
                     result = new ObjectResponse<TEntity>("Geçersiz parametre");
             }
@@ -215,7 +215,11 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             }
             return result;
         }
+
+   
         #endregion
+
+
 
         #region Güncellem İşlemleri
         public async Task<ObjectResponse<object>> UpdateAsync(TEntity entity)
@@ -249,15 +253,15 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 if (entity.isNotNull() && entity.isIdNotEmpty())
                 {
                     DateTime dateTime = DateTime.Now;
-                    entity.guncellemeZamani = dateTime;
+                    //entity.guncellemeZamani = dateTime;
 
-                    if (await _entityDalBase.UpdateAsync(entity))
-                    {
-                        result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(
-                            e => e.guncellemeZamani == dateTime &&
-                            e.Id == entity.Id)).FirstOrDefault());
-                    }
-                    else
+                    //if (await _entityDalBase.UpdateAsync(entity))
+                    //{
+                    //    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(
+                    //        e => e.guncellemeZamani == dateTime &&
+                    //        e.Id == entity.Id)).FirstOrDefault());
+                    //}
+                    //else
                         result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
                 }
                 else

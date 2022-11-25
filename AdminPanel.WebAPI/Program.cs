@@ -7,15 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddConnectionString(builder);
 builder.Services.AddCrosAyari();
-builder.Services.AddJwt();
+//builder.Services.AddJwt();
 
 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-builder.Services.AddSwagerAuthorization();
+builder.Services.AddSwaggerGen();
+//builder.Services.AddSwagerAuthorization();
 
 var app = builder.Build();
 
@@ -24,7 +24,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.VeriTabaniniKaydet();
+   // app.VeriTabaniniKaydet();
 }
 
 app.UseSwagger();
@@ -36,7 +36,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

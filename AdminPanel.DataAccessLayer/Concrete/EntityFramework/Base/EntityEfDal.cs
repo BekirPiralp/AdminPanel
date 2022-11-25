@@ -16,10 +16,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             using (TContext context = new TContext())
             {
 
-                if (entity.isNotNull())
+                if (entity.isNotNull() && entity.isIdEmpty())//entity.isNull() normalde ekleme nesnesinde Id olmaz lakin oracle için gerekli 
                 {
-                    entity.kayitZamani = kayitZamani != null ? (DateTime)kayitZamani : DateTime.Now;
-
+                    //entity.kayitZamani = kayitZamani != null ? (DateTime)kayitZamani : DateTime.Now;
                     context.Entry(entity).State = EntityState.Added;
                     int response = await context.SaveChangesAsync();
 
@@ -37,16 +36,16 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             {
                 if (entity.isIdNotEmpty() & !entity.silinmisMi())
                 {
-                    entity.silmeZamani = silmeZamani != null ? (DateTime)silmeZamani : DateTime.Now;
+                    //entity.silmeZamani = silmeZamani != null ? (DateTime)silmeZamani : DateTime.Now;
 
-                    // silme işlemi sanal olacak on göre ayarlama yapılacak
-                    //context.Entry(entity).State = EntityState.Deleted;
-                    entity.sil = true;
-                    context.Entry(entity).State = EntityState.Modified;
-                    int response = await context.SaveChangesAsync();
+                    //// silme işlemi sanal olacak on göre ayarlama yapılacak
+                    ////context.Entry(entity).State = EntityState.Deleted;
+                    //entity.sil = true;
+                    //context.Entry(entity).State = EntityState.Modified;
+                    //int response = await context.SaveChangesAsync();
 
-                    if (response > 0)
-                        result = true;
+                    //if (response > 0)
+                    //    result = true;
                 }
             }
             return result;
@@ -57,7 +56,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             List<TEntity> result;
             using (TContext context = new TContext())
             {
-
+               // result = context.Set<TEntity>().ToList();
                 result = filter == null ? await context.Set<TEntity>().ToListAsync()
                     : await context.Set<TEntity>().Where(filter).ToListAsync();
             }
@@ -81,7 +80,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             {
                 if (entity.isIdNotEmpty())
                 {
-                    entity.guncellemeZamani = guncellemeZamani != null ? (DateTime)guncellemeZamani : DateTime.Now;
+                    //entity.guncellemeZamani = guncellemeZamani != null ? (DateTime)guncellemeZamani : DateTime.Now;
 
                     context.Entry(entity).State = EntityState.Modified;
                     int response = await context.SaveChangesAsync();

@@ -14,11 +14,13 @@ namespace AdminPanel.WebAPI.Extension
 
         public static IServiceCollection AddConnectionString(this IServiceCollection service, WebApplicationBuilder builder)
         {
-            "".setConnectionString(builder.Configuration.GetConnectionString("Varsayilan"));
+            "".setConnectionString(builder.Configuration.GetConnectionString("OracleString"));
 
-            service.AddDbContext<EfContext>(op => {
-                op.UseSqlServer("".getConnectionString(),options=> options.EnableRetryOnFailure(maxRetryCount:"".MaxRetryCount()));
-                
+            service.AddDbContext<EFContextOracle>(op =>
+            {
+                op.UseOracle(builder.Configuration.GetConnectionString("OracleString"),
+                    b => b.MigrationsAssembly(typeof(EFContextOracle).Assembly.FullName)
+                    .UseOracleSQLCompatibility("12"));
             });
             return service;
         }

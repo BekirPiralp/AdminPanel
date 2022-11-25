@@ -4,7 +4,7 @@ using AdminPanel.EntityLayer.Concrete.Other.AuthenticationKismi;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi
 {
-    public class EfDalTokensTable : EntityEfDal<TokensTable, EfContext>, IDalTokensTable
+    public class EfDalTokensTable : EntityEfDal<TokensTable, EFContextOracle>, IDalTokensTable
     {
     }
 }
