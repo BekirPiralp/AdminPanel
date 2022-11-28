@@ -113,9 +113,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             int mod = totalItems % pageItemsCount;
             int pageCount = mod == 0 ? totalItems / pageItemsCount : ((totalItems - mod) / pageItemsCount) + 1;
 
-            int itemIndex = pageIndex != 0 ? pageItemsCount * pageIndex - 1 : 0;
+            int itemIndex = pageIndex != 0 ? pageItemsCount * (pageIndex - 1) : 0;
 
-            if (pageIndex > pageCount)
+            if (pageIndex > pageCount || pageCount <= 0)
             {
                 throw new Exception("Geçersiz parametre / istek");
             }

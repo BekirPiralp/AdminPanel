@@ -7,7 +7,7 @@ using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
 {
-    public class BusTokensMailPassword : EntityBusBase<TokensMailPassword>, IBusTokensMailPassword
+    public class BusTokensMailPassword : EntityBusBase<TokensMailPassword, IDalTokensMailPassword>, IBusTokensMailPassword
     {
         public BusTokensMailPassword(IDalTokensMailPassword entityDalBase) : base(entityDalBase)
         {

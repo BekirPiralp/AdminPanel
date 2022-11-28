@@ -1,4 +1,5 @@
-﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
+﻿using AdminPanel.DataAccessLayer.Abstract.Base;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo;
 using AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo;
@@ -8,7 +9,7 @@ using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo
 {
-    public class BusGetTemp : EntityBusBase<TEMP_SOSYALYARDIM3>, IBusGetTemp
+    public class BusGetTemp : EntityBusBase<TEMP_SOSYALYARDIM3, IGetTempDAL>, IBusGetTemp
     {
         public BusGetTemp(IGetTempDAL entityDalBase) : base(entityDalBase)
         {

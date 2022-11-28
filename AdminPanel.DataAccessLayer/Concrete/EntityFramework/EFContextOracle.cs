@@ -38,7 +38,6 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 
 
              optionsBuilder.UseOracle("".getConnectionString());
-           // optionsBuilder.UseOracle(ConfigurationManager.ConnectionStrings["OracleString"].ConnectionString);
 
         }
         public DbSet<TEMP_SOSYALYARDIM3> TEMP_SOSYALYARDIM3 { get; set; }

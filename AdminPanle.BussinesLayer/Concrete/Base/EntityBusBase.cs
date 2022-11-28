@@ -2,15 +2,17 @@
 using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanle.BusinessLayer.Abstract.Base;
+using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Base
 {
-    public class EntityBusBase<TEntity> : IEntityBusBase<TEntity>
+    public class EntityBusBase<TEntity, DalBase> : IEntityBusBase<TEntity>
         where TEntity : class, IEntity, new()
+        where DalBase: class,IEntityDalBase<TEntity>
     {
-        protected IEntityDalBase<TEntity> _entityDalBase;
-        public EntityBusBase(IEntityDalBase<TEntity> entityDalBase)
+        protected DalBase _entityDalBase;
+        public EntityBusBase(DalBase entityDalBase)
         {
             //deneme
             _entityDalBase = entityDalBase;
@@ -216,10 +218,28 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-   
+        public async Task<ObjectResponse<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex)
+        {
+            ObjectResponse<List<TEntity>> result;
+            
+            try
+            {
+                var entities = await this._entityDalBase.GetPaginationAsync(pageItemsCount, pageIndex);
+                if (entities.isNotNull() && entities.isNotEmpty())
+                {
+                    result = new ObjectResponse<List<TEntity>>(entities);
+                }
+                else
+                    result = new ObjectResponse<List<TEntity>>("İlgili nesneler getirilemedi");
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<List<TEntity>>("Nesneler getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
+
+            return result;
+        }
         #endregion
-
-
 
         #region Güncellem İşlemleri
         public async Task<ObjectResponse<object>> UpdateAsync(TEntity entity)

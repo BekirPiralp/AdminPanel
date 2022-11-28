@@ -2,12 +2,13 @@
 using AdminPanel.Guvenlik.Other;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Oracle.ManagedDataAccess.Types;
 using MIMT = Microsoft.IdentityModel.Tokens;
 
 
 namespace AdminPanel.WebAPI.Extension
 {
-
+    
 
     public static class ServiceCollectionExtension
     {
@@ -16,6 +17,7 @@ namespace AdminPanel.WebAPI.Extension
         {
             "".setConnectionString(builder.Configuration.GetConnectionString("OracleString"));
 
+            //var a = builder.Configuration.GetSection("ConnectionStrings")["OracleString"];
             service.AddDbContext<EFContextOracle>(op =>
             {
                 op.UseOracle(builder.Configuration.GetConnectionString("OracleString"),

@@ -8,7 +8,7 @@ using AdminPanle.BusinessLayer.Other.Response;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi
 {
-    public class BusTokensTable : EntityBusBase<TokensTable>, IBusTokensTable
+    public class BusTokensTable : EntityBusBase<TokensTable, IDalTokensTable>, IBusTokensTable
     {
         public BusTokensTable(IDalTokensTable entityDalBase) : base(entityDalBase)
         {

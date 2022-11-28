@@ -22,6 +22,16 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// <param name="id"></param>
         /// <returns></returns>
         Task<ObjectResponse<TEntity>> GetByIdAsync(int id);
+
+        /// <summary>
+        /// Sayfalam  işlemi içindir.
+        /// Page index değeri normal insanların kullandığı değerler (ör: 1,2,3...) gibi yollanmalıdır.
+        /// Eğerki sıfır veya bir yollanır ise aynı nesneler geri gelir.
+        /// </summary>
+        /// <param name="pageItemsCount"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        Task<ObjectResponse<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex);
         #endregion
 
         #region Silme işlemleri

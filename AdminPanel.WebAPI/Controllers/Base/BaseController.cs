@@ -44,6 +44,17 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
             return result;
         }
+
+        [HttpGet()]
+        [Route("[controller]/GetPage/")]
+        public async Task<ActionResult<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex)
+        {
+            ActionResult result;
+
+            result = dondur(await _entityBusBase.GetPage(pageItemsCount,pageIndex));
+            
+            return result;
+        }
         #endregion
 
         #region delete
