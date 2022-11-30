@@ -106,14 +106,18 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
 
         public async Task<List<TEntity>> GetPaginationAsync(int pageItemsCount, int pageIndex, Expression<Func<TEntity, bool>>? filter = null)
         {
+
+            if (pageItemsCount <= 0)
+                throw new Exception("Geçersiz parametre / istek");
+
             List<TEntity> response = null;
 
             int totalItems = await GetTotalCountAsync(filter);
 
-            int mod = totalItems % pageItemsCount;
-            int pageCount = mod == 0 ? totalItems / pageItemsCount : ((totalItems - mod) / pageItemsCount) + 1;
+            int mod = totalItems % pageItemsCount; // fazlalık hesplaması
+            int pageCount = mod == 0 ? totalItems / pageItemsCount : ((totalItems - mod) / pageItemsCount) + 1; // toplam sayfa sayısını elde etme
 
-            int itemIndex = pageIndex != 0 ? pageItemsCount * (pageIndex - 1) : 0;
+            int itemIndex = pageIndex > 0 ? pageItemsCount * (pageIndex - 1) : 0; // Bakılmaya başlanacak olan nesnenin sırası hesaplanıyor
 
             if (pageIndex > pageCount || pageCount < 0)
             {
