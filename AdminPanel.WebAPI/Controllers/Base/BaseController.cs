@@ -55,6 +55,17 @@ namespace AdminPanel.WebAPI.Controllers.Base
             
             return result;
         }
+
+        [HttpGet()]
+        [Route("[controller]/GetTotalCount/")]
+        public async Task<IActionResult> GetItemsTotalCount()
+        {
+            IActionResult result;
+
+            result = dondur(await _entityBusBase.GetItemsTotalCount());
+            
+            return result;
+        }
         #endregion
 
         #region delete

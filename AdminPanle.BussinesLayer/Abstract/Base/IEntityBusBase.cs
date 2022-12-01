@@ -32,6 +32,12 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// <param name="pageIndex"></param>
         /// <returns></returns>
         Task<ObjectResponse<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex);
+
+        /// <summary>
+        /// Toplam nesne sayısını öğrenmek içindir.
+        /// </summary>
+        /// <returns></returns>
+        Task<ObjectResponse<object>> GetItemsTotalCount();
         #endregion
 
         #region Silme işlemleri

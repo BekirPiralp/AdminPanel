@@ -239,6 +239,27 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
 
             return result;
         }
+
+        public async Task<ObjectResponse<object>> GetItemsTotalCount()
+        {
+            ObjectResponse<object> result;
+            try
+            {
+                int response = await _entityDalBase.GetTotalCountAsync();
+                
+                if (response < 0)
+                    throw new Exception("İmkansız sayı!");
+
+                result = new ObjectResponse<object>(response);
+            }
+            catch(Exception ex)
+            {
+                result = new ObjectResponse<object>("Nesnelerin toplam sayısı getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region Güncellem İşlemleri
