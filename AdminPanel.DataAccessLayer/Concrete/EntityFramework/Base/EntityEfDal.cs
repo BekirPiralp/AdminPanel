@@ -102,6 +102,13 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             }
             return response;
         }
+        public async Task<List<TEntity>> GetPaginationAsync(
+            int pageItemsCount, int pageIndex,
+            Expression<Func<TEntity, bool>>? filter = null,
+            bool desc = false)
+        {
+            return await GetPaginationAsync(pageItemsCount,pageIndex,p=>p.ID,filter,desc);
+        }
 
         public async Task<List<TEntity>> GetPaginationAsync<Tkey>(
             int pageItemsCount, int pageIndex,

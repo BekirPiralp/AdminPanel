@@ -57,6 +57,9 @@ namespace AdminPanel.DataAccessLayer.Abstract.Base
          */
 
         Task<int> GetTotalCountAsync(Expression<Func<TEntity, bool>>? filter = null);
+        
+        Task<List<TEntity>> GetPaginationAsync(int pageItemsCount, int pageIndex, Expression<Func<TEntity, bool>>? filter = null, bool desc = false);
+
         Task<List<TEntity>> GetPaginationAsync<Tkey>(int pageItemsCount, int pageIndex, Expression<Func<TEntity, Tkey>>? orderFilter, Expression<Func<TEntity, bool>>? filter = null, bool desc = false);
         #endregion
 
