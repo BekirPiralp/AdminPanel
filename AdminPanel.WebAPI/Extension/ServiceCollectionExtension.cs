@@ -19,11 +19,13 @@ namespace AdminPanel.WebAPI.Extension
             service.AddDbContext<EFContextOracle>(op =>
             { 
                 op.UseOracle(
-                    AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleDbString],
+                    AppSettingsConfiguration.Create()
+                        .Configuration
+                        .GetConnectionString(AppSettingsConfigurationNames.OracleDbString),
                     b => b.MigrationsAssembly(typeof(EFContextOracle).Assembly.FullName)
                     .UseOracleSQLCompatibility(
-                        AppSettingsConfiguration.Create()
-                        .Configuration[AppSettingsConfigurationNames.OracleSqlComponity]));
+                     AppSettingsConfiguration.Create()
+                        .Configuration.GetSQLCompatibilityString(AppSettingsConfigurationNames.OracleSqlComponity)));
             });
             return service;
         }

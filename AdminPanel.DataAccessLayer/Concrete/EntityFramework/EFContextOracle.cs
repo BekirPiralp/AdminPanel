@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using AdminPanel.AppSettings;
+using Microsoft.Extensions.Configuration;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
@@ -26,10 +27,12 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseOracle(
-                AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleDbString]
-                ,op=>op.UseOracleSQLCompatibility(
-                    AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleSqlComponity]
-                    ));
+                    AppSettingsConfiguration.Create()
+                        .Configuration
+                        .GetConnectionString(AppSettingsConfigurationNames.OracleDbString),
+                    b => b.UseOracleSQLCompatibility(
+                     AppSettingsConfiguration.Create()
+                        .Configuration.GetSQLCompatibilityString(AppSettingsConfigurationNames.OracleSqlComponity)));
 
         }
         public DbSet<TEMP_SOSYALYARDIM3> TEMP_SOSYALYARDIM3 { get; set; }
