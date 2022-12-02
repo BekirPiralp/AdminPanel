@@ -2,17 +2,14 @@
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
-using AdminPanle.BusinessLayer.Concrete.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq.Expressions;
 
 namespace AdminPanel.WebAPI.Controllers.Base.Tests
 {
-    
+
     public class BaseControllerTests<TController, ITEntityBusBase, TEntity>
         where TController : BaseController<ITEntityBusBase,TEntity>,new()
         where ITEntityBusBase : class, IEntityBusBase<TEntity>
