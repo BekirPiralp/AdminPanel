@@ -54,15 +54,17 @@ namespace AdminPanel.WebAPI.Controllers.Base.Tests
             //Hazırlık
             int pageItemsCount = 10;
             int pageIndex = 1;
-            ActionResult<List<TEntity>> response;
+            ObjectResult response;
 
             //Eylem
-            response =  await _controller.GetPage(pageItemsCount, pageIndex);
-
+            response =  (ObjectResult)(await _controller.GetPage(pageItemsCount, pageIndex)).Result;
+            
+            temellYanitIslem(response,typeof(List<TEntity>)));
+            
             //Tez
             Assert.IsNotNull(response.Value,"Veri gelmedi. Boş döndü");
-            Assert.IsTrue(response.Value.Count > 0,"Liste Boş döndü");
-            Assert.IsTrue(response.Value.Count <= pageItemsCount && response.Value.Count > 0, "İstenen sayıda veri dönmedi.");
+            Assert.IsTrue(((List<TEntity>)response.Value).Count > 0,"Liste Boş döndü");
+            Assert.IsTrue(((List<TEntity>)response.Value).Count <= pageItemsCount && ((List<TEntity>)response.Value).Count > 0, "İstenen sayıda veri dönmedi.");
         }
 
         private protected void temellYanitIslem(ObjectResult response,Type beklenenValueType)
