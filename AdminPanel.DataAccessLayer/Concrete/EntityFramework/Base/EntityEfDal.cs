@@ -103,13 +103,25 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             return response;
         }
 
-
-        public async Task<List<TEntity>> GetPaginationAsync(int pageItemsCount, int pageIndex, Expression<Func<TEntity, bool>>? filter = null)
+        public async Task<List<TEntity>> GetPaginationAsync<Tkey>(
+            int pageItemsCount, int pageIndex,
+            Expression<Func<TEntity, Tkey>>? orderFilter, //Expression<Func<TEntity, Tkey>>? orderFilter = p => p.ID, Derleme zamanı sabiti olmalı
+            Expression<Func<TEntity, bool>>? filter = null,
+            bool desc = false)
         {
+            #region order filtreye göre yönlendirme
+            
+            if (orderFilter == null)
+                //orderFilter = p => p.ID; // order filter yok ise varsayılan // TKey int dönüştürme hatası oldu; ID duruma göre farklı türde olabilir
+                return await GetPaginationAsync(pageItemsCount, pageIndex, p => p.ID, filter, desc);
+            
+            #endregion
+
+            #region Hazırlık
 
             if (pageItemsCount <= 0)
                 throw new Exception("Geçersiz parametre / istek");
-
+             
             List<TEntity> response = null;
 
             int totalItems = await GetTotalCountAsync(filter);
@@ -123,22 +135,44 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             {
                 throw new Exception("Geçersiz parametre / istek");
             }
+            #endregion
 
             using (TContext context = new TContext())
             {
+               
                 response = filter == null ? await filtreYok() : await filtreVar();
 
                 // local function
                 async Task<List<TEntity>> filtreYok()
                 {
-                    return await context.Set<TEntity>().OrderBy(p => p.ID).Skip(itemIndex).Take(pageItemsCount).ToListAsync();
+                    return desc ? await context.Set<TEntity>()
+                                        .OrderByDescending(orderFilter)
+                                        .Skip(itemIndex)
+                                        .Take(pageItemsCount)
+                                        .ToListAsync() 
+                                 : await context.Set<TEntity>()
+                                        .OrderBy(orderFilter)
+                                        .Skip(itemIndex)
+                                        .Take(pageItemsCount)
+                                        .ToListAsync();
                 }
 
                 async Task<List<TEntity>> filtreVar()
                 {
-                    return await context.Set<TEntity>().OrderBy(p => p.ID).Where(filter).Skip(itemIndex).Take(pageItemsCount).ToListAsync();
+                    return desc ? await context.Set<TEntity>()
+                                        .OrderByDescending(orderFilter)
+                                        .Where(filter)
+                                        .Skip(itemIndex)
+                                        .Take(pageItemsCount)
+                                        .ToListAsync() 
+                                 : await context.Set<TEntity>()
+                                        .OrderBy(orderFilter)
+                                        .Where(filter)
+                                        .Skip(itemIndex)
+                                        .Take(pageItemsCount)
+                                        .ToListAsync();
                 }
-
+                
             }
             return response;
         }
