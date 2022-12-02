@@ -59,7 +59,7 @@ namespace AdminPanel.WebAPI.Controllers.Base.Tests
             //Eylem
             response =  (ObjectResult)(await _controller.GetPage(pageItemsCount, pageIndex)).Result;
             
-            temellYanitIslem(response,typeof(List<TEntity>)));
+            temellYanitIslem(response,typeof(List<TEntity>));
             
             //Tez
             Assert.IsNotNull(response.Value,"Veri gelmedi. Boş döndü");
