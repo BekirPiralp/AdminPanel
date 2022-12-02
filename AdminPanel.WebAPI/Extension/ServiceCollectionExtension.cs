@@ -1,8 +1,8 @@
-﻿using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
+﻿using AdminPanel.AppSettings;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.Guvenlik.Other;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Oracle.ManagedDataAccess.Types;
 using MIMT = Microsoft.IdentityModel.Tokens;
 
 
@@ -13,17 +13,17 @@ namespace AdminPanel.WebAPI.Extension
     public static class ServiceCollectionExtension
     {
 
-        public static IServiceCollection AddConnectionString(this IServiceCollection service, WebApplicationBuilder builder)
+        public static IServiceCollection AddConnectionString(this IServiceCollection service)
         {
-            "".setConnectionString(builder.Configuration.GetConnectionString("OracleString"));
-            "".setConnectionString("11");
-
             //var a = builder.Configuration.GetSection("ConnectionStrings")["OracleString"];
             service.AddDbContext<EFContextOracle>(op =>
-            {
-                op.UseOracle(builder.Configuration.GetConnectionString("OracleString"),
+            { 
+                op.UseOracle(
+                    AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleDbString],
                     b => b.MigrationsAssembly(typeof(EFContextOracle).Assembly.FullName)
-                    .UseOracleSQLCompatibility("".getSQLCompatibility()));
+                    .UseOracleSQLCompatibility(
+                        AppSettingsConfiguration.Create()
+                        .Configuration[AppSettingsConfigurationNames.OracleSqlComponity]));
             });
             return service;
         }

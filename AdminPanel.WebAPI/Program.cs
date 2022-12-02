@@ -1,13 +1,14 @@
 using AdminPanel.WebAPI.Extension;
-using AdminPanel.Guvenlik.Other;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AdminPanel.AppSettings;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AppSettingsConfigure();
 // Add services to the container.
-builder.Services.AddConnectionString(builder);
+builder.Services.AddConnectionString();
 builder.Services.AddCrosAyari();
 //builder.Services.AddJwt();
+
 
 
 
@@ -26,6 +27,7 @@ if (app.Environment.IsDevelopment())
 {
    // app.VeriTabaniniKaydet();
 }
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

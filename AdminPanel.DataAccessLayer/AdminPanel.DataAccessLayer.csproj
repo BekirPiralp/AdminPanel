@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdminPanel.AppSettings\AdminPanel.AppSettings.csproj" />
     <ProjectReference Include="..\AdminPanel.EntityLayer\AdminPanel.EntityLayer.csproj" />
   </ItemGroup>
 

@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.WebAPI", "AdminP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.Guvenlik", "AdminPanel.Guvenlik\AdminPanel.Guvenlik.csproj", "{857B914B-A8D6-4033-86C4-36989DB36A29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel.WebAPITests", "AdminPanel.WebAPITests\AdminPanel.WebAPITests.csproj", "{D835AF2C-4C62-4DE6-8970-83DA9E044D7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.WebAPITests", "AdminPanel.WebAPITests\AdminPanel.WebAPITests.csproj", "{D835AF2C-4C62-4DE6-8970-83DA9E044D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel.AppSettings", "AdminPanel.AppSettings\AdminPanel.AppSettings.csproj", "{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{D835AF2C-4C62-4DE6-8970-83DA9E044D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D835AF2C-4C62-4DE6-8970-83DA9E044D7E}.Release|x64.ActiveCfg = Release|Any CPU
 		{D835AF2C-4C62-4DE6-8970-83DA9E044D7E}.Release|x64.Build.0 = Release|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Debug|x64.Build.0 = Debug|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Release|x64.ActiveCfg = Release|Any CPU
+		{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

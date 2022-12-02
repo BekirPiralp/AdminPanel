@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using AdminPanel.AppSettings;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 {
@@ -24,20 +25,11 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
 
        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-            //var configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json")
-            //    .Build();
-
-
-            //var connectionString = configuration.GetConnectionString("OracleString");
-            //optionsBuilder.UseSqlServer(connectionString);
-            //optionsBuilder.UseOracle(connectionString);
-
-
-
-             optionsBuilder.UseOracle("".getConnectionString(),op=>op.UseOracleSQLCompatibility("".getSQLCompatibility()));
+            optionsBuilder.UseOracle(
+                AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleDbString]
+                ,op=>op.UseOracleSQLCompatibility(
+                    AppSettingsConfiguration.Create().Configuration[AppSettingsConfigurationNames.OracleSqlComponity]
+                    ));
 
         }
         public DbSet<TEMP_SOSYALYARDIM3> TEMP_SOSYALYARDIM3 { get; set; }
