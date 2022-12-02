@@ -1,8 +1,12 @@
-﻿using AdminPanel.EntityLayer.Abctract;
+﻿using AdminPanel.AppSettings;
+using AdminPanel.EntityLayer.Abctract;
+using AdminPanel.WebAPI.Extension;
 using AdminPanle.BusinessLayer.Abstract.Base;
 using AdminPanle.BusinessLayer.Concrete.Base;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq.Expressions;
 
@@ -17,6 +21,15 @@ namespace AdminPanel.WebAPI.Controllers.Base.Tests
     {
         private protected static TController _controller;
 
+        internal static void test()
+        {
+            var builder = WebApplication.CreateBuilder();
+
+            builder.AppSettingsConfigure();
+
+            builder.Services.AddConnectionString();
+            builder.Services.AddCrosAyari();
+        }
         
         public  void Kur()
         {
