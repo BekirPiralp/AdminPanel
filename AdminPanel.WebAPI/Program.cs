@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AppSettingsConfigure();
 // Add services to the container.
 builder.Services.AddConnectionString();
+builder.Services.AddConnectionStringPostgre();
 builder.Services.AddCrosAyari();
 //builder.Services.AddJwt();
 

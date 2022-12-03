@@ -30,6 +30,21 @@ namespace AdminPanel.WebAPI.Extension
             return service;
         }
 
+        public static IServiceCollection AddConnectionStringPostgre(this IServiceCollection service)
+        {
+            service.AddDbContext<EfContextPostgre>(op =>
+            {
+                op.UseNpgsql(
+                    AppSettingsConfiguration.Create()
+                        .Configuration
+                        .GetConnectionString(
+                            AppSettingsConfigurationNames.PostgreSQL
+                        )
+                    );
+            });
+            return service;
+        }
+
         public static void AddCrosAyari(this IServiceCollection services)
         {
             /** Cros ayarı**/
