@@ -1,12 +1,5 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo;
 using Microsoft.EntityFrameworkCore;
-using Oracle.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
 using AdminPanel.AppSettings;
 using Microsoft.Extensions.Configuration;
 
