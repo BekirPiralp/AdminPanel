@@ -1,7 +1,9 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.AuthenticationKismi;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.TestPostgre;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.TestPostgre;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.YBS_Asis;
 
 namespace AdminPanel.DataAccessLayer.Other
@@ -14,21 +16,24 @@ namespace AdminPanel.DataAccessLayer.Other
         private static DalOlusturucu? _nesneOlusturucu;
         private static readonly object kilit = new object();
 
-       
+
         #region Authentication kısmı
         public IDalTokensTable TokensTable { get; }
         public IDalTokensMailPassword TokensMailPassword { get; }
         #endregion
-       
+
         #region YBS_TEMP
         public IGetTempDAL getTempDAL { get; }
         #endregion
 
+        #region PostgreSql veritabanı testi
+        public IDalTestPostgreDal testPostgreDal { get; }
+        #endregion
 
 
         private DalOlusturucu()
         {
-           
+
             #region Authentication kısmı
             TokensTable = new EfDalTokensTable();
             TokensMailPassword = new EfDalTokensMailPassword();
@@ -38,9 +43,13 @@ namespace AdminPanel.DataAccessLayer.Other
             getTempDAL = new GetTempDAL<EFContextOracle>();
             #endregion
 
+            #region PostgreSql veritabanı testi
+            testPostgreDal = new EfDalTestPostgre<EfContextPostgre>();
+            #endregion
+
         }
 
-    public static DalOlusturucu Olustur()
+        public static DalOlusturucu Olustur()
         {
             if (_nesneOlusturucu.isNull())
             {

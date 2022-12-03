@@ -3,7 +3,7 @@ using AdminPanel.EntityLayer.Concrete.Other.TestPostgre;
 
 namespace AdminPanel.DataAccessLayer.Abstract.Other.Genel.TestPostgre
 {
-    public interface ITestPostgreDal:IEntityDalBasePostgre<testpostgre>
+    public interface IDalTestPostgreDal:IEntityDalBasePostgre<testpostgre>
     {
     }
 }
