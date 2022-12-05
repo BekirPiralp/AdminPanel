@@ -46,6 +46,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
 
                     //if (response > 0)
                     //    result = true;
+                    throw new Exception("Silme işlemi devredışı bırakıldı");
                 }
             }
             return result;

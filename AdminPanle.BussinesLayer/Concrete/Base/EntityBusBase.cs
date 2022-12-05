@@ -83,10 +83,11 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 {
                     DateTime dateTime = DateTime.Now;
 
-                    //if (await _entityDalBase.AddAsync(entity, dateTime))
-                    //    result = new ObjectResponse<TEntity>(
-                    //        (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
-                    //else
+                    if (await _entityDalBase.AddAsync(entity, dateTime))
+                        result = new ObjectResponse<TEntity>(entity); // adres aynı olduğu için ilgili nesne gelir
+                    //result = new ObjectResponse<TEntity>(
+                    //    (await _entityDalBase.GetAsync()).FirstOrDefault(p => p.kayitZamani == dateTime));
+                    else
                         result = new ObjectResponse<TEntity>("Nesne eklenemedi");
                 }
                 else
@@ -270,10 +271,11 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             try
             {
                 if (entity.isNotNull() && entity.isIdNotEmpty())
-                    if (await _entityDalBase.UpdateAsync(entity))
-                        result = new ObjectResponse<object>(true);
-                    else
-                        result = new ObjectResponse<object>("Nesne güncellenemedi");
+                    //if (await _entityDalBase.UpdateAsync(entity))
+                    //    result = new ObjectResponse<object>(true);
+                    //else
+                    //    result = new ObjectResponse<object>("Nesne güncellenemedi");
+                    result = new ObjectResponse<object>("Güncelleme işlemi devre dışı bırakıldı");
                 else
                     result = new ObjectResponse<object>("Geçersiz parametre");
             }
@@ -303,7 +305,8 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                     //        e.Id == entity.Id)).FirstOrDefault());
                     //}
                     //else
-                        result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
+                    //    result = new ObjectResponse<TEntity>("Güncelleme işlemi başarısız");
+                    result = new ObjectResponse<TEntity>("Güncelleme işlemi devre dışı bırakıldı");
                 }
                 else
                     result = new ObjectResponse<TEntity>("Geçersiz parametre");
