@@ -47,5 +47,26 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo
                 return response;
         }
 
+        public async Task<ObjectResponse<List<TEMP_SOSYALYARDIM3>>> GetPageOrderByDogumYili(int pageItemsCount, int pageIndex)
+        {
+            ObjectResponse<List<TEMP_SOSYALYARDIM3>> result;
+
+            try
+            {
+                var entities = await this._entityDalBase.GetPaginationAsync(pageItemsCount, pageIndex,p=>p.dogumYili,null,false);
+                if (entities.isNotNull() && entities.isNotEmpty())
+                {
+                    result = new ObjectResponse<List<TEMP_SOSYALYARDIM3>>(entities);
+                }
+                else
+                    result = new ObjectResponse<List<TEMP_SOSYALYARDIM3>>("İlgili nesneler getirilemedi");
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<List<TEMP_SOSYALYARDIM3>>("Nesneler getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
+
+            return result;
+        }
     }
 }

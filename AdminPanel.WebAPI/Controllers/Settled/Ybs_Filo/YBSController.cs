@@ -24,17 +24,17 @@ namespace AdminPanel.WebAPI.Controllers.Settled.Ybs_Filo
             return result;
         }
 
-        [HttpPost]
-        [Route("[controller]/setData/")]
-        public async Task<ActionResult<List<TEMP_SOSYALYARDIM3>>> SetData(TEMP_SOSYALYARDIM3 Temp)
-
+        [HttpGet]
+        [Route("[controller]/[Action]/")]
+        public async Task<ActionResult<List<TEMP_SOSYALYARDIM3>>> GetPageByDogumYili(int pageItemsCount, int pageIndex)
         {
             ActionResult result;
-            result=dondur(await _entityBusBase.AddAsync(Temp));
-            return result;
-            
-        }
 
+            result = dondur(await _entityBusBase.GetPageOrderByDogumYili(pageItemsCount,pageIndex));
+
+            return result;
+        }
+        
     }
          
 }
