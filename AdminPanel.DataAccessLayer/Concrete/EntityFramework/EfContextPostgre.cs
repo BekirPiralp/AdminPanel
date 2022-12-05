@@ -25,6 +25,6 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             base.OnConfiguring(optionsBuilder);
         }
 
-        DbSet<testpostgre> testpostgres { get; set; }
+        DbSet<testpostgre> testpostgre { get; set; }
     }
 }
