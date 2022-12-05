@@ -9,6 +9,6 @@ namespace AdminPanel.EntityLayer.Concrete.Other.TestPostgre
         [Column("id")]
         public int id { get; set; }
         [Column("name")]
-        public string Name { get; set; }
+        public string name { get; set; }
     }
 }
