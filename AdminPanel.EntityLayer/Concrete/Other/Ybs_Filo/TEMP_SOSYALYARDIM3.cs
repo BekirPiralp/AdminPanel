@@ -1,43 +1,73 @@
 ﻿using AdminPanel.EntityLayer.Concrete.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo
 {
-    
-    public class TEMP_SOSYALYARDIM3:YbsFiloBase
+
+    public class TEMP_SOSYALYARDIM3 : YbsFiloBase
     {
-        public string?  ACIKLAMA { get; set; }
-        public string? AD_SOYAD { get; set; }
-        public int? BELGE_NO { get; set; }
-        public string? CINSIYET { get; set; }
-        public string? DOGUM_YILI { get; set; }
-        public string? DURUM { get; set; }
-        public string? HANE_65YAS_USTU { get; set; }
-        public string? HANE_COCUK_SAYISI { get; set; }
-        public string? HANE_KISI_SAYISI { get; set; }
-        public string? HANE_OGRENCI_DURUMU { get; set; }
-   
-        //ID
-        public string? ILCE { get; set; }
-        public int? ISDELETED { get; set; }
-        public DateTime? KAYIT_TARIHI { get; set; }
-        public string? KURUM { get; set; }
-        public string? MAHALLE { get; set; }
-        public string? MEVKII { get; set; }
-        public string? PAKET_TIPI { get; set; }
-        public string? TC_NO { get; set; }
-        public string? TELEFON { get; set; }
-        public string? YARDIM_TIPI { get; set; }
-        public string? YARDIM_TUTARI { get; set;}
-        
-        
+        [Column("ACIKLAMA")]
+        public string? aciklama { get; set; }
 
+        [Column("AD_SOYAD")]
+        public string? adSoyad { get; set; }
 
+        [Column("BELGE_NO")]
+        public int? belgeNo { get; set; }
 
+        [Column("CINSIYET")]
+        public string? cinsiyet { get; set; }
 
-}
+        [Column("DOGUM_YILI")]
+        public string? dogumYili { get; set; }
+
+        [Column("DURUM")]
+        public string? durum { get; set; }
+
+        [Column("HANE_65YAS_USTU")]
+        public string? hane65YasUstu { get; set; }
+
+        [Column("HANE_COCUK_SAYISI")]
+        public string? haneCocukSayisi { get; set; }
+
+        [Column("HANE_KISI_SAYISI")]
+        public string? haneKisiSayisi { get; set; }
+
+        [Column("HANE_OGRENCI_DURUMU")]
+        public string? haneOgrenciDurumu { get; set; }
+
+        [Column("ILCE")]
+        public string? ilce { get; set; }
+
+        [Column("ISDELETED")]
+        public int? isDeleted { get; set; }
+
+        [Column("KAYIT_TARIHI")]
+        public DateTime? kayitTarihi { get; set; }
+
+        [Column("KURUM")]
+        public string? kurum { get; set; }
+
+        [Column("MAHALLE")]
+        public string? mahalle { get; set; }
+
+        [Column("MEVKII")]
+        public string? mevki { get; set; }
+
+        [Column("PAKET_TIPI")]
+        public string? paketTip { get; set; }
+
+        [Column("TC_NO")]
+        public string? tcNo { get; set; }
+
+        [Column("TELEFON")]
+        public string? telefon { get; set; }
+
+        [Column("YARDIM_TIPI")]
+        public string? yardimTipi { get; set; }
+
+        [Column("YARDIM_TUTARI")]
+        public string? yardimTutari { get; set; }
+
+    }
 }
