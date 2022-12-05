@@ -25,6 +25,7 @@ namespace AdminPanel.WebAPI.Controllers.Base.Tests
             builder.AppSettingsConfigure();
 
             builder.Services.AddConnectionString();
+            builder.Services.AddConnectionStringPostgre();
             builder.Services.AddCrosAyari();
         }
         
