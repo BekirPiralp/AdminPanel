@@ -1,7 +1,9 @@
 ﻿using AdminPanel.DataAccessLayer.Other;
 using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
+using AdminPanle.BusinessLayer.Abstract.Other.TestPostgre;
 using AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo;
 using AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi;
+using AdminPanle.BusinessLayer.Concrete.Other.TestPostgre;
 using AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo;
 
 namespace AdminPanle.BusinessLayer.Other
@@ -22,9 +24,11 @@ namespace AdminPanle.BusinessLayer.Other
 
         #region YBS_TEMP
         public IBusGetTemp BusGetTemp { get; }
-
         #endregion
 
+        #region PostgreSql veritabanı testi
+        public IBusTestPostgre TestPostgre { get; }
+        #endregion
 
         private BusOlusturucu()
         {
@@ -36,8 +40,11 @@ namespace AdminPanle.BusinessLayer.Other
             #endregion
 
             #region YBS_TEMP
-
             BusGetTemp = new BusGetTemp(DalOlusturucu.Olustur().getTempDAL);
+            #endregion
+
+            #region PostgreSql veritabanı testi
+            TestPostgre = new BusTestPostgre(DalOlusturucu.Olustur().TestPostgre);
             #endregion
         }
 

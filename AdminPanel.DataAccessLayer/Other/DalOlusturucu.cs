@@ -27,7 +27,7 @@ namespace AdminPanel.DataAccessLayer.Other
         #endregion
 
         #region PostgreSql veritabanı testi
-        public IDalTestPostgreDal testPostgreDal { get; }
+        public IDalTestPostgre TestPostgre { get; }
         #endregion
 
 
@@ -44,7 +44,7 @@ namespace AdminPanel.DataAccessLayer.Other
             #endregion
 
             #region PostgreSql veritabanı testi
-            testPostgreDal = new EfDalTestPostgre<EfContextPostgre>();
+            TestPostgre = new EfDalTestPostgre<EfContextPostgre>();
             #endregion
 
         }

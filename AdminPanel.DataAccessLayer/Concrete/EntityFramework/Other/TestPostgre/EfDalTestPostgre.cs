@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.TestPostgre
 {
-    public class EfDalTestPostgre<TContext> : EntityEfDalPostgre<testpostgre,TContext>, IDalTestPostgreDal
+    public class EfDalTestPostgre<TContext> : EntityEfDalPostgre<testpostgre,TContext>, IDalTestPostgre
         where TContext : DbContext,new()
     {
     }
