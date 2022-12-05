@@ -34,7 +34,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
 
         [HttpGet()]
-        [Route("[controller]/GetAll/")]
+        [Route("[controller]/[Action]/")]
         public async Task<ActionResult<List<TEntity>>> GetAll()
         {
 
@@ -46,7 +46,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
         }
 
         [HttpGet()]
-        [Route("[controller]/GetPage/")]
+        [Route("[controller]/[Action]/")]
         public async Task<ActionResult<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex)
         {
             ActionResult result;
@@ -57,7 +57,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
         }
 
         [HttpGet()]
-        [Route("[controller]/GetTotalCount/")]
+        [Route("[controller]/[Action]/")]
         public async Task<IActionResult> GetItemsTotalCount()
         {
             IActionResult result;
@@ -81,7 +81,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
         }
 
-        [HttpDelete()]
+        [HttpPost()]
         [Route("[controller]/[Action]/")]
         public async Task<ActionResult> DeleteByObject([FromBody] TEntity entity)
         {
@@ -93,7 +93,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
         }
 
-        [HttpDelete()]
+        [HttpPost()]
         [Route("[controller]/[Action]/")]
         public async Task<ActionResult> DeleteByList([FromBody] List<TEntity> entities)
         {
@@ -107,7 +107,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
         #endregion
 
         #region put
-        [HttpPut()]
+        [HttpPost()]
         [Route("[controller]/[Action]/")]
         public async Task<ActionResult<bool>> Put(TEntity entity)
         {
@@ -118,7 +118,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
             return result;
         }
 
-        [HttpPut()]
+        [HttpPost()]
         [Route("[controller]/[Action]/")]
         public async Task<ActionResult<TEntity>> PutBy(TEntity entity)
         {

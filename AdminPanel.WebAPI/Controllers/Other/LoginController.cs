@@ -1,13 +1,12 @@
 ﻿using AdminPanel.Guvenlik.AuthenticationKismi;
 using AdminPanel.WebAPI.Objects;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace AdminPanel.WebAPI.Controllers.Other
 {
-    [Route("[controller]/")]
+    
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -19,7 +18,8 @@ namespace AdminPanel.WebAPI.Controllers.Other
 
        
 
-        [HttpPost(template:"Create")]
+        [HttpPost()]
+        [Route("[controller]/[Action]/")]
         public async Task<IActionResult> CreateEmailPassword(EmailPassword emailPassword)//(string email, string password)
         {
 
@@ -33,7 +33,8 @@ namespace AdminPanel.WebAPI.Controllers.Other
                 return BadRequest("Geçersiz parametre");
         }
 
-        [HttpPut(template:"Update")]
+        [HttpPost]
+        [Route("[controller]/[Action]/")]
         [Authorize]
         public async Task<IActionResult> UpdatePassword(EmailPassword emailPassword)
         {
@@ -49,6 +50,7 @@ namespace AdminPanel.WebAPI.Controllers.Other
         }
 
         [HttpPost()]
+        [Route("[controller]/[Action]/")]
         public async Task<IActionResult> CreateAccessToken(EmailPassword emailPassword)
         {
             if (emailPassword != null)
@@ -60,7 +62,8 @@ namespace AdminPanel.WebAPI.Controllers.Other
                 return BadRequest("Geçersiz parametre");
         }
 
-        [HttpPost(template:"Refresh")]
+        [HttpPost()]
+        [Route("[controller]/[Action]/")]
         public async Task<IActionResult> CreateAccessTokenByRefreshToken(EmailRefreshToken emailRefreshToken)
         {
             if (emailRefreshToken != null)
@@ -72,7 +75,8 @@ namespace AdminPanel.WebAPI.Controllers.Other
                 return BadRequest("Geçersiz parametre");
         }
 
-        [HttpDelete()]
+        [HttpPost()]
+        [Route("[controller]/[Action]/")]
         [Authorize]
         public async Task<IActionResult> RemoveRefreshToken(EmailRefreshToken emailRefreshToken)
         {
