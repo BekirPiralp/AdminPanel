@@ -7,7 +7,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.TestPostgre
     public class testpostgre : IEntity
     {
         [Column("id")]
-        public int ID { get; set; }
+        public int id { get; set; }
         [Column("name")]
         public string Name { get; set; }
     }

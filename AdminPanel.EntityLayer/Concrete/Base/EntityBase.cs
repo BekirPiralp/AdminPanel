@@ -7,7 +7,7 @@ namespace AdminPanel.EntityLayer.Concrete.Base
     {
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int id { get; set; }
         //[Column(TypeName ="bool")]
         public bool sil { get; set; } = false;
         [Required]

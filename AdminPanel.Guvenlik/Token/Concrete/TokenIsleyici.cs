@@ -75,7 +75,7 @@ namespace AdminPanel.Guvenlik.Token.Concrete
         {
             List<Claim> result = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier,mailPassword.ID.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,mailPassword.id.ToString()),
                 new Claim(ClaimTypes.Email,mailPassword.mail),
                 new Claim(ClaimTypes.Name,"Bekir ;)"),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())

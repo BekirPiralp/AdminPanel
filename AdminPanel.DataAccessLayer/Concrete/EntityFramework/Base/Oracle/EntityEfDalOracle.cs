@@ -20,9 +20,9 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base.Oracle
                 {
                     
                     // son id yi alma start
-                    int id = (context.Set<TEntity>().ToList().OrderByDescending(p => p.ID).FirstOrDefault()).ID;
+                    int id = (context.Set<TEntity>().ToList().OrderByDescending(p => p.id).FirstOrDefault()).id;
                     id++;
-                    entity.ID = id;
+                    entity.id = id;
                     // son id yi alma end
                     context.Entry(entity).State = EntityState.Added;
                     int response = await context.SaveChangesAsync();

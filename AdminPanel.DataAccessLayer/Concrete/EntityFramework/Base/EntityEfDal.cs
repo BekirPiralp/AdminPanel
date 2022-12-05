@@ -107,7 +107,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             Expression<Func<TEntity, bool>>? filter = null,
             bool desc = false)
         {
-            return await GetPaginationAsync(pageItemsCount,pageIndex,p=>p.ID,filter,desc);
+            return await GetPaginationAsync(pageItemsCount,pageIndex,p=>p.id,filter,desc);
         }
 
         public async Task<List<TEntity>> GetPaginationAsync<Tkey>(
@@ -120,7 +120,7 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework.Base
             
             if (orderFilter == null)
                 //orderFilter = p => p.ID; // order filter yok ise varsayılan // TKey int dönüştürme hatası oldu; ID duruma göre farklı türde olabilir
-                return await GetPaginationAsync(pageItemsCount, pageIndex, p => p.ID, filter, desc);
+                return await GetPaginationAsync(pageItemsCount, pageIndex, p => p.id, filter, desc);
             
             #endregion
 

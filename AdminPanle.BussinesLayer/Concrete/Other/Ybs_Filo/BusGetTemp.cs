@@ -24,7 +24,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo
 
                 try
                 {
-                     result = (await this._entityDalBase.GetAsync(p => p.TC_NO == TC));
+                     result = (await this._entityDalBase.GetAsync(p => p.tcNo == TC));
                     if (result.isNotNull())
                     {
                         response = new ObjectResponse<List<TEMP_SOSYALYARDIM3>>(result);

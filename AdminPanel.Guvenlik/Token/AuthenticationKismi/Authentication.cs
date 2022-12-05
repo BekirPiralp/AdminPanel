@@ -236,7 +236,7 @@ namespace AdminPanel.Guvenlik.AuthenticationKismi
 
                     if (emailResource.Success)
                     {
-                        if (emailResource.Data.ID == emailID)
+                        if (emailResource.Data.id == emailID)
                         {
                             emailResource.Data.password = password;
 

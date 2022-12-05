@@ -137,7 +137,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             {
                 if (id > 0)
                 {
-                    TEntity? entity = (await _entityDalBase.GetAsync(e => e.ID == id)).FirstOrDefault();
+                    TEntity? entity = (await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault();
                     if (entity.isNotNull() && !entity.silinmisMi())
                     {
                         if (!await _entityDalBase.DeleteAsync(entity))
@@ -207,7 +207,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             try
             {
                 if (id > 0)
-                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.ID == id)).FirstOrDefault());
+                    result = new ObjectResponse<TEntity>((await _entityDalBase.GetAsync(e => e.id == id)).FirstOrDefault());
                 else
                     result = new ObjectResponse<TEntity>("Geçersiz parametre");
             }

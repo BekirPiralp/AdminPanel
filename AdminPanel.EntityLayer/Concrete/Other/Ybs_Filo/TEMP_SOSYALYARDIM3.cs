@@ -40,7 +40,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo
         public string? ilce { get; set; }
 
         [Column("ISDELETED")]
-        public int? isDeleted { get; set; }
+        public int? silinmisMi { get; set; }
 
         [Column("KAYIT_TARIHI")]
         public DateTime? kayitTarihi { get; set; }
@@ -55,7 +55,7 @@ namespace AdminPanel.EntityLayer.Concrete.Other.Ybs_Filo
         public string? mevki { get; set; }
 
         [Column("PAKET_TIPI")]
-        public string? paketTip { get; set; }
+        public string? paketTipi { get; set; }
 
         [Column("TC_NO")]
         public string? tcNo { get; set; }
