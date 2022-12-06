@@ -8,6 +8,6 @@ namespace AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo
     {
         Task<ObjectResponse<List<TEMP_SOSYALYARDIM3>>> GetByTCAsync(string TC);
 
-        Task<ObjectResponse<List<TEMP_SOSYALYARDIM3>>> GetPageOrderByDogumYili(int pageItemsCount, int pageIndex);
+        Task<ObjectResponse<PageResponse<TEMP_SOSYALYARDIM3>>> GetPageOrderByDogumYili(int pageItemsCount, int pageIndex);
     }
 }

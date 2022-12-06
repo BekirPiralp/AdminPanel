@@ -2,6 +2,7 @@
 using AdminPanel.WebAPI.Controllers.Base;
 using AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo;
 using AdminPanle.BusinessLayer.Other;
+using AdminPanle.BusinessLayer.Other.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebAPI.Controllers.Settled.Ybs_Filo
@@ -26,7 +27,7 @@ namespace AdminPanel.WebAPI.Controllers.Settled.Ybs_Filo
 
         [HttpGet]
         [Route("[controller]/[Action]/")]
-        public async Task<ActionResult<List<TEMP_SOSYALYARDIM3>>> GetPageByDogumYili(int pageItemsCount, int pageIndex)
+        public async Task<ActionResult<PageResponse<List<TEMP_SOSYALYARDIM3>>>> GetPageByDogumYili(int pageItemsCount, int pageIndex)
         {
             ActionResult result;
 
