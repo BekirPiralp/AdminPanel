@@ -5,6 +5,7 @@ using AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo;
 using AdminPanle.BusinessLayer.Concrete.Base;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
+using System.Linq.Expressions;
 
 namespace AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo
 {
@@ -49,11 +50,11 @@ namespace AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo
         public async Task<ObjectResponse<PageResponse<TEMP_SOSYALYARDIM3>>> GetPageOrderByDogumYili(int pageItemsCount, int pageIndex)
         {
             ObjectResponse<PageResponse<TEMP_SOSYALYARDIM3>> result;
-
+            Expression<Func<TEMP_SOSYALYARDIM3, bool>>? filter = p => p.dogumYili != null && !p.dogumYili.Trim().Equals("0"); // doğum yılı null olmayan ve 0 olmayanlar
             try
             {
-                int totalCount = await this._entityDalBase.GetTotalCountAsync();
-                var entities = await this._entityDalBase.GetPaginationAsync(pageItemsCount, pageIndex,p=>p.dogumYili,null,false);
+                int totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
+                var entities = await this._entityDalBase.GetPaginationAsync(pageItemsCount, pageIndex,p=>p.dogumYili,filter,false);
                 if (entities.isNotNull() && entities.isNotEmpty())
                 {
                     result = new ObjectResponse<PageResponse<TEMP_SOSYALYARDIM3>>
