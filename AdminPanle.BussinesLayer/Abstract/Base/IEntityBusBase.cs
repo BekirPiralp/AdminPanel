@@ -33,6 +33,8 @@ namespace AdminPanle.BusinessLayer.Abstract.Base
         /// <returns></returns>
         Task<ObjectResponse<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex);
 
+        Task<ObjectResponse<PageResponse<TEntity>>> GetPage(int pageItemsCount, int pageIndex,string? orderFieldName,string? searchString,bool desc=false);
+
         /// <summary>
         /// Toplam nesne sayısını öğrenmek içindir.
         /// </summary>

@@ -4,12 +4,19 @@ using AdminPanel.EntityLayer.Abctract;
 using AdminPanle.BusinessLayer.Abstract.Base;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.Extensions.Options;
+using System;
+using System.Linq.Expressions;
+using System.Net;
+using System.Reflection;
 
 namespace AdminPanle.BusinessLayer.Concrete.Base
 {
     public class EntityBusBase<TEntity, DalBase> : IEntityBusBase<TEntity>
         where TEntity : class, IEntity, new()
-        where DalBase: class,IEntityDalBase<TEntity>
+        where DalBase : class, IEntityDalBase<TEntity>
     {
         protected DalBase _entityDalBase;
         public EntityBusBase(DalBase entityDalBase)
@@ -68,7 +75,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             }
             catch (Exception ex)
             {
-                result = new ObjectResponse<object>("Nesneler eklenirken hata ile karşılaşıldı. :\n\t"+ex.Message);
+                result = new ObjectResponse<object>("Nesneler eklenirken hata ile karşılaşıldı. :\n\t" + ex.Message);
             }
 
             return result;
@@ -204,7 +211,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
 
         public async Task<ObjectResponse<TEntity>> GetByIdAsync(int id)
         {
-            ObjectResponse<TEntity> result ;
+            ObjectResponse<TEntity> result;
             try
             {
                 if (id > 0)
@@ -222,7 +229,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         public async Task<ObjectResponse<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex)
         {
             ObjectResponse<List<TEntity>> result;
-            
+
             try
             {
                 var entities = await this._entityDalBase.GetPaginationAsync(pageItemsCount, pageIndex);
@@ -241,19 +248,88 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
+        public async Task<ObjectResponse<PageResponse<TEntity>>> GetPage
+            (int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
+        {
+            ObjectResponse<PageResponse<TEntity>> result;
+            string searchQuery = null;
+            Expression<Func<TEntity, bool>>? filter =(p=>p.isNull());
+
+            try
+            {
+                var opt = ScriptOptions.Default.AddReferences(typeof(TEntity).Assembly);
+                var EType = typeof(TEntity);
+                var properties = EType.GetRuntimeProperties();
+
+                properties.Where(p => p.Name.ToLower().Trim() != "id");
+
+                var dynamicColumn = properties.Where(p => p.Name.ToLower() == orderFieldName.ToLower().Trim()).FirstOrDefault();
+
+
+                Expression<Func<TEntity, object>>? orderQurey = (p=>p.id);
+
+                if (searchString != null && searchString.Trim().Length > 0)
+                {
+                    searchQuery = getSearchQuery(properties, searchString);
+
+                    filter = await CSharpScript.EvaluateAsync<Expression<Func<TEntity, bool>>?>(searchQuery, opt);
+                }
+
+                if (orderFieldName != null && orderFieldName.Trim().Length > 0)
+                {
+                    orderQurey = await CSharpScript.EvaluateAsync < Expression<Func < TEntity, object >>> ($"p=>p.{dynamicColumn.Name}", opt); // 90% patlayacak
+                }
+
+                var entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex,orderQurey, filter,desc);
+                var totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
+                if (entities.isNotNull() && entities.isNotEmpty())
+                {
+                    result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities,totalCount));
+                }
+                else
+                    result = new ObjectResponse<PageResponse<TEntity>>("İlgili nesneler getirilemedi");
+
+            }
+            catch (Exception ex)
+            {
+                result = new ObjectResponse<PageResponse<TEntity>>("Nesneler getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
+            }
+
+            return result;
+        }
+
+        private string getSearchQuery(IEnumerable<PropertyInfo> properties, string searchString)
+        {
+            string result = null;
+            if (properties != null && properties.Count() > 0)
+            {
+                result = "p => ";
+                foreach (var property in properties)
+                {
+                    //if () liste controlü yapılacak
+                    //    continue;
+
+                    result += "p." + property.Name + $"ToString().ToLower().Trim().CompareTo({searchString.Trim().ToLower()}) ||";
+                }
+                result = result.Substring(0, result.Length - 2); // ensondaki yada karakteri kaldırılıyor.
+            }
+
+            return result;
+        }
+
         public async Task<ObjectResponse<object>> GetItemsTotalCount()
         {
             ObjectResponse<object> result;
             try
             {
                 int response = await _entityDalBase.GetTotalCountAsync();
-                
+
                 if (response < 0)
                     throw new Exception("İmkansız sayı!");
 
                 result = new ObjectResponse<object>(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result = new ObjectResponse<object>("Nesnelerin toplam sayısı getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
             }
@@ -318,6 +394,8 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
 
             return result;
         }
+
+       
         #endregion
     }
 }

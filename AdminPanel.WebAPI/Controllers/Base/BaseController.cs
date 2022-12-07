@@ -58,6 +58,17 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
         [HttpGet()]
         [Route("[controller]/[Action]/")]
+        public async Task<ActionResult<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
+        {
+            ActionResult result;
+
+            result = dondur(await _entityBusBase.GetPage(pageItemsCount, pageIndex,orderFieldName,searchString,desc));
+
+            return result;
+        }
+
+        [HttpGet()]
+        [Route("[controller]/[Action]/")]
         public async Task<IActionResult> GetItemsTotalCount()
         {
             IActionResult result;
