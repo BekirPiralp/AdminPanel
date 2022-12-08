@@ -28,8 +28,8 @@ namespace AdminPanel.ExpressionQuery
                 result = "p => ";
                 char karakter = '"';
                 foreach (var property in properties)
-                {
-                    result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
+                { 
+                    result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ",StringComparison.CurrentCultureIgnoreCase) ||";
                 }
                 result = result.Substring(0, result.Length - 2); // en son daki ya da karakteri kaldırılıyor.
             }
