@@ -253,7 +253,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         {
             ObjectResponse<PageResponse<TEntity>> result;
             string searchQuery = null;
-            Expression<Func<TEntity, bool>>? filter =(p=>p.isNull());
+            Func<TEntity, bool> filter = (p => p.isNull());
 
             try
             {
@@ -261,30 +261,32 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                 var EType = typeof(TEntity);
                 var properties = EType.GetRuntimeProperties();
 
-                properties.Where(p => p.Name.ToLower().Trim() != "id");
+                properties = properties.Where(p => p.Name.ToLower().Trim() != "id");
 
                 var dynamicColumn = properties.Where(p => p.Name.ToLower() == orderFieldName.ToLower().Trim()).FirstOrDefault();
 
 
-                Expression<Func<TEntity, object>>? orderQurey = (p=>p.id);
+                Expression<Func<TEntity, object>>? orderQurey = (p => p.id);
 
                 if (searchString != null && searchString.Trim().Length > 0)
                 {
                     searchQuery = getSearchQuery(properties, searchString);
 
-                    filter = await CSharpScript.EvaluateAsync<Expression<Func<TEntity, bool>>?>(searchQuery, opt);
+
+
+                    filter = await CSharpScript.EvaluateAsync<Func<TEntity, Boolean>>(searchQuery, opt);
                 }
 
                 if (orderFieldName != null && orderFieldName.Trim().Length > 0)
                 {
-                    orderQurey = await CSharpScript.EvaluateAsync < Expression<Func < TEntity, object >>> ($"p=>p.{dynamicColumn.Name}", opt); // 90% patlayacak
+                    orderQurey = await CSharpScript.EvaluateAsync<Expression<Func<TEntity, object>>>($"p=>p.{dynamicColumn.Name}", opt); // 90% patlayacak
                 }
 
-                var entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex,orderQurey, filter,desc);
-                var totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
+                var entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex, orderQurey, Expression.Lambda<Func<TEntity, bool>>(Expression.Call(filter.Method)), desc);
+                var totalCount = await this._entityDalBase.GetTotalCountAsync(Expression.Lambda<Func<TEntity, bool>>(Expression.Call(filter.Method)));
                 if (entities.isNotNull() && entities.isNotEmpty())
                 {
-                    result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities,totalCount));
+                    result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities, totalCount));
                 }
                 else
                     result = new ObjectResponse<PageResponse<TEntity>>("İlgili nesneler getirilemedi");
@@ -309,7 +311,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                     //if () liste controlü yapılacak
                     //    continue;
 
-                    result += "p." + property.Name + $"ToString().ToLower().Trim().CompareTo({searchString.Trim().ToLower()}) ||";
+                    result += "p." + property.Name + ".ToString().ToLower().Trim().CompareTo(\"" + searchString.Trim().ToLower() + "\") ||";
                 }
                 result = result.Substring(0, result.Length - 2); // ensondaki yada karakteri kaldırılıyor.
             }
@@ -395,7 +397,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-       
+
         #endregion
     }
 }
