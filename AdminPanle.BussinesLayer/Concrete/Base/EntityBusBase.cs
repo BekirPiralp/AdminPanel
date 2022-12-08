@@ -1,17 +1,10 @@
-﻿
-using AdminPanel.DataAccessLayer.Abstract.Base;
+﻿using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Abctract;
 using AdminPanel.ExpressionQuery;
 using AdminPanle.BusinessLayer.Abstract.Base;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.Extensions.Options;
-using System;
 using System.Linq.Expressions;
-using System.Net;
-using System.Reflection;
 
 namespace AdminPanle.BusinessLayer.Concrete.Base
 {
@@ -270,10 +263,12 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
                     orderQurey = await ExpressionConverter<TEntity>.ConvertToOrderAsync(orderFieldName);
 
 
-                entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex, orderQurey, filter, desc);
+                entities = await this._entityDalBase.GetPaginationAsync<object>
+                    (pageItemsCount, pageIndex, orderQurey, filter, desc);
 
                 totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
 
+                
                 if (entities.isNotNull() && entities.isNotEmpty())
                 {
                     result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities, totalCount));
