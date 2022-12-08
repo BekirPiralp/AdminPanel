@@ -1,6 +1,7 @@
 ﻿
 using AdminPanel.DataAccessLayer.Abstract.Base;
 using AdminPanel.EntityLayer.Abctract;
+using AdminPanel.ExpressionQuery;
 using AdminPanle.BusinessLayer.Abstract.Base;
 using AdminPanle.BusinessLayer.Other.Extensions;
 using AdminPanle.BusinessLayer.Other.Response;
@@ -252,39 +253,30 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             (int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
         {
             ObjectResponse<PageResponse<TEntity>> result;
-            string searchQuery = null;
-            Expression<Func<TEntity, bool>>? filter =(p=>p.isNull());
+
+            Expression<Func<TEntity, bool>>? filter = null;
+            Expression<Func<TEntity, object>>? orderQurey = null;
+
+            List<TEntity>? entities;
+
+            int totalCount;
 
             try
             {
-                var opt = ScriptOptions.Default.AddReferences(typeof(TEntity).Assembly);
-                var EType = typeof(TEntity);
-                var properties = EType.GetRuntimeProperties();
-
-                properties.Where(p => p.Name.ToLower().Trim() != "id");
-
-                var dynamicColumn = properties.Where(p => p.Name.ToLower() == orderFieldName.ToLower().Trim()).FirstOrDefault();
-
-
-                Expression<Func<TEntity, object>>? orderQurey = (p=>p.id);
-
                 if (searchString != null && searchString.Trim().Length > 0)
-                {
-                    searchQuery = getSearchQuery(properties, searchString);
-
-                    filter = await CSharpScript.EvaluateAsync<Expression<Func<TEntity, bool>>?>(searchQuery, opt);
-                }
+                    filter = await ExpressionConverter<TEntity>.ConvertToSearchAsync(searchString, "id");
 
                 if (orderFieldName != null && orderFieldName.Trim().Length > 0)
-                {
-                    orderQurey = await CSharpScript.EvaluateAsync < Expression<Func < TEntity, object >>> ($"p=>p.{dynamicColumn.Name}", opt); // 90% patlayacak
-                }
+                    orderQurey = await ExpressionConverter<TEntity>.ConvertToOrderAsync(orderFieldName);
 
-                var entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex,orderQurey, filter,desc);
-                var totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
+
+                entities = await this._entityDalBase.GetPaginationAsync<object>(pageItemsCount, pageIndex, orderQurey, filter, desc);
+
+                totalCount = await this._entityDalBase.GetTotalCountAsync(filter);
+
                 if (entities.isNotNull() && entities.isNotEmpty())
                 {
-                    result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities,totalCount));
+                    result = new ObjectResponse<PageResponse<TEntity>>(new PageResponse<TEntity>(entities, totalCount));
                 }
                 else
                     result = new ObjectResponse<PageResponse<TEntity>>("İlgili nesneler getirilemedi");
@@ -293,25 +285,6 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             catch (Exception ex)
             {
                 result = new ObjectResponse<PageResponse<TEntity>>("Nesneler getirilirken hata ile karşılaşıldı. :\n\t" + ex.Message);
-            }
-
-            return result;
-        }
-
-        private string getSearchQuery(IEnumerable<PropertyInfo> properties, string searchString)
-        {
-            string result = null;
-            if (properties != null && properties.Count() > 0)
-            {
-                result = "p => ";
-                foreach (var property in properties)
-                {
-                    //if () liste controlü yapılacak
-                    //    continue;
-
-                    result += "p." + property.Name + $"ToString().ToLower().Trim().CompareTo({searchString.Trim().ToLower()}) ||";
-                }
-                result = result.Substring(0, result.Length - 2); // ensondaki yada karakteri kaldırılıyor.
             }
 
             return result;
@@ -395,7 +368,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
             return result;
         }
 
-       
+
         #endregion
     }
 }

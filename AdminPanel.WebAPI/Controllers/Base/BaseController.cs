@@ -58,7 +58,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
 
         [HttpGet()]
         [Route("[controller]/[Action]/")]
-        public async Task<ActionResult<List<TEntity>>> GetPage(int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
+        public async Task<ActionResult<List<TEntity>>> GetPageQuery(int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
         {
             ActionResult result;
 
