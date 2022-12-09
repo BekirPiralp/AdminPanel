@@ -1,11 +1,4 @@
-﻿using AdminPanel.DataAccessLayer.Abstract.Base;
-using AdminPanel.EntityLayer.Abctract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AdminPanel.EntityLayer.Abctract;
 
 namespace AdminPanel.DataAccessLayer.Abstract.Other.EntityFramework.Oracle
 {

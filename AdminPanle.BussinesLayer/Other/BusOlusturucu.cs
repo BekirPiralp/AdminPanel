@@ -1,9 +1,11 @@
 ﻿using AdminPanel.DataAccessLayer.Other;
 using AdminPanle.BusinessLayer.Abstract.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Abstract.Other.TestPostgre;
+using AdminPanle.BusinessLayer.Abstract.Other.TestProduct;
 using AdminPanle.BusinessLayer.Abstract.Other.Ybs_Filo;
 using AdminPanle.BusinessLayer.Concrete.Other.AuthenticationKismi;
 using AdminPanle.BusinessLayer.Concrete.Other.TestPostgre;
+using AdminPanle.BusinessLayer.Concrete.Other.TestProduct;
 using AdminPanle.BusinessLayer.Concrete.Other.Ybs_Filo;
 
 namespace AdminPanle.BusinessLayer.Other
@@ -30,6 +32,10 @@ namespace AdminPanle.BusinessLayer.Other
         public IBusTestPostgre TestPostgre { get; }
         #endregion
 
+        #region MsSql ProductTest
+        public IBusProduct Product { get; }
+        #endregion
+
         private BusOlusturucu()
         {
 
@@ -45,6 +51,10 @@ namespace AdminPanle.BusinessLayer.Other
 
             #region PostgreSql veritabanı testi
             TestPostgre = new BusTestPostgre(DalOlusturucu.Olustur().TestPostgre);
+            #endregion
+
+            #region MsSql ProductTest
+            Product = new BusProduct(DalOlusturucu.Olustur().Product);
             #endregion
         }
 

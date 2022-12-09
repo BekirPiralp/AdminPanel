@@ -6,5 +6,6 @@
         public readonly static string OracleSqlComponity = "Oracle";
         public readonly static string MsSqlDbString = "Varsayilan";
         public readonly static string PostgreSQL = "testPostgreSQL";
+        public readonly static string MsSql = "MsSqlAliAbiTestTablo";
     }
 }

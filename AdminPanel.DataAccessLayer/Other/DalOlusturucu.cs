@@ -1,9 +1,11 @@
 ﻿using AdminPanel.DataAccessLayer.Abstract.Other.Genel.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.TestPostgre;
+using AdminPanel.DataAccessLayer.Abstract.Other.Genel.TestProduct;
 using AdminPanel.DataAccessLayer.Abstract.Other.Genel.YBS_Asis;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.AuthenticationKismi;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.TestPostgre;
+using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.TestProduct;
 using AdminPanel.DataAccessLayer.Concrete.EntityFramework.Other.YBS_Asis;
 
 namespace AdminPanel.DataAccessLayer.Other
@@ -30,6 +32,10 @@ namespace AdminPanel.DataAccessLayer.Other
         public IDalTestPostgre TestPostgre { get; }
         #endregion
 
+        #region MsSql ProductTest
+        public IDalProduct Product { get; }
+        #endregion
+
 
         private DalOlusturucu()
         {
@@ -45,6 +51,10 @@ namespace AdminPanel.DataAccessLayer.Other
 
             #region PostgreSql veritabanı testi
             TestPostgre = new EfDalTestPostgre<EfContextPostgre>();
+            #endregion
+
+            #region MsSql ProductTest
+            Product = new EfDalProduct<EfContextMsSql>();
             #endregion
 
         }
