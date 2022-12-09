@@ -27,6 +27,6 @@ namespace AdminPanel.DataAccessLayer.Concrete.EntityFramework
             base.OnConfiguring(optionsBuilder);
         }
 
-        DbSet<Product> Product { get; set; }
+        DbSet<Product> Sehir { get; set; }
     }
 }
