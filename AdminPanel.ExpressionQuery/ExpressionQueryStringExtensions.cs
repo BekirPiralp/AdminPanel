@@ -29,7 +29,7 @@ namespace AdminPanel.ExpressionQuery
                 char karakter = '"';
                 foreach (var property in properties)
                 { 
-                    if(property.GetType == typeof(string))
+                    if(property.PropertyType == typeof(string))
                         result += "p." + property.Name + ".ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
                     else
                         result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
