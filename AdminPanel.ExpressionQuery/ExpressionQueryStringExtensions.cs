@@ -29,7 +29,10 @@ namespace AdminPanel.ExpressionQuery
                 char karakter = '"';
                 foreach (var property in properties)
                 { 
-                    result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ",StringComparison.CurrentCultureIgnoreCase) ||";
+                    if(property.GetType == typeof(string))
+                        result += "p." + property.Name + ".ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
+                    else
+                        result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
                 }
                 result = result.Substring(0, result.Length - 2); // en son daki ya da karakteri kaldırılıyor.
             }
