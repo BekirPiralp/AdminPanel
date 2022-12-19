@@ -243,7 +243,7 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
         }
 
         public async Task<ObjectResponse<PageResponse<TEntity>>> GetPage
-            (int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
+            (int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false , params string[]? removeColumsName)
         {
             ObjectResponse<PageResponse<TEntity>> result;
 
@@ -256,8 +256,9 @@ namespace AdminPanle.BusinessLayer.Concrete.Base
 
             try
             {
-                if (searchString != null && searchString.Trim().Length > 0)
-                    filter = await ExpressionConverter<TEntity>.ConvertToSearchAsync(searchString, "id");
+               
+                if (searchString != null && searchString.Trim().Length > 0 )
+                    filter = await ExpressionConverter<TEntity>.ConvertToSearchAsync(searchString, removeColumsName);
 
                 if (orderFieldName != null && orderFieldName.Trim().Length > 0)
                     orderQurey = await ExpressionConverter<TEntity>.ConvertToOrderAsync(orderFieldName);

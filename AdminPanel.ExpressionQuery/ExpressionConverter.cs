@@ -6,7 +6,7 @@ namespace AdminPanel.ExpressionQuery
     public class ExpressionConverter<T>
         where T : class
     {
-        public static async Task<Expression<Func<T, bool>>?> ConvertToSearchAsync(string? searchString, string? removeItemName)
+        public static async Task<Expression<Func<T, bool>>?> ConvertToSearchAsync(string? searchString, params string[]? removeItemName)
         {
             Expression<Func<T, bool>>? result = null;
 

@@ -8,16 +8,20 @@ namespace AdminPanel.ExpressionQuery
     public static class ExpressionQueryStringExtensions
         
     {
-        public static string? ConvertToSearchQuery<T>(this string searchText,string? removeItemName)
+        public static string? ConvertToSearchQuery<T>(this string searchText,params string[]? removeItemsName)
         {
             if(searchText == null || searchText.Trim().Length<=0)
                 throw new ArgumentNullException(nameof(searchText));
 
             Type type = typeof(T);
             IEnumerable<PropertyInfo> properties = type.GetRuntimeProperties();
-            
-            if (removeItemName != null && removeItemName.Trim().Length > 0)
-                properties = properties.Where(i => i.Name.ToLower() != removeItemName.ToLower());
+
+            if(removeItemsName != null && removeItemsName.Length > 0)
+                foreach (var removeItemName in removeItemsName)
+                {
+                    if (removeItemName != null && removeItemName.Trim().Length > 0)
+                        properties = properties.Where(i => i.Name.ToLower() != removeItemName.ToLower());
+                }
 
 
 

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.WebAPITests", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.AppSettings", "AdminPanel.AppSettings\AdminPanel.AppSettings.csproj", "{24CC5727-250C-4FB7-9B4F-71C0AAB7DD33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel.ExpressionQuery", "AdminPanel.ExpressionQuery\AdminPanel.ExpressionQuery.csproj", "{4BE70EF4-3DDB-4DB4-B36E-B4DEB9AADD8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel.ExpressionQuery", "AdminPanel.ExpressionQuery\AdminPanel.ExpressionQuery.csproj", "{4BE70EF4-3DDB-4DB4-B36E-B4DEB9AADD8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel.ExcelConverter", "AdminPanel.ExcelConverter\AdminPanel.ExcelConverter.csproj", "{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,14 @@ Global
 		{4BE70EF4-3DDB-4DB4-B36E-B4DEB9AADD8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BE70EF4-3DDB-4DB4-B36E-B4DEB9AADD8F}.Release|x64.ActiveCfg = Release|Any CPU
 		{4BE70EF4-3DDB-4DB4-B36E-B4DEB9AADD8F}.Release|x64.Build.0 = Release|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Debug|x64.Build.0 = Debug|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Release|x64.ActiveCfg = Release|Any CPU
+		{6F9D7269-FC5D-423C-8CD4-4C0172CABDCA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

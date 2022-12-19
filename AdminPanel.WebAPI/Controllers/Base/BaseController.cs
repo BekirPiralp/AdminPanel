@@ -16,6 +16,7 @@ namespace AdminPanel.WebAPI.Controllers.Base
         private protected ITEntityBusBase _entityBusBase;
         public BaseController(ITEntityBusBase entityBusBase) : base()
         {
+
             _entityBusBase = entityBusBase;
         }
 
@@ -51,18 +52,18 @@ namespace AdminPanel.WebAPI.Controllers.Base
         {
             ActionResult result;
 
-            result = dondur(await _entityBusBase.GetPage(pageItemsCount,pageIndex));
-            
+            result = dondur(await _entityBusBase.GetPage(pageItemsCount, pageIndex));
+
             return result;
         }
 
         [HttpGet()]
         [Route("[controller]/[Action]/")]
-        public async Task<ActionResult<List<TEntity>>> GetPageQuery(int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false)
+        public async Task<ActionResult<List<TEntity>>> GetPageQuery(int pageItemsCount, int pageIndex, string? orderFieldName, string? searchString, bool desc = false, [FromQuery] params string[]? removeColumnsNames )
         {
             ActionResult result;
 
-            result = dondur(await _entityBusBase.GetPage(pageItemsCount, pageIndex,orderFieldName,searchString,desc));
+            result = dondur(await _entityBusBase.GetPage(pageItemsCount, pageIndex,orderFieldName,searchString,desc, removeColumnsNames));
 
             return result;
         }
