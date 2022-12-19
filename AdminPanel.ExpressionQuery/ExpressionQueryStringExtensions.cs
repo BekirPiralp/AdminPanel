@@ -19,7 +19,7 @@ namespace AdminPanel.ExpressionQuery
             if(removeItemsName != null && removeItemsName.Length > 0)
                 foreach (var removeItemName in removeItemsName)
                 {
-                    if (removeItemName != null && removeItemName.Trim().Length > 0)
+                    if (removeItemName.Trim().Length > 0)
                         properties = properties.Where(i => i.Name.ToLower() != removeItemName.ToLower());
                 }
 
