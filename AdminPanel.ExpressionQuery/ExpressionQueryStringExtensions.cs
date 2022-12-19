@@ -34,9 +34,9 @@ namespace AdminPanel.ExpressionQuery
                 foreach (var property in properties)
                 { 
                     if(property.PropertyType == typeof(string))
-                        result += "p." + property.Name + ".ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
+                        result += "p." + property.Name + ".ToLower().TrimStart().TrimEnd().Contains(" + karakter + searchText.TrimStart().TrimEnd().ToLower() + karakter + ") ||";
                     else
-                        result += "p." + property.Name + ".ToString().ToLower().Trim().Contains(" + karakter + searchText.Trim().ToLower() + karakter + ") ||";
+                        result += "p." + property.Name + ".ToString().ToLower().TrimStart().TrimEnd().Contains(" + karakter + searchText.TrimStart().TrimEnd().ToLower() + karakter + ") ||";
                 }
                 result = result.Substring(0, result.Length - 2); // en son daki ya da karakteri kaldırılıyor.
             }
